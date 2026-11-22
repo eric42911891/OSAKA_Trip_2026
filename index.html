@@ -3,304 +3,1154 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>大阪家庭旅遊手冊</title>
+<title>大阪家庭旅遊手冊 2026</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap">
 <style>
-:root{
-  --paper:#FFF6E6;--grid:#F1E2C6;--card:#FFFDF7;--ink:#4A3A33;--sub:#7D6A5F;--stroke:#4A3A33;
-  --pink:#F6A5B7;--matcha:#A9CF95;--sun:#F7CF63;--sky:#8CC6E4;--peach:#F9B98B;--btn-ink:#3A2B27;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;
+:root {
+  --paper: #FFF6E6;
+  --grid: #F1E2C6;
+  --card: #FFFDF7;
+  --ink: #4A3A33;
+  --sub: #7D6A5F;
+  --stroke: #4A3A33;
+  --pink: #F6A5B7;
+  --matcha: #A9CF95;
+  --sun: #F7CF63;
+  --sky: #8CC6E4;
+  --peach: #F9B98B;
+  --purple: #D4B5E8;
+  --btn-ink: #3A2B27;
+  --font-base: 17px;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#2A211E;--grid:#33292A;--card:#382D29;--ink:#F7EADB;--sub:#C4AE9E;--stroke:#E8D3BE;
-    --pink:#E58CA2;--matcha:#8DB87A;--sun:#E4B94A;--sky:#6FAFD0;--peach:#E49C6E;color-scheme:dark;
+
+:root[data-theme="dark"] {
+  --paper: #2A211E;
+  --grid: #33292A;
+  --card: #382D29;
+  --ink: #F7EADB;
+  --sub: #C4AE9E;
+  --stroke: #E8D3BE;
+  --pink: #E58CA2;
+  --matcha: #8DB87A;
+  --sun: #E4B94A;
+  --sky: #6FAFD0;
+  --peach: #E49C6E;
+  --purple: #B896DB;
+  --btn-ink: #211917;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #2A211E;
+    --grid: #33292A;
+    --card: #382D29;
+    --ink: #F7EADB;
+    --sub: #C4AE9E;
+    --stroke: #E8D3BE;
+    --pink: #E58CA2;
+    --matcha: #8DB87A;
+    --sun: #E4B94A;
+    --sky: #6FAFD0;
+    --peach: #E49C6E;
+    --purple: #B896DB;
+    --btn-ink: #211917;
+    color-scheme: dark;
   }
 }
-:root[data-theme="dark"]{
-  --paper:#2A211E;--grid:#33292A;--card:#382D29;--ink:#F7EADB;--sub:#C4AE9E;--stroke:#E8D3BE;
-  --pink:#E58CA2;--matcha:#8DB87A;--sun:#E4B94A;--sky:#6FAFD0;--peach:#E49C6E;color-scheme:dark;
-}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;color:var(--ink);background-color:var(--paper);
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px);background-size:100% 30px;
-  font:17px/1.7 "Huninn","Yuanti TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;padding-bottom:96px}
-main{max-width:560px;margin:0 auto;padding:0 16px}
-h1,h2,h3,.hand{font-family:"LXGW WenKai TC","Kaiti TC","DFKai-SB",serif;font-weight:700}
-.view{display:none}.view.on{display:block}
-/* cover */
-header{text-align:center;padding:22px 4px 8px}
-header .en{font-size:15px;color:var(--sub);margin:0}
-header h1{margin:2px 0 6px;font-size:34px;line-height:1.25}
-header .dates{display:inline-block;background:var(--sun);color:var(--btn-ink);border:2px solid var(--stroke);border-radius:999px;padding:2px 16px;font-size:16px;box-shadow:3px 3px 0 var(--stroke);transform:rotate(-1.5deg)}
-header svg{display:block;width:100%;height:56px;margin-top:6px}
-h2{font-size:24px;margin:18px 4px 10px;display:inline-block;background:linear-gradient(transparent 58%,var(--pink) 58%)}
-.note{font-size:15px;color:var(--sub);margin:8px 4px}
-/* sticker card */
-.card{background:var(--card);border:2px solid var(--stroke);border-radius:18px 14px 20px 12px/14px 20px 12px 18px;padding:16px;margin:0 0 16px;box-shadow:4px 4px 0 var(--stroke);position:relative}
-.card.tape::before{content:"";position:absolute;top:-11px;left:50%;width:84px;height:20px;margin-left:-42px;background:var(--matcha);opacity:.85;transform:rotate(-3deg);border-radius:3px}
-/* timeline */
-.tl{list-style:none;margin:16px 0 0;padding:0}
-.tl li{position:relative;display:grid;grid-template-columns:46px 1fr;gap:0 10px;padding-bottom:18px}
-.tl li::before{content:"";position:absolute;left:22px;top:46px;bottom:-4px;border-left:3px dotted var(--stroke);opacity:.55}
-.tl li:last-child::before{display:none}
-.dot{width:46px;height:46px;border-radius:50%;border:2px solid var(--stroke);display:grid;place-items:center;font-size:23px;background:var(--c,var(--sun));box-shadow:2px 2px 0 var(--stroke)}
-.tl .box{background:var(--card);border:2px solid var(--stroke);border-radius:16px 12px 18px 10px/12px 18px 10px 16px;padding:8px 14px 10px;box-shadow:3px 3px 0 var(--stroke)}
-.tl li:nth-child(even) .box{transform:rotate(.5deg)}
-.tl li:nth-child(odd) .box{transform:rotate(-.4deg)}
-.when{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.when time{font-family:"LXGW WenKai TC","Kaiti TC",serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
-.chip{font-size:13px;background:var(--c,var(--sun));color:var(--btn-ink);border:1.5px solid var(--stroke);border-radius:999px;padding:0 10px;line-height:1.6}
-.tl b{display:block;font-size:18px;line-height:1.45;margin-top:2px}
-.tl small{display:block;color:var(--sub);font-size:15px;line-height:1.55;margin-top:2px}
-.plane{--c:var(--sun)}.rail{--c:var(--sky)}.walk{--c:var(--matcha)}.sight{--c:var(--pink)}.boat{--c:var(--peach)}
-a.map,button{display:inline-block;font:inherit;font-size:15px;color:var(--btn-ink);background:var(--card);border:2px solid var(--stroke);border-radius:999px;padding:2px 14px;margin-top:8px;text-decoration:none;box-shadow:2px 2px 0 var(--stroke);min-height:36px}
-a.map{background:var(--matcha)}
-button{background:var(--pink);font-size:16px;min-height:44px;padding:6px 20px}
-button:active,a.map:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--stroke)}
-/* flights */
-.fl h3{margin:0 0 6px;font-size:19px}
-.fl .row{display:flex;align-items:center;gap:6px}
-.fl .t{font-family:"LXGW WenKai TC","Kaiti TC",serif;font-size:34px;font-weight:700;line-height:1.2}
-.fl .p{font-size:14px;color:var(--sub)}
-.fl .mid{flex:1;text-align:center;font-size:24px;border-top:3px dotted var(--stroke);line-height:0.1;opacity:.8;padding-top:0}
-dl{margin:0}dt{color:var(--sub);font-size:14px;margin-top:10px}dd{margin:0;font-size:18px}
-.jp{font-size:21px;line-height:1.55;background:var(--sun);color:var(--btn-ink);border:2px dashed var(--stroke);border-radius:12px;padding:10px 14px;margin:6px 0 4px}
-.sos a.call{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:var(--ink);padding:12px 0;border-bottom:2px dotted var(--stroke)}
-.sos a.call:last-child{border-bottom:0}
-.sos .n{font-family:"LXGW WenKai TC","Kaiti TC",serif;font-size:30px;font-weight:700}
-/* tabs */
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;gap:6px;background:var(--card);border-top:2px solid var(--stroke);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))}
-nav a{flex:1;text-align:center;text-decoration:none;color:var(--ink);font-size:14px;padding:4px 0;border:2px solid transparent;border-radius:14px;min-height:52px;line-height:1.35}
-nav a b{display:block;font-size:22px;line-height:1.3}
-nav a.on{background:var(--pink);color:var(--btn-ink);border-color:var(--stroke);box-shadow:2px 2px 0 var(--stroke)}
-.ic{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.strip{display:flex;gap:14px;justify-content:center;margin:8px 0 4px}
-.strip .ic{width:56px;height:56px;padding:9px;border:2px solid var(--stroke);border-radius:50%;color:var(--btn-ink);box-shadow:2px 2px 0 var(--stroke)}
-.strip .ic:nth-child(4n+1){background:var(--sun)}.strip .ic:nth-child(4n+2){background:var(--sky)}.strip .ic:nth-child(4n+3){background:var(--matcha)}.strip .ic:nth-child(4n){background:var(--pink)}
-.intro{display:flex;gap:10px;align-items:center;margin:8px 0 0;padding-top:8px;border-top:2px dotted var(--stroke);font-size:15px;line-height:1.55}
-.intro .ic{flex:0 0 38px;width:38px;height:38px;color:var(--ink)}
-nav a{font-size:13px}
-a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 
-/* v2: 六天切換、交通展開、手機導覽優化 */
-.section-top h2{margin-bottom:2px}
-.section-top .note{margin-top:0}
-.day-panel{display:none;animation:fadeIn .16s ease-out}
-.day-panel.on{display:block}
-@keyframes fadeIn{from{opacity:.65;transform:translateY(3px)}to{opacity:1;transform:none}}
-.day-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:10px 0 19px}
-.day-switch button{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0;padding:7px 4px;min-width:0;min-height:62px;border-radius:14px;background:var(--card);color:var(--ink);box-shadow:2px 2px 0 var(--stroke);font-family:inherit;font-size:15px;font-weight:700;line-height:1.25}
-.day-switch button small{font-size:12px;font-weight:400;margin-top:5px;color:var(--sub)}
-.day-switch button.on{background:var(--matcha);color:var(--btn-ink);transform:translate(1px,1px);box-shadow:1px 1px 0 var(--stroke)}
-.day-switch button.on small{color:var(--btn-ink)}
-.travel-details{margin-top:9px;border-top:1px dashed var(--sub);padding-top:7px}
-.travel-details summary{cursor:pointer;color:var(--ink);font-size:14px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.travel-details summary::-webkit-details-marker{display:none}
-.travel-details summary::after{content:'＋';font-size:21px;line-height:1}
-.travel-details[open] summary::after{content:'－'}
-.detail-content{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.65;padding:9px 11px;border-radius:10px;background:var(--paper)}
-.empty-day .card{text-align:center;padding:28px 18px;margin-top:15px}
-.empty-day h3{font-size:22px;margin:4px 0 5px}
-.empty-day p{margin:0;color:var(--sub);font-size:15px}
-.empty-icon{font-size:38px}
-nav{z-index:30;max-width:600px;margin:auto;box-shadow:0 -4px 18px #00000010}
-nav a{font-size:14px}
-nav a b{font-size:23px}
-.tl .box{overflow-wrap:anywhere}
-@media (max-width:360px){main{padding:0 12px}.tl li{grid-template-columns:42px 1fr;gap:0 7px}.dot{width:42px;height:42px;font-size:21px}.tl li::before{left:20px}.tl .box{padding:8px 10px}.when time{font-size:20px}.day-switch{gap:6px}}
-@media (prefers-reduced-motion:reduce){.day-panel{animation:none}}
+:root[data-font="large"] {
+  --font-base: 20px;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px);
+  background-size: 100% 30px;
+  font: var(--font-base)/1.7 "Huninn", "Yuanti TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  padding-bottom: 96px;
+  transition: font-size 0.2s ease, background-color 0.3s ease;
+}
+
+main {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+h1, h2, h3, .hand {
+  font-family: "LXGW WenKai TC", "Kaiti TC", "DFKai-SB", serif;
+  font-weight: 700;
+}
+
+/* Dynamic Floating Plane Animation */
+@keyframes floatPlane {
+  0%, 100% { transform: translateY(0px) rotate(-10deg); }
+  50% { transform: translateY(-6px) rotate(-6deg); }
+}
+
+.floating-plane {
+  animation: floatPlane 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Header Component */
+header {
+  text-align: center;
+  padding: 20px 4px 10px;
+  position: relative;
+}
+
+.top-tools {
+  position: absolute;
+  top: 14px;
+  right: 4px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.icon-btn {
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--stroke);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--stroke);
+}
+
+header .en {
+  font-size: 15px;
+  color: var(--sub);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+header h1 {
+  margin: 2px 0 6px;
+  font-size: 32px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+header .dates {
+  display: inline-block;
+  background: var(--sun);
+  color: var(--btn-ink);
+  border: 2px solid var(--stroke);
+  border-radius: 999px;
+  padding: 2px 18px;
+  font-size: 16px;
+  box-shadow: 3px 3px 0 var(--stroke);
+  transform: rotate(-1.2deg);
+  font-weight: bold;
+}
+
+header svg.header-sky {
+  display: block;
+  width: 100%;
+  height: 54px;
+  margin-top: 8px;
+}
+
+h2.sec-title {
+  font-size: 24px;
+  margin: 18px 4px 10px;
+  display: inline-block;
+  background: linear-gradient(transparent 58%, var(--pink) 58%);
+}
+
+.note {
+  font-size: 15px;
+  color: var(--sub);
+  margin: 8px 4px;
+}
+
+/* Card Styling */
+.card {
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  border-radius: 18px 14px 20px 12px / 14px 20px 12px 18px;
+  padding: 16px;
+  margin: 0 0 16px;
+  box-shadow: 4px 4px 0 var(--stroke);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.card.tape::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 90px;
+  height: 22px;
+  margin-left: -45px;
+  background: var(--matcha);
+  opacity: 0.85;
+  transform: rotate(-2.5deg);
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Day Switcher Bar */
+.day-nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  padding: 8px 0;
+  margin: 0 -16px 14px;
+  border-bottom: 2px stroke var(--stroke);
+}
+
+.day-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 16px;
+  scrollbar-width: none;
+}
+
+.day-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.day-btn {
+  flex: 0 0 auto;
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--stroke);
+  white-space: nowrap;
+}
+
+.day-btn.on {
+  background: var(--pink);
+  color: var(--btn-ink);
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--stroke);
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 4px 14px;
+  font-size: 14px;
+}
+
+.toggle-pill {
+  display: inline-flex;
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  border-radius: 999px;
+  padding: 2px;
+  box-shadow: 2px 2px 0 var(--stroke);
+}
+
+.toggle-pill button {
+  border: none;
+  background: transparent;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  min-height: auto;
+  box-shadow: none;
+  margin-top: 0;
+}
+
+.toggle-pill button.on {
+  background: var(--sun);
+  color: var(--btn-ink);
+  font-weight: bold;
+}
+
+/* Timeline */
+.tl {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.tl li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 0 12px;
+  padding-bottom: 18px;
+}
+
+.tl li::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 46px;
+  bottom: -4px;
+  border-left: 3px dotted var(--stroke);
+  opacity: 0.55;
+}
+
+.tl li:last-child::before {
+  display: none;
+}
+
+.dot {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--stroke);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: var(--c, var(--sun));
+  box-shadow: 2px 2px 0 var(--stroke);
+  z-index: 2;
+}
+
+/* Landmark Cards vs Compact Transit Pills */
+.tl .box {
+  background: var(--card);
+  border: 2px solid var(--stroke);
+  border-radius: 16px 12px 18px 10px / 12px 18px 10px 16px;
+  padding: 12px 16px;
+  box-shadow: 3px 3px 0 var(--stroke);
+}
+
+.tl li.transit .box {
+  background: transparent;
+  border: 2px dashed var(--stroke);
+  box-shadow: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  opacity: 0.9;
+}
+
+.tl li:nth-child(even) .box { transform: rotate(0.4deg); }
+.tl li:nth-child(odd) .box { transform: rotate(-0.4deg); }
+.tl li.transit .box { transform: none !important; }
+
+.when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.when time {
+  font-family: "LXGW WenKai TC", "Kaiti TC", serif;
+  font-weight: 700;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip {
+  font-size: 12px;
+  background: var(--c, var(--sun));
+  color: var(--btn-ink);
+  border: 1.5px solid var(--stroke);
+  border-radius: 999px;
+  padding: 0 10px;
+  line-height: 1.6;
+  font-weight: bold;
+}
+
+.tl b {
+  display: block;
+  font-size: 18px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.tl small {
+  display: block;
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.intro {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 2px dotted var(--stroke);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.intro .ic-svg {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  background: var(--paper);
+  border: 1.5px solid var(--stroke);
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 1px 1px 0 var(--stroke);
+}
+
+.plane { --c: var(--sun); }
+.rail  { --c: var(--sky); }
+.walk  { --c: var(--matcha); }
+.sight { --c: var(--pink); }
+.boat  { --c: var(--peach); }
+.food  { --c: var(--sun); }
+.temple{ --c: var(--purple); }
+
+/* Buttons & Links */
+a.map, button.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--btn-ink);
+  background: var(--matcha);
+  border: 2px solid var(--stroke);
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin-top: 10px;
+  text-decoration: none;
+  box-shadow: 2px 2px 0 var(--stroke);
+  min-height: 34px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.btn-action {
+  background: var(--pink);
+  font-size: 15px;
+  min-height: 42px;
+  padding: 6px 18px;
+}
+
+a.map:active, button.btn-action:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--stroke);
+}
+
+/* Flight Cards */
+.fl h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fl .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.fl .t {
+  font-family: "LXGW WenKai TC", "Kaiti TC", serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.fl .p {
+  font-size: 13px;
+  color: var(--sub);
+}
+
+.fl .mid {
+  flex: 1;
+  text-align: center;
+  font-size: 22px;
+  border-top: 3px dotted var(--stroke);
+  line-height: 0.1;
+  opacity: 0.85;
+}
+
+/* Definition lists */
+dl { margin: 0; }
+dt { color: var(--sub); font-size: 13px; margin-top: 8px; }
+dd { margin: 0; font-size: 17px; font-weight: bold; }
+
+/* Taxi Card */
+.jp {
+  font-size: 20px;
+  line-height: 1.6;
+  background: var(--sun);
+  color: var(--btn-ink);
+  border: 2.5px dashed var(--stroke);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* SOS Calls */
+.sos a.call {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 12px 0;
+  border-bottom: 2px dotted var(--stroke);
+}
+
+.sos a.call:last-child {
+  border-bottom: 0;
+}
+
+.sos .n {
+  font-family: "LXGW WenKai TC", "Kaiti TC", serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+/* Checklist Styling */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1.5px dotted var(--stroke);
+  cursor: pointer;
+}
+
+.checklist-item:last-child { border-bottom: none; }
+
+.checklist-item input[type="checkbox"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--stroke);
+  border-radius: 6px;
+  background: var(--card);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 0 var(--stroke);
+}
+
+.checklist-item input[type="checkbox"]:checked {
+  background: var(--matcha);
+}
+
+.checklist-item input[type="checkbox"]:checked::after {
+  content: "✓";
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--btn-ink);
+}
+
+.checklist-item.done label {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 14px;
+  background: var(--paper);
+  border: 2px solid var(--stroke);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 14px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--matcha);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Views & Fixed Bottom Nav */
+.view {
+  display: none;
+}
+
+.view.on {
+  display: block;
+}
+
+nav.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  gap: 6px;
+  background: var(--card);
+  border-top: 2.5px solid var(--stroke);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+nav.bottom-nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 13px;
+  padding: 4px 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  min-height: 52px;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+nav.bottom-nav a b {
+  font-size: 20px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+nav.bottom-nav a.on {
+  background: var(--pink);
+  color: var(--btn-ink);
+  border-color: var(--stroke);
+  box-shadow: 2px 2px 0 var(--stroke);
+}
+
+/* Toast Message */
+#toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--btn-ink);
+  color: var(--paper);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 </style>
 </head>
 <body>
+
+<!-- SVG Icon Symbols Library -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<symbol id="d-torii" viewBox="0 0 48 48"><path d="M5 13 Q24 7 43 13 M9 20 H39 M14 13 V42 M34 13 V42"/></symbol>
-<symbol id="d-cup" viewBox="0 0 48 48"><path d="M8 22 H40 Q40 40 24 41 Q8 40 8 22Z M17 15 Q14 11 17 7 M25 15 Q22 11 25 7 M33 15 Q30 11 33 7"/></symbol>
-<symbol id="d-pagoda" viewBox="0 0 48 48"><path d="M24 4 V10 M10 22 L24 10 L38 22 Z M13 34 L24 24 L35 34 Z M6 43 H42 M15 34 V43 M33 34 V43"/></symbol>
-<symbol id="d-boat" viewBox="0 0 48 48"><path d="M6 28 H42 L36 38 H12Z M24 28 V8 L36 24 H24 M4 44 Q10 40 16 44 T28 44 T40 44"/></symbol>
-<symbol id="d-food" viewBox="0 0 48 48"><path d="M8 42 L40 6"/><circle cx="17" cy="32" r="5"/><circle cx="26" cy="22" r="5"/><circle cx="35" cy="12" r="5"/></symbol>
-<symbol id="d-book" viewBox="0 0 48 48"><path d="M24 12 Q15 7 5 9 V37 Q15 35 24 40 Q33 35 43 37 V9 Q33 7 24 12Z M24 12 V40"/></symbol>
-<symbol id="d-pad" viewBox="0 0 48 48"><path d="M12 16 H36 Q44 16 44 26 Q44 36 38 36 Q33 36 31 31 H17 Q15 36 10 36 Q4 36 4 26 Q4 16 12 16Z M14 22 V30 M10 26 H18 M34 24 H34.5 M39 28 H39.5"/></symbol>
+  <symbol id="d-torii" viewBox="0 0 48 48"><path d="M5 13 Q24 7 43 13 M9 20 H39 M14 13 V42 M34 13 V42" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M14 20 H34" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="d-cup" viewBox="0 0 48 48"><path d="M8 22 H40 Q40 40 24 41 Q8 40 8 22Z" fill="var(--matcha)" opacity="0.4"/><path d="M8 22 H40 Q40 40 24 41 Q8 40 8 22Z M17 15 Q14 11 17 7 M25 15 Q22 11 25 7 M33 15 Q30 11 33 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="d-pagoda" viewBox="0 0 48 48"><path d="M10 22 L24 10 L38 22 Z M13 34 L24 24 L35 34 Z" fill="var(--sun)" opacity="0.5"/><path d="M24 4 V10 M10 22 L24 10 L38 22 Z M13 34 L24 24 L35 34 Z M6 43 H42 M15 34 V43 M33 34 V43" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="d-boat" viewBox="0 0 48 48"><path d="M6 28 H42 L36 38 H12Z" fill="var(--sky)" opacity="0.5"/><path d="M6 28 H42 L36 38 H12Z M24 28 V8 L36 24 H24 M4 44 Q10 40 16 44 T28 44 T40 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="d-food" viewBox="0 0 48 48"><path d="M8 42 L40 6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle cx="17" cy="32" r="5" fill="var(--peach)" stroke="currentColor" stroke-width="2.5"/><circle cx="26" cy="22" r="5" fill="var(--sun)" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="12" r="5" fill="var(--pink)" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="d-deer" viewBox="0 0 48 48"><path d="M12 14 Q8 6 4 10 M16 12 Q20 4 24 8 M14 20 L26 24 L22 40 M26 24 L38 22 L40 40 M38 22 L42 16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="14" r="3" fill="currentColor"/></symbol>
+  <symbol id="d-daruma" viewBox="0 0 48 48"><circle cx="24" cy="26" r="18" fill="var(--pink)" opacity="0.4"/><circle cx="24" cy="26" r="18" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="22" r="3" fill="currentColor"/><circle cx="30" cy="22" r="3" fill="currentColor"/><path d="M18 32 Q24 37 30 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="d-map" viewBox="0 0 48 48"><path d="M8 12 L18 6 L30 12 L40 6 V36 L30 42 L18 36 L8 42 Z" fill="var(--sky)" opacity="0.3"/><path d="M8 12 L18 6 L30 12 L40 6 V36 L30 42 L18 36 L8 42 Z M18 6 V36 M30 12 V42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
+
 <main>
-<header>
-  <p class="en">Osaka Family Trip 2026</p>
-  <h1>大阪家庭旅遊手冊</h1>
-  <span class="dates">12/02（三）– 12/07（一）</span>
-  <svg viewBox="0 0 400 56" aria-hidden="true"><path d="M10 40 Q100 4 200 30 T390 18" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" opacity=".6"/><text x="352" y="30" font-size="26" transform="rotate(-12 352 30)">✈️</text><ellipse cx="60" cy="14" rx="22" ry="8" fill="var(--sky)" opacity=".7"/><ellipse cx="78" cy="10" rx="14" ry="7" fill="var(--sky)" opacity=".7"/></svg>
-</header>
-
-<section id="v-itinerary" class="view">
-  <div class="section-top"><h2>每日行程</h2><p class="note">點選日期切換，搭車時可展開交通提醒。</p></div>
-  <div class="day-switch" role="group" aria-label="切換旅遊日期">
-    <button type="button" data-day="day1">DAY 01<small>12/02・三</small></button>
-    <button type="button" data-day="day2">DAY 02<small>12/03・四</small></button>
-    <button type="button" data-day="day3">DAY 03<small>12/04・五</small></button>
-    <button type="button" data-day="day4">DAY 04<small>12/05・六</small></button>
-    <button type="button" data-day="day5">DAY 05<small>12/06・日</small></button>
-    <button type="button" data-day="day6">DAY 06<small>12/07・一</small></button>
-  </div>
-  <section id="v-day1" class="day-panel">
-  <h2>第 1 天　12/02（三）</h2>
-  <p class="note" style="margin-top:0">難波、心齋橋、道頓堀。<br>※交通時間依原規劃整理，出發前請再核對班次。</p>
-  <div class="strip"><svg class="ic"><use href="#d-torii"/></svg><svg class="ic"><use href="#d-food"/></svg><svg class="ic"><use href="#d-boat"/></svg></div>
-  <ol class="tl">
-    <li class="plane"><span class="dot">🛫</span><div class="box"><div class="when"><time>07:05</time><span class="chip">飛機</span></div><b>長榮 BR 182 起飛</b><small>高雄機場第 1 航廈 → 關西機場第 1 航廈</small></div></li>
-    <li class="walk"><span class="dot">🛬</span><div class="box"><div class="when"><time>10:55</time><span class="chip">機場</span></div><b>抵達關西機場</b><small>出境、拿行李<br>JR 車站在機場二樓</small></div></li>
-    <li class="rail"><span class="dot">🚆</span><div class="box"><div class="when"><time>12:14</time><span class="chip">JR</span></div><b>HARUKA 22 號</b><small>關西機場 → 天王寺，約 34 分鐘</small></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>12:50</time><span class="chip">地鐵</span></div><b>御堂筋線</b><small>天王寺站 → 大國町站，約 7 分鐘<br>刷交通卡搭乘</small></div></li>
-    <li class="walk"><span class="dot">🧳</span><div class="box"><div class="when"><time>12:55</time><span class="chip">步行</span></div><b>飯店寄放行李</b><small>ESLEAD HOTEL Namba Daikokucho Annex<br>從車站步行約 3 分鐘</small><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=ESLEAD+HOTEL+Namba+Daikokucho+Annex" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">⛩️</span><div class="box"><div class="when"><time>13:30</time><span class="chip">景點</span></div><b>難波八阪神社</b><small>從飯店步行約 12 分鐘</small><p class="intro"><svg class="ic"><use href="#d-torii"/></svg><span>以巨大的獅子頭舞殿聞名，高約 12 公尺。據說獅子會吞下厄運，帶來勝運和考試順利。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=難波八阪神社" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>14:10</time><span class="chip">地鐵</span></div><b>御堂筋線</b><small>難波站 → 心齋橋站，約 4 分鐘<br>刷交通卡搭乘</small></div></li>
-    <li class="sight"><span class="dot">🛍️</span><div class="box"><div class="when"><time>14:20</time><span class="chip">逛街</span></div><b>心齋橋 → 道頓堀</b><small>在道頓堀吃晚餐</small><p class="intro"><svg class="ic"><use href="#d-food"/></svg><span>心齋橋筋是大阪最熱鬧的購物街，走到道頓堀就是招牌林立的美食街，章魚燒、大阪燒都在這一帶。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=道頓堀" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="boat"><span class="dot">🚤</span><div class="box"><div class="when"><time>20:00</time><span class="chip">遊船</span></div><b>道頓堀觀光遊船 Wonder Cruise</b><small>全程約 20 分鐘<br>登船地點請依預約憑證確認</small><p class="intro"><svg class="ic"><use href="#d-boat"/></svg><span>沿著道頓堀川航行，可以近看河岸的霓虹招牌和橋上的夜景。</span></p></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>20:30</time><span class="chip">地鐵</span></div><b>御堂筋線</b><small>難波站 → 大國町站，約 4 分鐘<br>刷交通卡搭乘</small></div></li>
-    <li class="walk"><span class="dot">🏨</span><div class="box"><div class="when"><time class="hand">晚上</time><span class="chip">住宿</span></div><b>回飯店休息</b><small>ESLEAD HOTEL Namba Daikokucho Annex</small></div></li>
-  </ol>
-</section>
-
-<section id="v-day2" class="day-panel">
-  <h2>第 2 天　12/03（四）</h2>
-  <p class="note" style="margin-top:0">宇治一日散策：抹茶、世界遺產和《源氏物語》。<br>※電車班次與 Premium Car 供應以當日公告為準。</p>
-  <div class="strip"><svg class="ic"><use href="#d-cup"/></svg><svg class="ic"><use href="#d-pagoda"/></svg><svg class="ic"><use href="#d-torii"/></svg><svg class="ic"><use href="#d-book"/></svg></div>
-  <ol class="tl">
-    <li class="walk"><span class="dot">🏨</span><div class="box"><div class="when"><time>08:00</time><span class="chip">出發</span></div><b>從飯店出發</b><small>ESLEAD HOTEL → 大國町站</small></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>08:10</time><span class="chip">地鐵</span></div><b>御堂筋線</b><small>大國町站 → 淀屋橋站，約 8 分鐘<br>刷交通卡搭乘</small></div></li>
-    <li class="rail"><span class="dot">🚃</span><div class="box"><div class="when"><time>08:47</time><span class="chip">京阪</span></div><b>京阪本線 特急</b><small>淀屋橋 → 中書島，約 41 分鐘<br>刷交通卡搭乘，現場購買 Premium Car 車票<br>到中書島站換車</small></div></li>
-    <li class="rail"><span class="dot">🚃</span><div class="box"><div class="when"><time>09:43</time><span class="chip">京阪</span></div><b>宇治線 普通</b><small>中書島 → 宇治，約 15 分鐘</small></div></li>
-    <li class="sight"><span class="dot">🍵</span><div class="box"><div class="when"><time>10:00</time><span class="chip">甜點</span></div><b>中村藤吉本店</b><small>先去抽號碼牌</small><p class="intro"><svg class="ic"><use href="#d-cup"/></svg><span>宇治的抹茶老舖，以抹茶甜點和茶蕎麵聞名。本店常常要排隊，所以先抽號碼牌，再去逛別的地方。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=中村藤吉本店+宇治" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">🍡</span><div class="box"><div class="when"><time class="hand">接著</time><span class="chip">午餐</span></div><b>平等院表參道</b><small>邊走邊吃午餐</small><p class="intro"><svg class="ic"><use href="#d-food"/></svg><span>通往平等院的參道，兩旁是茶店、甜點店和伴手禮店，很適合邊逛邊吃。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=平等院表參道" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">🏯</span><div class="box"><div class="when"><time class="hand">接著</time><span class="chip">世界遺產</span></div><b>平等院</b><p class="intro"><svg class="ic"><use href="#d-pagoda"/></svg><span>平安時代 1052 年建成，鳳凰堂是代表建築，也是日本 10 圓硬幣背面的圖案。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=平等院" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">⛩️</span><div class="box"><div class="when"><time class="hand">接著</time><span class="chip">神社</span></div><b>宇治神社</b><p class="intro"><svg class="ic"><use href="#d-torii"/></svg><span>祭祀菟道稚郎子，以回頭看的小兔子造型聞名，可以找找看兔子的蹤影。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=宇治神社" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">⛩️</span><div class="box"><div class="when"><time class="hand">接著</time><span class="chip">世界遺產</span></div><b>宇治上神社</b><p class="intro"><svg class="ic"><use href="#d-torii"/></svg><span>本殿被認為是日本現存最古老的神社建築，安靜又古樸，也是世界遺產。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=宇治上神社" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="sight"><span class="dot">📖</span><div class="box"><div class="when"><time class="hand">接著</time><span class="chip">博物館</span></div><b>源氏物語博物館</b><p class="intro"><svg class="ic"><use href="#d-book"/></svg><span>《源氏物語》的最後十帖以宇治為舞台。館內用模型和影片介紹平安時代的貴族生活。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=源氏物語ミュージアム" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="rail"><span class="dot">🚃</span><div class="box"><div class="when"><time>16:30</time><span class="chip">京阪</span></div><b>宇治線 普通</b><small>宇治 → 中書島，約 15 分鐘<br>刷交通卡搭乘，到中書島站換車</small></div></li>
-    <li class="rail"><span class="dot">🚃</span><div class="box"><div class="when"><time>17:01</time><span class="chip">京阪</span></div><b>京阪本線 特急</b><small>中書島 → 北濱，約 38 分鐘<br>在月台購買 Premium Car 車票</small></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>17:39</time><span class="chip">地鐵</span></div><b>堺筋線</b><small>北濱 → 惠美須町，約 8 分鐘<br>刷交通卡搭乘</small></div></li>
-    <li class="sight"><span class="dot">🎮</span><div class="box"><div class="when"><time>17:50</time><span class="chip">晚餐</span></div><b>日本橋筋商店街</b><p class="intro"><svg class="ic"><use href="#d-pad"/></svg><span>大阪有名的電器街，也叫 Den Den Town，動漫、遊戲和公仔店很多，也有不少餐廳。</span></p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=日本橋筋商店街" target="_blank" rel="noopener">看地圖</a></div></li>
-    <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>20:30</time><span class="chip">地鐵</span></div><b>堺筋線 → 御堂筋線</b><small>惠美須町 → 動物園前，約 3 分鐘<br>刷交通卡搭乘，到動物園前換車<br>動物園前 → 大國町，約 3 分鐘</small></div></li>
-    <li class="walk"><span class="dot">🏨</span><div class="box"><div class="when"><time class="hand">晚上</time><span class="chip">住宿</span></div><b>回飯店休息</b><small>ESLEAD HOTEL Namba Daikokucho Annex</small></div></li>
-  </ol>
-</section>
-  <div id="v-day3" class="day-panel empty-day"><h2>第 3 天　12/04（五）</h2><div class="card tape"><span class="empty-icon">📍</span><h3>行程準備中</h3><p>保留這一天的版面，待你提供正式行程後加入景點、交通與時間軸。</p></div></div>
-  <div id="v-day4" class="day-panel empty-day"><h2>第 4 天　12/05（六）</h2><div class="card tape"><span class="empty-icon">🍁</span><h3>行程準備中</h3><p>尚未加入當日資料，避免出現未確認的交通時刻。</p></div></div>
-  <div id="v-day5" class="day-panel empty-day"><h2>第 5 天　12/06（日）</h2><div class="card tape"><span class="empty-icon">🗺️</span><h3>行程準備中</h3><p>待補上當日的景點、用餐與回飯店路線。</p></div></div>
-  <div id="v-day6" class="day-panel empty-day"><h2>第 6 天　12/07（一）</h2><div class="card tape"><span class="empty-icon">✈️</span><h3>回程日</h3><p>已知回程航班為長榮 BR 181，11:55 自關西機場起飛，14:40 抵達高雄；出發交通時程尚待確認。</p><a href="#flight" class="map">查看航班資訊</a></div></div>
-</section>
-
-<section id="v-flight" class="view">
-  <h2>航班資訊</h2>
-  <div class="card tape fl" style="margin-top:8px">
-    <h3>去程　12/02（三）長榮 BR 182</h3>
-    <div class="row">
-      <div><div class="t">07:05</div><div class="p">高雄 第 1 航廈</div></div>
-      <div class="mid">✈️</div>
-      <div style="text-align:right"><div class="t">10:55</div><div class="p">關西 第 1 航廈</div></div>
+  <!-- Header Component -->
+  <header>
+    <div class="top-tools">
+      <button class="icon-btn" id="btn-font" title="切換字型大小">A+</button>
+      <button class="icon-btn" id="btn-theme" title="切換日夜模式">🌙</button>
     </div>
-  </div>
-  <div class="card tape fl">
-    <h3>回程　12/07（一）長榮 BR 181</h3>
-    <div class="row">
-      <div><div class="t">11:55</div><div class="p">關西 第 1 航廈</div></div>
-      <div class="mid">✈️</div>
-      <div style="text-align:right"><div class="t">14:40</div><div class="p">高雄 第 1 航廈</div></div>
+    <p class="en">OSAKA FAMILY TRIP 2026</p>
+    <h1>大阪家庭旅遊手冊</h1>
+    <span class="dates">12/02（三）– 12/07（一）</span>
+    
+    <!-- Dynamic Header Sky SVG -->
+    <svg class="header-sky" viewBox="0 0 400 54" aria-hidden="true">
+      <path d="M10 38 Q100 6 200 28 T390 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round" opacity="0.6"/>
+      <g class="floating-plane">
+        <text x="348" y="26" font-size="24" transform="rotate(-5 348 26)">✈️</text>
+      </g>
+      <ellipse cx="60" cy="14" rx="22" ry="7" fill="var(--sky)" opacity="0.6"/>
+      <ellipse cx="78" cy="10" rx="14" ry="6" fill="var(--sky)" opacity="0.6"/>
+      <ellipse cx="220" cy="12" rx="18" ry="6" fill="var(--sun)" opacity="0.5"/>
+    </svg>
+  </header>
+
+  <!-- TAB 1: ITINERARY VIEW -->
+  <section id="view-itinerary" class="view on">
+    <!-- Day Capsule Switcher Bar -->
+    <div class="day-nav-wrapper">
+      <div class="day-bar">
+        <button class="day-btn on" data-day="1">Day 1 難波・道頓堀</button>
+        <button class="day-btn" data-day="2">Day 2 宇治抹茶散策</button>
+        <button class="day-btn" data-day="3">Day 3 京都古都古街</button>
+        <button class="day-btn" data-day="4">Day 4 勝尾寺・梅田</button>
+        <button class="day-btn" data-day="5">Day 5 奈良小鹿・新世界</button>
+        <button class="day-btn" data-day="6">Day 6 機場採買返航</button>
+      </div>
     </div>
-  </div>
-  <p class="note">回程班機 11:55 起飛，當天請提早從飯店出發前往關西機場。</p>
-</section>
 
-<section id="v-hotel" class="view">
-  <h2>住宿資訊</h2>
-  <div class="card tape" style="margin-top:8px">
-    <dl>
-      <dt>飯店</dt><dd>ESLEAD HOTEL Namba Daikokucho Annex</dd>
-      <dt>入住</dt><dd>12/02（三）16:00 起</dd>
-      <dt>退房</dt><dd>12/07（一）10:00 前</dd>
-      <dt>交通</dt><dd>地鐵御堂筋線「大國町站」步行約 3 分鐘</dd>
-    </dl>
-    <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=ESLEAD+HOTEL+Namba+Daikokucho+Annex" target="_blank" rel="noopener">看地圖</a>
-  </div>
-  <h2>給計程車司機看</h2>
-  <div class="card">
-    <div class="jp">〒556-0014<br>大阪府大阪市浪速区大国2丁目1-7<br>ESLEAD HOTEL Namba Daikokucho Annex</div>
-    <button id="copy" type="button">複製地址</button>
-  </div>
-  <p class="note">12/02 到飯店時還沒到入住時間，先寄放行李，16:00 後再辦理入住。</p>
-</section>
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <span class="note" id="day-date-hint" style="margin:0">12/02（三）第一天行程</span>
+      <div class="toggle-pill">
+        <button id="filter-all" class="on">完整交通</button>
+        <button id="filter-spots">僅看景點</button>
+      </div>
+    </div>
 
-<section id="v-sos" class="view">
-  <h2>緊急聯絡</h2>
-  <div class="card sos" style="margin-top:8px">
-    <a class="call" href="tel:110"><span>警察</span><span class="n">110</span></a>
-    <a class="call" href="tel:119"><span>火警、救護車</span><span class="n">119</span></a>
-    <a class="call" href="tel:+886800085095"><span>外交部旅外國人急難救助</span><span class="n" style="font-size:20px">+886-800-085-095</span></a>
-  </div>
-  <p class="note">走散時先打電話聯絡；聯絡不上就回飯店會合。</p>
-</section>
+    <!-- DAY 1 CONTENT -->
+    <div id="day-content-1" class="day-pane">
+      <ol class="tl">
+        <li class="plane transit"><span class="dot">🛫</span><div class="box"><div class="when"><time>07:05</time><span class="chip">長榮 BR182</span></div><b>高雄機場 (KHH) 起飛</b><small>第 1 航廈 ➔ 關西機場 (KIX) 10:55 抵達</small></div></li>
+        <li class="walk transit"><span class="dot">🛬</span><div class="box"><div class="when"><time>10:55</time><span class="chip">入境</span></div><b>關西機場通關 & 提領行李</b><small>完成入境手續，往二樓 JR/南海電鐵車站</small></div></li>
+        <li class="rail transit"><span class="dot">🚆</span><div class="box"><div class="when"><time>12:14</time><span class="chip">JR</span></div><b>搭乘 HARUKA 22 號</b><small>關西機場 ➔ 天王寺站（約 34 分鐘）</small></div></li>
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>12:50</time><span class="chip">大阪地鐵</span></div><b>御堂筋線轉乘</b><small>天王寺站 ➔ 大國町站（約 7 分鐘，刷 ICOCA）</small></div></li>
+        <li class="walk spot"><span class="dot">🧳</span><div class="box"><div class="when"><time>12:55</time><span class="chip">飯店</span></div><b>飯店寄放行李</b><small>ESLEAD HOTEL Namba Daikokucho Annex<br>大國町站步行 3 分鐘即達</small><a class="map" href="https://www.google.com/maps/search/?api=1&query=ESLEAD+HOTEL+Namba+Daikokucho+Annex" target="_blank" rel="noopener">📍 開啟地圖導航</a></div></li>
+        
+        <li class="sight spot"><span class="dot">⛩️</span><div class="box"><div class="when"><time>13:30</time><span class="chip">核心景點</span></div><b>難波八阪神社</b><small>從飯店步行約 12 分鐘</small><div class="intro"><svg class="ic-svg"><use href="#d-torii"/></svg><span><b>巨大的獅子頭舞殿（高 12 公尺）</b>！傳說巨大的張口獅子能幫參拜者張口吸走厄運，並帶來勝運與學業商賣繁盛。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=難波八阪神社" target="_blank" rel="noopener">📍 導航至神社</a></div></li>
+        
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>14:10</time><span class="chip">地鐵</span></div><b>前往心齋橋</b><small>難波站 ➔ 心齋橋站（御堂筋線 4 分鐘）</small></div></li>
+        
+        <li class="sight spot"><span class="dot">🛍️</span><div class="box"><div class="when"><time>14:20</time><span class="chip">購物美食</span></div><b>心齋橋筋商店街 ➔ 道頓堀</b><small>沿路漫步採買，享用熱騰騰在地美食</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>大阪最熱鬧繁華的心臟地帶！一定要和<b>固力果跑跑人招牌</b>拍照，品嚐現做章魚燒、熱氣騰騰的大阪燒與香濃拉麵。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=道頓堀" target="_blank" rel="noopener">📍 導航至道頓堀</a></div></li>
+        
+        <li class="boat spot"><span class="dot">🚤</span><div class="box"><div class="when"><time>20:00</time><span class="chip">觀光遊船</span></div><b>道頓堀觀光遊船 Wonder Cruise</b><small>全程約 20 分鐘（請依預約憑證提前報到）</small><div class="intro"><svg class="ic-svg"><use href="#d-boat"/></svg><span>乘船沿著道頓堀川夜航，從運河中央近距離欣賞兩岸絢麗動人的霓虹燈海與熱情的大訪風情！</span></div></div></li>
+        
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>20:30</time><span class="chip">返回</span></div><b>搭地鐵回飯店</b><small>難波站 ➔ 大國町站（約 4 分鐘）</small></div></li>
+        <li class="walk spot"><span class="dot">🏨</span><div class="box"><div class="when"><time class="hand">晚間</time><span class="chip">休息</span></div><b>Check-in 入住飯店養足體力</b><small>ESLEAD HOTEL Namba Daikokucho Annex</small></div></li>
+      </ol>
+    </div>
+
+    <!-- DAY 2 CONTENT -->
+    <div id="day-content-2" class="day-pane" style="display:none">
+      <ol class="tl">
+        <li class="walk transit"><span class="dot">🏨</span><div class="box"><div class="when"><time>08:00</time><span class="chip">出發</span></div><b>飯店出發前往淀屋橋</b><small>大國町站 ➔ 淀屋橋站（御堂筋線 8 分鐘）</small></div></li>
+        <li class="rail transit"><span class="dot">🚃</span><div class="box"><div class="when"><time>08:47</time><span class="chip">京阪電車</span></div><b>京阪本線 特急 (加購 Premium Car)</b><small>淀屋橋 ➔ 中書島站（約 41 分鐘），月台換乘宇治線普通車至宇治（15 分鐘）</small></div></li>
+        
+        <li class="sight spot"><span class="dot">🍵</span><div class="box"><div class="when"><time>10:00</time><span class="chip">抹茶名店</span></div><b>中村藤吉 本店</b><small>抵達第一件事：先至現場櫃檯抽號碼牌！</small><div class="intro"><svg class="ic-svg"><use href="#d-cup"/></svg><span>日本宇治百年名店！必點限定竹筒抹茶冰淇淋甜品與清香濃郁的抹茶蕎麥麵，極致極緻的抹茶體驗。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=中村藤吉本店+宇治" target="_blank" rel="noopener">📍 導航至中村藤吉</a></div></li>
+        
+        <li class="sight spot"><span class="dot">🍡</span><div class="box"><div class="when"><time class="hand">午前</time><span class="chip">老街午餐</span></div><b>平等院表參道散策</b><small>享用宇治茶餐、抹茶大福與熱糰子</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>古色古香的古街參道，兩旁林立茶行與手作甜點店，茶香四溢，非常適合全家邊走邊逛。</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">🏯</span><div class="box"><div class="when"><time class="hand">午後</time><span class="chip">世界遺產</span></div><b>平等院 鳳凰堂</b><small>平安時代 1052 年木造歷史古蹟</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>日幣 10 圓硬幣背面的國寶建築！優雅倒映於阿字池畔，頂端一對金鳳凰發出耀眼光芒。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=平等院" target="_blank" rel="noopener">📍 導航至平等院</a></div></li>
+        
+        <li class="sight spot"><span class="dot">⛩️</span><div class="box"><div class="when"><time class="hand">午後</time><span class="chip">神社</span></div><b>宇治神社 & 宇治上神社</b><small>尋找幸運的回頭兔（みかえり兔）御守</small><div class="intro"><svg class="ic-svg"><use href="#d-torii"/></svg><span>宇治上神社本殿被視為日本現存最古老的神社建築。別忘了買可愛的兔子籤詩求平安！</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">📖</span><div class="box"><div class="when"><time class="hand">傍晚</time><span class="chip">博物館</span></div><b>源氏物語博物館</b><small>探索日本平安古典文學舞台</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>重現紫式部名著《源氏物語》宇治十帖的牛車與貴族生活場景，展示極具工藝之美。</span></div></div></li>
+        
+        <li class="rail transit"><span class="dot">🚃</span><div class="box"><div class="when"><time>17:00</time><span class="chip">京阪返程</span></div><b>搭京阪電車返回大阪市區</b><small>宇治 ➔ 中書島 ➔ 北濱站 ➔ 轉堺筋線至惠美須町站</small></div></li>
+        
+        <li class="sight spot"><span class="dot">🎮</span><div class="box"><div class="when"><time>18:00</time><span class="chip">動漫美食</span></div><b>日本橋筋商店街 (Den Den Town)</b><small>大阪動漫電器街散步 & 晚餐</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>關西的秋葉原！公仔玩具店、電玩與各式熱鬧燒肉食堂聚集地，晚餐可在此大快朵頤。</span></div></div></li>
+        <li class="walk transit"><span class="dot">🏨</span><div class="box"><div class="when"><time class="hand">晚間</time><span class="chip">住宿</span></div><b>搭地鐵返回大國町飯店休息</b></div></li>
+      </ol>
+    </div>
+
+    <!-- DAY 3 CONTENT -->
+    <div id="day-content-3" class="day-pane" style="display:none">
+      <ol class="tl">
+        <li class="rail transit"><span class="dot">🚃</span><div class="box"><div class="when"><time>08:15</time><span class="chip">京阪特急</span></div><b>大阪出發前往京都祇園</b><small>淀屋橋站 ➔ 祇園四條站（約 48 分鐘）</small></div></li>
+        
+        <li class="sight spot"><span class="dot">⛩️</span><div class="box"><div class="when"><time>09:30</time><span class="chip">世界遺產</span></div><b>清水寺（清水舞台 & 音羽瀑布）</b><small>京都最知名的千年古剎</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>佇立於懸崖上的宏偉木造清水舞台！至音羽瀑布飲用代表「健康、學業、良緣」的靈水泉。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=清水寺" target="_blank" rel="noopener">📍 導航至清水寺</a></div></li>
+        
+        <li class="sight spot"><span class="dot">🍡</span><div class="box"><div class="when"><time>11:30</time><span class="chip">古街漫步</span></div><b>三年坂・二年坂 散策</b><small>充滿石板路與町家店鋪的風雅古街</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>品嚐抹茶軟餅乾、醬油小糰子，沿路欣賞日式傳統傘店與可愛的京飾品店。</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">🗼</span><div class="box"><div class="when"><time>13:30</time><span class="chip">地標拍照</span></div><b>法觀寺（八坂之塔）</b><small>拍攝京都古街經典角度的五重塔</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>高聳於傳統町家木造房屋之上的古塔，是代表京都古都歲月最夢幻的取景勝地。</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">👘</span><div class="box"><div class="when"><time>15:00</time><span class="chip">花街風情</span></div><b>花見小路 ➔ 八坂神社</b><small>祇園的核心古風區域</small><div class="intro"><svg class="ic-svg"><use href="#d-torii"/></svg><span>幸運的話能瞥見藝妓幽雅的身影；傍晚造訪朱紅色的八坂神社，欣賞點亮百盞提燈的舞殿。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=八坂神社" target="_blank" rel="noopener">📍 導航至八坂神社</a></div></li>
+        
+        <li class="rail transit"><span class="dot">🚃</span><div class="box"><div class="when"><time>18:30</time><span class="chip">返回</span></div><b>搭乘京阪電車返回大阪</b><small>祇園四條 ➔ 淀屋橋 ➔ 地鐵至大國町飯店</small></div></li>
+      </ol>
+    </div>
+
+    <!-- DAY 4 CONTENT -->
+    <div id="day-content-4" class="day-pane" style="display:none">
+      <ol class="tl">
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>08:30</time><span class="chip">前往北攝</span></div><b>大國町 ➔ 千里中央 ➔ 阪急巴士</b><small>前往位於勝尾寺的祈福聖地</small></div></li>
+        
+        <li class="sight spot"><span class="dot">👺</span><div class="box"><div class="when"><time>10:00</time><span class="chip">祈福勝地</span></div><b>勝尾寺（滿山勝利不倒翁達摩）</b><small>祈求勝運與學業目標達成的千古名剎</small><div class="intro"><svg class="ic-svg"><use href="#d-daruma"/></svg><span>寺內密密麻麻擺滿了信眾許願獻上的紅色迷你達摩不倒翁，氣勢震撼又極具手繪萌感！</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=勝尾寺" target="_blank" rel="noopener">📍 導航至勝尾寺</a></div></li>
+        
+        <li class="sight spot"><span class="dot">🍁</span><div class="box"><div class="when"><time>13:00</time><span class="chip">自然景觀</span></div><b>箕面大瀑布 & 步道散步</b><small>芬多精森林浴與名物「炸楓葉天婦羅」</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>列入日本瀑布百選！沿著涼爽的溪谷步道漫步，別忘了品嚐酥脆帶甜味的現炸紅葉點心。</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">🌆</span><div class="box"><div class="when"><time>17:00</time><span class="chip">繁華購物</span></div><b>梅田商圈 (Umeda) & 晚餐</b><small>阪急百貨、Grand Front 及梅田地下街</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>大阪北區時尚核心，各大藥妝店與百貨應有盡有，晚餐可在地下街享用精緻日式洋食或壽司。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=梅田" target="_blank" rel="noopener">📍 導航至梅田</a></div></li>
+        
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>20:30</time><span class="chip">返回</span></div><b>搭乘御堂筋線直達大國町飯店</b></div></li>
+      </ol>
+    </div>
+
+    <!-- DAY 5 CONTENT -->
+    <div id="day-content-5" class="day-pane" style="display:none">
+      <ol class="tl">
+        <li class="rail transit"><span class="dot">🚃</span><div class="box"><div class="when"><time>08:30</time><span class="chip">近鐵電車</span></div><b>難波站 ➔ 近鐵奈良站</b><small>搭乘近鐵奈良線快速急行（約 38 分鐘）</small></div></li>
+        
+        <li class="sight spot"><span class="dot">🦌</span><div class="box"><div class="when"><time>09:30</time><span class="chip">親近小鹿</span></div><b>奈良公園 餵鹿體驗</b><small>購買鹿仙貝與禮貌鞠躬的神鹿互動</small><div class="intro"><svg class="ic-svg"><use href="#d-deer"/></svg><span>數百隻溫馴的梅花鹿在古木參天的公園自由徜徉，向小鹿點頭鞠躬牠也會跟著敬禮喔！</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=奈良公園" target="_blank" rel="noopener">📍 導航至奈良公園</a></div></li>
+        
+        <li class="sight spot"><span class="dot">🏯</span><div class="box"><div class="when"><time>11:00</time><span class="chip">國寶古蹟</span></div><b>東大寺（大佛殿）</b><small>全球現存最大型單一木造建築</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>殿內供奉 15 公尺高的盧舍那大佛，莊嚴震撼。殿內還有有趣的「穿過大佛鼻孔木柱」祈福體驗。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=東大寺" target="_blank" rel="noopener">📍 導航至東大寺</a></div></li>
+        
+        <li class="sight spot"><span class="dot">⛩️</span><div class="box"><div class="when"><time>13:30</time><span class="chip">朱紅神社</span></div><b>春日大社 & 二月堂</b><small>千座石燈籠參道與全景俯瞰</small><div class="intro"><svg class="ic-svg"><use href="#d-torii"/></svg><span>沿途滿是古老青苔石燈籠，走上二月堂木造迴廊可免費居高臨下俯瞰整座美麗的奈良盆地。</span></div></div></li>
+        
+        <li class="sight spot"><span class="dot">🍢</span><div class="box"><div class="when"><time>17:30</time><span class="chip">懷舊大阪</span></div><b>通天閣・新世界 串炸晚餐</b><small>體驗大阪昭和下町復古風情</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>高聳的通天閣下盡是誇張巨型立體招牌！來吃現炸酥脆的各式串炸（注意沾醬只沾一次規則）。</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=通天閣" target="_blank" rel="noopener">📍 導航至通天閣</a></div></li>
+        
+        <li class="sight spot"><span class="dot">✨</span><div class="box"><div class="when"><time>19:40</time><span class="chip">極致夜景</span></div><b>阿倍野 HARUKAS 300 展望台</b><small>300 公尺高空 360 度無死角百億夜景</small><div class="intro"><svg class="ic-svg"><use href="#d-pagoda"/></svg><span>搭乘光速電梯直達 60 樓落地玻璃迴廊，將全大阪的燈火璀璨盡收眼底，劃下極致完美的旅程句點！</span></div><a class="map" href="https://www.google.com/maps/search/?api=1&query=HARUKAS+300" target="_blank" rel="noopener">📍 導航至阿倍野</a></div></li>
+        
+        <li class="rail transit"><span class="dot">🚇</span><div class="box"><div class="when"><time>21:00</time><span class="chip">返回</span></div><b>天王寺 ➔ 大國町飯店整理行李</b></div></li>
+      </ol>
+    </div>
+
+    <!-- DAY 6 CONTENT -->
+    <div id="day-content-6" class="day-pane" style="display:none">
+      <ol class="tl">
+        <li class="walk transit"><span class="dot">🏨</span><div class="box"><div class="when"><time>08:30</time><span class="chip">退房</span></div><b>飯店退房（最晚 10:00 前）</b><small>檢查房間物品、隨身護照與貴重物</small></div></li>
+        
+        <li class="rail transit"><span class="dot">🚆</span><div class="box"><div class="when"><time>09:00</time><span class="chip">南海電鐵</span></div><b>大國町 ➔ 天王寺 / 難波轉南海特急 Rapi:t</b><small>直達關西國際機場 (約 38–45 分鐘)</small></div></li>
+        
+        <li class="sight spot"><span class="dot">🛍️</span><div class="box"><div class="when"><time>09:50</time><span class="chip">最後採買</span></div><b>關西機場 (KIX) 報到 & 免稅店購物</b><small>託運行李、完成安檢與出境</small><div class="intro"><svg class="ic-svg"><use href="#d-food"/></svg><span>把握最後機會於機場免稅店採買白色戀人、東京牛奶起司工廠餅乾與獺祭大吟釀伴手禮！</span></div></div></li>
+        
+        <li class="plane transit"><span class="dot">🛫</span><div class="box"><div class="when"><time>11:55</time><span class="chip">長榮 BR181</span></div><b>長榮 BR181 班機起飛返台</b><small>關西機場 (KIX) ➔ 高雄機場 (KHH) 14:40 抵達</small></div></li>
+        
+        <li class="walk spot"><span class="dot">🏠</span><div class="box"><div class="when"><time>14:40</time><span class="chip">平安歸家</span></div><b>順利返抵高雄 溫馨滿載！</b><small>結束令人難忘充滿回憶的大陸家庭之旅 ❤️</small></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- TAB 2: FLIGHT & HOTEL VIEW -->
+  <section id="view-flights-hotel" class="view">
+    <h2 class="sec-title">✈️ 航班資訊</h2>
+    <div class="card tape fl" style="margin-top:10px">
+      <h3><span>去程長榮 BR 182</span><span class="chip">12/02（三）</span></h3>
+      <div class="row">
+        <div><div class="t">07:05</div><div class="p">高雄 (KHH) T1</div></div>
+        <div class="mid">✈️</div>
+        <div style="text-align:right"><div class="t">10:55</div><div class="p">關西 (KIX) T1</div></div>
+      </div>
+    </div>
+    
+    <div class="card tape fl">
+      <h3><span>回程長榮 BR 181</span><span class="chip">12/07（一）</span></h3>
+      <div class="row">
+        <div><div class="t">11:55</div><div class="p">關西 (KIX) T1</div></div>
+        <div class="mid">✈️</div>
+        <div style="text-align:right"><div class="t">14:40</div><div class="p">高雄 (KHH) T1</div></div>
+      </div>
+    </div>
+    <p class="note">⚠️ 回程班機 11:55 起飛，當天請務必提前 2.5 小時（09:25 前）抵達關西機場辦理手續。</p>
+
+    <h2 class="sec-title" style="margin-top:20px">🏨 住宿飯店資訊</h2>
+    <div class="card tape">
+      <dl>
+        <dt>飯店名稱</dt><dd>ESLEAD HOTEL Namba Daikokucho Annex</dd>
+        <dt>入住退房</dt><dd>12/02 16:00 起Check-in / 12/07 10:00 前Check-out</dd>
+        <dt>交通位置</dt><dd>大阪地鐵御堂筋線 / 谷町線「大國町站」步行約 3 分鐘</dd>
+      </dl>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=ESLEAD+HOTEL+Namba+Daikokucho+Annex" target="_blank" rel="noopener">📍 Google 地圖導航</a>
+    </div>
+
+    <h2 class="sec-title">🚕 給計程車司機看</h2>
+    <div class="card">
+      <p class="note" style="margin-top:0">若搭乘計程車，直接將此畫面出示給司機看：</p>
+      <div class="jp">〒556-0014<br>大阪府大阪市浪速区大国2丁目1-7<br>ESLEAD HOTEL Namba Daikokucho Annex</div>
+      <button class="btn-action" id="btn-copy-address" type="button">📋 一鍵複製日文地址</button>
+    </div>
+  </section>
+
+  <!-- TAB 3: CHECKLIST VIEW -->
+  <section id="view-checklist" class="view">
+    <h2 class="sec-title">🧳 隨身與行李檢查表</h2>
+    <p class="note" style="margin-top:0">勾選後系統會自動儲存進度喔！</p>
+    
+    <div class="card tape">
+      <div style="display:flex; justify-shadow:space-between; align-items:center;">
+        <b>完成進度</b>
+        <span id="check-percent" style="font-weight:bold; color:var(--pink)">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+
+      <h3 style="margin:12px 0 6px; font-size:16px;">📄 證件與財物隨身包</h3>
+      <div class="checklist-group">
+        <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">護照（確認 6 個月以上有效期）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Visit Japan Web 入境 QR Code 截圖</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">日幣現金 & 海外回饋信用卡</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">ICOCA / 西瓜卡（綁定 Apple Pay 或實體卡）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">機票電子憑證 & 飯店預約單據</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Wonder Cruise 觀光船預約憑證</label></div>
+      </div>
+
+      <h3 style="margin:16px 0 6px; font-size:16px;">🔌 電子產品與3C (必須隨身帶)</h3>
+      <div class="checklist-group">
+        <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">行動電源（⚠️嚴禁托運，必須隨身攜帶）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">手機充電線 & 日本雙腳扁平插頭 adapter</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">日本 eSIM 或漫遊 SIM 卡啟用確認</label></div>
+      </div>
+
+      <h3 style="margin:16px 0 6px; font-size:16px;">💊 個人藥品與日常用品</h3>
+      <div class="checklist-group">
+        <div class="checklist-item"><input type="checkbox" id="c10"><label for="c10">個人常備藥（腸胃藥、感冒藥、暈車藥）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c11"><label for="c11">保暖衣物（洋蔥式穿法、羽絨外套、毛帽）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c12"><label for="c12">舒適好走的運動鞋（京都宇治步行的好夥伴）</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c13"><label for="c13">保溫瓶 & 摺疊傘</label></div>
+      </div>
+
+      <button class="btn-action" id="btn-reset-check" style="background:var(--paper); margin-top:16px;">🔄 重置所有勾選</button>
+    </div>
+  </section>
+
+  <!-- TAB 4: SOS EMERGENCY VIEW -->
+  <section id="view-sos" class="view">
+    <h2 class="sec-title">🆘 緊急聯絡與支援</h2>
+    <p class="note" style="margin-top:0">遇到緊急狀況點擊按鈕即可立刻撥號：</p>
+    
+    <div class="card sos" style="margin-top:8px">
+      <a class="call" href="tel:110">
+        <div><b>日本警察局 Emergency Call</b><br><small style="color:var(--sub)">犯罪、交通事故或遺失物</small></div>
+        <span class="n">110</span>
+      </a>
+      <a class="call" href="tel:119">
+        <div><b>火警與緊急救護車 Ambulance</b><br><small style="color:var(--sub)">急病、重大傷患或火災</small></div>
+        <span class="n">119</span>
+      </a>
+      <a class="call" href="tel:+886800085095">
+        <div><b>台灣外交部旅外國人急難救助</b><br><small style="color:var(--sub)">護照遺失或緊急急難協助</small></div>
+        <span class="n" style="font-size:20px">+886-800-085-095</span>
+      </a>
+      <a class="call" href="tel:+81664438481">
+        <div><b>台北駐大阪經濟文化辦事處</b><br><small style="color:var(--sub)">位於大阪市北區中之島</small></div>
+        <span class="n" style="font-size:18px">06-6443-8481</span>
+      </a>
+    </div>
+
+    <h2 class="sec-title">👨‍👩‍👧‍👦 家庭成員走散對策</h2>
+    <div class="card tape">
+      <ul style="margin:0; padding-left:20px; line-height:1.8;">
+        <li>萬一在人潮擁擠處走散，請原地保持冷靜不要慌張移動。</li>
+        <li>使用 LINE 語音或文字訊息發送身邊最明顯的「景點地標」或「店家編號」。</li>
+        <li>若手機無訊號，直接約定返回「當天最終景點大門」或「大國町飯店大廳」會合。</li>
+      </ul>
+    </div>
+  </section>
 </main>
 
-<nav aria-label="主要導覽">
-  <a href="#day1" data-v="itinerary"><b>🗓️</b>行程</a>
-  <a href="#flight" data-v="flight"><b>✈️</b>航班</a>
-  <a href="#hotel" data-v="hotel"><b>🏨</b>住宿</a>
-  <a href="#sos" data-v="sos"><b>🆘</b>緊急</a>
+<!-- Fixed Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <a href="#itinerary" class="nav-item on" data-target="view-itinerary"><b>🗓️</b>行程</a>
+  <a href="#flights-hotel" class="nav-item" data-target="view-flights-hotel"><b>✈️</b>機酒</a>
+  <a href="#checklist" class="nav-item" data-target="view-checklist"><b>🧳</b>清單</a>
+  <a href="#sos" class="nav-item" data-target="view-sos"><b>🆘</b>緊急</a>
 </nav>
+
+<!-- Toast Message Container -->
+<div id="toast">已複製至剪貼簿！</div>
 
 <script>
 (function(){
-  'use strict';
-  var pageNames=['itinerary','flight','hotel','sos'];
-  var dayNames=['day1','day2','day3','day4','day5','day6'];
-  var dayButtons=Array.from(document.querySelectorAll('.day-switch button'));
-  var tabLinks=Array.from(document.querySelectorAll('nav a'));
-  function show(){
-    var hash=decodeURIComponent((location.hash||'#day1').slice(1));
-    var day=dayNames.includes(hash)?hash:'day1';
-    var page=dayNames.includes(hash)?'itinerary':(pageNames.includes(hash)?hash:'itinerary');
-    pageNames.forEach(function(p){document.getElementById('v-'+p).classList.toggle('on',p===page);});
-    dayNames.forEach(function(d){document.getElementById('v-'+d).classList.toggle('on',d===day);});
-    dayButtons.forEach(function(b){
-      var active=b.dataset.day===day;
-      b.classList.toggle('on',active);
-      b.setAttribute('aria-pressed',String(active));
+  // 1. Navigation Controller
+  var navItems = document.querySelectorAll('.bottom-nav a');
+  var views = document.querySelectorAll('.view');
+
+  function switchTab(targetId) {
+    views.forEach(function(v) {
+      v.classList.toggle('on', v.id === targetId);
     });
-    tabLinks.forEach(function(a){
-      var active=a.dataset.v===page;
-      a.classList.toggle('on',active);
-      if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    navItems.forEach(function(item) {
+      item.classList.toggle('on', item.getAttribute('data-target') === targetId);
     });
-    window.scrollTo({top:0,behavior:'instant'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  dayButtons.forEach(function(b){b.addEventListener('click',function(){location.hash=b.dataset.day;});});
-  window.addEventListener('hashchange',show);
-  // 只折疊交通搭乘提醒；車站、路線與車程保持可見。
-  document.querySelectorAll('.tl li.rail').forEach(function(li){
-    var small=li.querySelector('.box small');
-    if(!small)return;
-    var html=small.innerHTML.split(/<br\s*\/?\s*>/i);
-    if(html.length<2)return;
-    small.innerHTML=html[0];
-    var details=document.createElement('details');
-    details.className='travel-details';
-    var summary=document.createElement('summary');
-    summary.textContent='交通提醒・轉乘資訊';
-    details.appendChild(summary);
-    var extra=document.createElement('div');
-    extra.className='detail-content';
-    extra.innerHTML=html.slice(1).join('<br>');
-    details.appendChild(extra);
-    small.after(details);
+
+  navItems.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = this.getAttribute('data-target');
+      switchTab(target);
+    });
   });
-  var btn=document.getElementById('copy');
-  btn.addEventListener('click',function(){
-    var addr='〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex';
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(addr).then(function(){btn.textContent='已複製 ✓';},function(){btn.textContent='請長按地址複製';});
-    }else{btn.textContent='請長按地址複製';}
+
+  // 2. Day Switcher Controller
+  var dayBtns = document.querySelectorAll('.day-btn');
+  var dayPanes = document.querySelectorAll('.day-pane');
+  var dayDateHint = document.getElementById('day-date-hint');
+
+  var dayHints = {
+    "1": "12/02（三）第一天：機場 ➔ 難波 ➔ 心齋橋道頓堀",
+    "2": "12/03（四）第二天：宇治抹茶 ➔ 平等院 ➔ 日本橋",
+    "3": "12/04（五）第三天：京都古都 ➔ 清水寺 ➔ 祇園散策",
+    "4": "12/05（六）第四天：勝尾寺達摩 ➔ 箕面瀑布 ➔ 梅田夜景",
+    "5": "12/06（日）第五天：奈良公園餵鹿 ➔ 通天閣 ➔ 阿倍野夜景",
+    "6": "12/07（一）第六天：退房 ➔ 關西機場採買 ➔ 返航高雄"
+  };
+
+  dayBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var day = this.getAttribute('data-day');
+      dayBtns.forEach(function(b){ b.classList.remove('on'); });
+      this.classList.add('on');
+
+      dayPanes.forEach(function(pane) {
+        pane.style.display = (pane.id === 'day-content-' + day) ? 'block' : 'none';
+      });
+
+      if (dayDateHint && dayHints[day]) {
+        dayDateHint.textContent = dayHints[day];
+      }
+    });
   });
-  show();
+
+  // 3. Spot vs All Filter Toggle
+  var btnFilterAll = document.getElementById('filter-all');
+  var btnFilterSpots = document.getElementById('filter-spots');
+
+  if (btnFilterAll && btnFilterSpots) {
+    btnFilterAll.addEventListener('click', function() {
+      this.classList.add('on');
+      btnFilterSpots.classList.remove('on');
+      document.querySelectorAll('.tl li.transit').forEach(function(el) {
+        el.style.display = 'grid';
+      });
+    });
+
+    btnFilterSpots.addEventListener('click', function() {
+      this.classList.add('on');
+      btnFilterAll.classList.remove('on');
+      document.querySelectorAll('.tl li.transit').forEach(function(el) {
+        el.style.display = 'none';
+      });
+    });
+  }
+
+  // 4. Large Font Mode Toggle
+  var btnFont = document.getElementById('btn-font');
+  var isLargeFont = false;
+  btnFont.addEventListener('click', function() {
+    isLargeFont = !isLargeFont;
+    if (isLargeFont) {
+      document.documentElement.setAttribute('data-font', 'large');
+      btnFont.style.background = 'var(--sun)';
+    } else {
+      document.documentElement.removeAttribute('data-font');
+      btnFont.style.background = 'var(--card)';
+    }
+  });
+
+  // 5. Dark Mode Toggle
+  var btnTheme = document.getElementById('btn-theme');
+  var isDark = false;
+  btnTheme.addEventListener('click', function() {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    btnTheme.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  // 6. Copy Address with Toast
+  var btnCopy = document.getElementById('btn-copy-address');
+  var toast = document.getElementById('toast');
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2200);
+  }
+
+  btnCopy.addEventListener('click', function() {
+    var textToCopy = "〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex";
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        showToast("✓ 已成功複製日文地址！");
+      }, function() {
+        showToast("請長按複製地址");
+      });
+    } else {
+      showToast("請長按複製地址");
+    }
+  });
+
+  // 7. Interactive Checklist with localStorage Sync
+  var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+  var progressFill = document.getElementById('progress-fill');
+  var checkPercent = document.getElementById('check-percent');
+  var btnResetCheck = document.getElementById('btn-reset-check');
+
+  function updateProgress() {
+    var total = checkboxes.length;
+    var checkedCount = 0;
+    checkboxes.forEach(function(cb) {
+      var item = cb.closest('.checklist-item');
+      if (cb.checked) {
+        checkedCount++;
+        if (item) item.classList.add('done');
+      } else {
+        if (item) item.classList.remove('done');
+      }
+      localStorage.setItem('osaka_check_' + cb.id, cb.checked ? '1' : '0');
+    });
+
+    var pct = Math.round((checkedCount / total) * 100);
+    if (progressFill) progressFill.style.width = pct + '%';
+    if (checkPercent) checkPercent.textContent = pct + '%';
+  }
+
+  checkboxes.forEach(function(cb) {
+    var saved = localStorage.getItem('osaka_check_' + cb.id);
+    if (saved === '1') cb.checked = true;
+
+    cb.addEventListener('change', updateProgress);
+  });
+
+  if (btnResetCheck) {
+    btnResetCheck.addEventListener('click', function() {
+      checkboxes.forEach(function(cb) {
+        cb.checked = false;
+        localStorage.removeItem('osaka_check_' + cb.id);
+      });
+      updateProgress();
+      showToast("已重置所有隨身清單");
+    });
+  }
+
+  // Initialize checklist state
+  updateProgress();
 })();
 </script>
 </body>

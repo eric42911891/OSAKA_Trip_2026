@@ -84,6 +84,34 @@ nav a.on{background:var(--pink);color:var(--btn-ink);border-color:var(--stroke);
 .intro .ic{flex:0 0 38px;width:38px;height:38px;color:var(--ink)}
 nav a{font-size:13px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+/* v2: 六天切換、交通展開、手機導覽優化 */
+.section-top h2{margin-bottom:2px}
+.section-top .note{margin-top:0}
+.day-panel{display:none;animation:fadeIn .16s ease-out}
+.day-panel.on{display:block}
+@keyframes fadeIn{from{opacity:.65;transform:translateY(3px)}to{opacity:1;transform:none}}
+.day-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:10px 0 19px}
+.day-switch button{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0;padding:7px 4px;min-width:0;min-height:62px;border-radius:14px;background:var(--card);color:var(--ink);box-shadow:2px 2px 0 var(--stroke);font-family:inherit;font-size:15px;font-weight:700;line-height:1.25}
+.day-switch button small{font-size:12px;font-weight:400;margin-top:5px;color:var(--sub)}
+.day-switch button.on{background:var(--matcha);color:var(--btn-ink);transform:translate(1px,1px);box-shadow:1px 1px 0 var(--stroke)}
+.day-switch button.on small{color:var(--btn-ink)}
+.travel-details{margin-top:9px;border-top:1px dashed var(--sub);padding-top:7px}
+.travel-details summary{cursor:pointer;color:var(--ink);font-size:14px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.travel-details summary::-webkit-details-marker{display:none}
+.travel-details summary::after{content:'＋';font-size:21px;line-height:1}
+.travel-details[open] summary::after{content:'－'}
+.detail-content{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.65;padding:9px 11px;border-radius:10px;background:var(--paper)}
+.empty-day .card{text-align:center;padding:28px 18px;margin-top:15px}
+.empty-day h3{font-size:22px;margin:4px 0 5px}
+.empty-day p{margin:0;color:var(--sub);font-size:15px}
+.empty-icon{font-size:38px}
+nav{z-index:30;max-width:600px;margin:auto;box-shadow:0 -4px 18px #00000010}
+nav a{font-size:14px}
+nav a b{font-size:23px}
+.tl .box{overflow-wrap:anywhere}
+@media (max-width:360px){main{padding:0 12px}.tl li{grid-template-columns:42px 1fr;gap:0 7px}.dot{width:42px;height:42px;font-size:21px}.tl li::before{left:20px}.tl .box{padding:8px 10px}.when time{font-size:20px}.day-switch{gap:6px}}
+@media (prefers-reduced-motion:reduce){.day-panel{animation:none}}
 </style>
 </head>
 <body>
@@ -104,9 +132,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset
   <svg viewBox="0 0 400 56" aria-hidden="true"><path d="M10 40 Q100 4 200 30 T390 18" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" opacity=".6"/><text x="352" y="30" font-size="26" transform="rotate(-12 352 30)">✈️</text><ellipse cx="60" cy="14" rx="22" ry="8" fill="var(--sky)" opacity=".7"/><ellipse cx="78" cy="10" rx="14" ry="7" fill="var(--sky)" opacity=".7"/></svg>
 </header>
 
-<section id="v-day1" class="view">
+<section id="v-itinerary" class="view">
+  <div class="section-top"><h2>每日行程</h2><p class="note">點選日期切換，搭車時可展開交通提醒。</p></div>
+  <div class="day-switch" role="group" aria-label="切換旅遊日期">
+    <button type="button" data-day="day1">DAY 01<small>12/02・三</small></button>
+    <button type="button" data-day="day2">DAY 02<small>12/03・四</small></button>
+    <button type="button" data-day="day3">DAY 03<small>12/04・五</small></button>
+    <button type="button" data-day="day4">DAY 04<small>12/05・六</small></button>
+    <button type="button" data-day="day5">DAY 05<small>12/06・日</small></button>
+    <button type="button" data-day="day6">DAY 06<small>12/07・一</small></button>
+  </div>
+  <section id="v-day1" class="day-panel">
   <h2>第 1 天　12/02（三）</h2>
-  <p class="note" style="margin-top:0">難波、心齋橋、道頓堀。</p>
+  <p class="note" style="margin-top:0">難波、心齋橋、道頓堀。<br>※交通時間依原規劃整理，出發前請再核對班次。</p>
   <div class="strip"><svg class="ic"><use href="#d-torii"/></svg><svg class="ic"><use href="#d-food"/></svg><svg class="ic"><use href="#d-boat"/></svg></div>
   <ol class="tl">
     <li class="plane"><span class="dot">🛫</span><div class="box"><div class="when"><time>07:05</time><span class="chip">飛機</span></div><b>長榮 BR 182 起飛</b><small>高雄機場第 1 航廈 → 關西機場第 1 航廈</small></div></li>
@@ -123,9 +161,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset
   </ol>
 </section>
 
-<section id="v-day2" class="view">
+<section id="v-day2" class="day-panel">
   <h2>第 2 天　12/03（四）</h2>
-  <p class="note" style="margin-top:0">宇治一日散策：抹茶、世界遺產和《源氏物語》。</p>
+  <p class="note" style="margin-top:0">宇治一日散策：抹茶、世界遺產和《源氏物語》。<br>※電車班次與 Premium Car 供應以當日公告為準。</p>
   <div class="strip"><svg class="ic"><use href="#d-cup"/></svg><svg class="ic"><use href="#d-pagoda"/></svg><svg class="ic"><use href="#d-torii"/></svg><svg class="ic"><use href="#d-book"/></svg></div>
   <ol class="tl">
     <li class="walk"><span class="dot">🏨</span><div class="box"><div class="when"><time>08:00</time><span class="chip">出發</span></div><b>從飯店出發</b><small>ESLEAD HOTEL → 大國町站</small></div></li>
@@ -145,6 +183,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset
     <li class="rail"><span class="dot">🚇</span><div class="box"><div class="when"><time>20:30</time><span class="chip">地鐵</span></div><b>堺筋線 → 御堂筋線</b><small>惠美須町 → 動物園前，約 3 分鐘<br>刷交通卡搭乘，到動物園前換車<br>動物園前 → 大國町，約 3 分鐘</small></div></li>
     <li class="walk"><span class="dot">🏨</span><div class="box"><div class="when"><time class="hand">晚上</time><span class="chip">住宿</span></div><b>回飯店休息</b><small>ESLEAD HOTEL Namba Daikokucho Annex</small></div></li>
   </ol>
+</section>
+  <div id="v-day3" class="day-panel empty-day"><h2>第 3 天　12/04（五）</h2><div class="card tape"><span class="empty-icon">📍</span><h3>行程準備中</h3><p>保留這一天的版面，待你提供正式行程後加入景點、交通與時間軸。</p></div></div>
+  <div id="v-day4" class="day-panel empty-day"><h2>第 4 天　12/05（六）</h2><div class="card tape"><span class="empty-icon">🍁</span><h3>行程準備中</h3><p>尚未加入當日資料，避免出現未確認的交通時刻。</p></div></div>
+  <div id="v-day5" class="day-panel empty-day"><h2>第 5 天　12/06（日）</h2><div class="card tape"><span class="empty-icon">🗺️</span><h3>行程準備中</h3><p>待補上當日的景點、用餐與回飯店路線。</p></div></div>
+  <div id="v-day6" class="day-panel empty-day"><h2>第 6 天　12/07（一）</h2><div class="card tape"><span class="empty-icon">✈️</span><h3>回程日</h3><p>已知回程航班為長榮 BR 181，11:55 自關西機場起飛，14:40 抵達高雄；出發交通時程尚待確認。</p><a href="#flight" class="map">查看航班資訊</a></div></div>
 </section>
 
 <section id="v-flight" class="view">
@@ -198,9 +241,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset
 </section>
 </main>
 
-<nav>
-  <a href="#day1" data-v="day1"><b>🗓️</b>第1天</a>
-  <a href="#day2" data-v="day2"><b>🍵</b>第2天</a>
+<nav aria-label="主要導覽">
+  <a href="#day1" data-v="itinerary"><b>🗓️</b>行程</a>
   <a href="#flight" data-v="flight"><b>✈️</b>航班</a>
   <a href="#hotel" data-v="hotel"><b>🏨</b>住宿</a>
   <a href="#sos" data-v="sos"><b>🆘</b>緊急</a>
@@ -208,23 +250,57 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset
 
 <script>
 (function(){
-  var names=["day1","day2","flight","hotel","sos"];
+  'use strict';
+  var pageNames=['itinerary','flight','hotel','sos'];
+  var dayNames=['day1','day2','day3','day4','day5','day6'];
+  var dayButtons=Array.from(document.querySelectorAll('.day-switch button'));
+  var tabLinks=Array.from(document.querySelectorAll('nav a'));
   function show(){
-    var h=(location.hash||"").replace("#","");
-    if(names.indexOf(h)<0)h="day1";
-    names.forEach(function(n){document.getElementById("v-"+n).classList.toggle("on",n===h);});
-    var l=document.querySelectorAll("nav a");
-    for(var i=0;i<l.length;i++){l[i].classList.toggle("on",l[i].getAttribute("data-v")===h);}
-    window.scrollTo(0,0);
+    var hash=decodeURIComponent((location.hash||'#day1').slice(1));
+    var day=dayNames.includes(hash)?hash:'day1';
+    var page=dayNames.includes(hash)?'itinerary':(pageNames.includes(hash)?hash:'itinerary');
+    pageNames.forEach(function(p){document.getElementById('v-'+p).classList.toggle('on',p===page);});
+    dayNames.forEach(function(d){document.getElementById('v-'+d).classList.toggle('on',d===day);});
+    dayButtons.forEach(function(b){
+      var active=b.dataset.day===day;
+      b.classList.toggle('on',active);
+      b.setAttribute('aria-pressed',String(active));
+    });
+    tabLinks.forEach(function(a){
+      var active=a.dataset.v===page;
+      a.classList.toggle('on',active);
+      if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    window.scrollTo({top:0,behavior:'instant'});
   }
-  window.addEventListener("hashchange",show);
-  show();
-  var btn=document.getElementById("copy");
-  btn.addEventListener("click",function(){
-    var text="〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex";
-    try{navigator.clipboard.writeText(text).then(function(){btn.textContent="已複製 ✓";},function(){btn.textContent="請長按文字複製";});}
-    catch(e){btn.textContent="請長按文字複製";}
+  dayButtons.forEach(function(b){b.addEventListener('click',function(){location.hash=b.dataset.day;});});
+  window.addEventListener('hashchange',show);
+  // 只折疊交通搭乘提醒；車站、路線與車程保持可見。
+  document.querySelectorAll('.tl li.rail').forEach(function(li){
+    var small=li.querySelector('.box small');
+    if(!small)return;
+    var html=small.innerHTML.split(/<br\s*\/?\s*>/i);
+    if(html.length<2)return;
+    small.innerHTML=html[0];
+    var details=document.createElement('details');
+    details.className='travel-details';
+    var summary=document.createElement('summary');
+    summary.textContent='交通提醒・轉乘資訊';
+    details.appendChild(summary);
+    var extra=document.createElement('div');
+    extra.className='detail-content';
+    extra.innerHTML=html.slice(1).join('<br>');
+    details.appendChild(extra);
+    small.after(details);
   });
+  var btn=document.getElementById('copy');
+  btn.addEventListener('click',function(){
+    var addr='〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex';
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(addr).then(function(){btn.textContent='已複製 ✓';},function(){btn.textContent='請長按地址複製';});
+    }else{btn.textContent='請長按地址複製';}
+  });
+  show();
 })();
 </script>
 </body>

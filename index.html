@@ -282,6 +282,21 @@ button:disabled{cursor:default}
   .tt-table-multistop td{font-size:12px}
   .tt-table-multistop td:last-child{font-size:10px}
 }
+
+/* 時刻表 11：同一路線列車開往不同終點，逐班顯示行先 */
+.tt-table-destination th,.tt-table-destination td{padding:9px 3px;white-space:nowrap}
+.tt-table-destination th:nth-child(1),.tt-table-destination td:nth-child(1){width:24%}
+.tt-table-destination th:nth-child(2),.tt-table-destination td:nth-child(2){width:23%}
+.tt-table-destination th:nth-child(3),.tt-table-destination td:nth-child(3){width:25%}
+.tt-table-destination th:nth-child(4),.tt-table-destination td:nth-child(4){width:28%}
+.tt-table-destination td{font-size:13px}
+.tt-table-destination td:nth-child(3),.tt-table-destination td:nth-child(4){font-size:11px;font-weight:500}
+.tt-table-destination .planned-row td{font-weight:700}
+@media(max-width:360px){
+  .tt-table-destination th,.tt-table-destination td{padding:8px 1px}
+  .tt-table-destination td{font-size:12px}
+  .tt-table-destination td:nth-child(3),.tt-table-destination td:nth-child(4){font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -468,7 +483,24 @@ const TRAIN_TIMETABLES = [
     ['14:18','14:34','急行'],['14:28','14:44','急行'],['14:38','14:54','急行'],['14:48','15:04','急行']
   ]},
   {id:10,day:5,operator:'近畿日本鐵道',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',planned:'09:47',arrival:'10:22',duration:'約 35 分鐘',service:'特急 HINOTORI',destination:'近鐵奈良',rows:[ ['09:47','10:22','特急HINOTORI']]},
-  {id:11,day:5,operator:'近畿日本鐵道',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',planned:'16:30',duration:'約 38 分鐘',service:'快速急行',note:'奈良回程，交通 IC 卡支付基本乘車費。尚未提供完整候選班次。',rows:[]},
+  {id:11,day:5,operator:'近畿日本鐵道',title:'近鐵奈良線 回程',from:'近鐵奈良',to:'近鐵日本橋',planned:'16:30',arrival:'17:14',duration:'約 44 分鐘',service:'快速急行',mixedDestinations:true,rows:[
+    ['15:06','15:43','急行','大阪難波'],
+    ['15:16','15:54','快速急行','神戶三宮'],
+    ['15:26','16:03','急行','大阪難波'],
+    ['15:36','16:14','快速急行','神戶三宮'],
+    ['15:56','16:36','快速急行','神戶三宮'],
+    ['16:03','16:44','急行','大阪難波'],
+    ['16:16','16:54','快速急行','神戶三宮'],
+    ['16:26','17:03','急行','大阪難波'],
+    ['16:30','17:14','快速急行','神戶三宮'],
+    ['16:43','17:24','急行','大阪難波'],
+    ['16:56','17:34','快速急行','神戶三宮'],
+    ['17:04','17:44','急行','大阪難波'],
+    ['17:18','17:54','快速急行','神戶三宮'],
+    ['17:26','18:03','急行','大阪難波'],
+    ['17:46','18:24','急行','大阪難波'],
+    ['17:58','18:34','快速急行','神戶三宮']
+  ]},
   {id:12,day:6,operator:'南海電鐵',title:'南海電鐵 特急 Rapi:t',from:'新今宮',to:'關西機場',planned:'07:32',arrival:'08:10',duration:'約 37 分鐘',service:'特急 Rapi:t',destination:'關西機場',note:'12/07 前往關西機場，請確認特急券、指定席及出發月台。尚未提供完整候選班次。',rows:[
     ['07:32','08:10','特急Rapi:t A7'],['08:02','08:39','特急Rapi:t A9']
   ]}
@@ -477,18 +509,24 @@ function timetableLabel(t){return t.label||'時刻表 '+t.id;}
 function trainTimetableHtml(t){
  const label=timetableLabel(t);
  const rows=t.multiStop
-   ? `<div class="tt-route-note">開往 ${esc(t.destination||t.to)} · ${t.rows.length} 班特急 · 三條及祇園四條皆可查看上車時間</div>
-      <table class="tt-table tt-table-multistop"><caption>${esc(label)}｜三條、祇園四條至淀屋橋時刻表</caption>
+   ? `<table class="tt-table tt-table-multistop"><caption>${esc(label)}｜三條、祇園四條至淀屋橋時刻表</caption>
       <thead><tr><th scope="col">三條<br><span>出發</span></th><th scope="col">祇園四條<br><span>出發</span></th><th scope="col">淀屋橋<br><span>抵達</span></th><th scope="col">車種</th></tr></thead>
       <tbody>${t.rows.map(r=>`<tr${t.planned===r[0]?' class="planned-row"':''}>
       <td>${esc(r[0])}${t.planned===r[0]?'<span class="tt-planned-tag">預定搭乘</span>':''}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table>`
+   : t.mixedDestinations
+   ? `<table class="tt-table tt-table-destination"><caption>${esc(label)}｜${esc(t.from)}至${esc(t.to)} 列車行先與班次表</caption>
+      <thead><tr><th scope="col">出發</th><th scope="col">抵達</th><th scope="col">車種</th><th scope="col">開往</th></tr></thead>
+      <tbody>${t.rows.map(r=>`<tr${t.planned===r[0]?' class="planned-row"':''}>
+        <td>${esc(r[0])}${t.planned===r[0]?'<span class="tt-planned-tag">預定搭乘</span>':''}</td>
+        <td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td>
+      </tr>`).join('')}</tbody></table>`
    : t.rows.length?`<table class="tt-table"><caption>${esc(label)}｜${esc(t.from)}至${esc(t.to)} 旅客整理時刻表</caption><thead><tr><th scope="col">出發</th><th scope="col">抵達</th><th scope="col">車種</th></tr></thead><tbody>${t.rows.map(r=>`<tr${t.planned===r[0]?' class="planned-row"':''}><td>${esc(r[0])}${t.planned===r[0]?'<span class="tt-planned-tag">預定搭乘</span>':''}</td><td>${esc(r[1])}</td><td>${esc(r[2]||'未註明')}</td></tr>`).join('')}</tbody></table>`:`<p class="train-missing"><strong>尚未輸入完整列車班次。</strong><br>目前僅記錄行程預計搭乘的時間與路線；待提供班次表後可補上。</p>`;
  const tripInfo=t.planned
   ?`<div class="train-plan"><small>行程預計搭乘 · 班次請以官方資訊確認</small><b>${esc(t.planned)}${t.arrival?' → '+esc(t.arrival):''}</b><p>${esc(t.duration)} · ${esc(t.service)}${t.destination?' · 開往 '+esc(t.destination):''}</p></div>`
   :`<div class="train-plan"><small>列車候選班次 · 旅客自行整理</small><b>共 ${t.rows.length} 班</b><p>開往 ${esc(t.destination)} · ${esc(t.service)} · ${esc(t.duration)}</p></div>`;
- const transfer=(t.id===8||t.id===9)?`<p class="tt-notice"><strong>轉乘提醒：</strong>阪急箕面回程兩段班次分別列出，部分相鄰班次僅有 2 分鐘間隔，不代表一定能順利轉乘。請以當日月台及時刻為準。</p>`:'';
+ const transfer='';
  const verify='';
- const other=t.id===8?'<a class="train-next-link" href="#timetable9">下一段：時刻表 9｜石橋阪大前 → 大阪梅田 →</a>':t.id===9?'<a class="train-next-link" href="#timetable8">← 前一段：時刻表 8｜箕面 → 石橋阪大前</a>':'';
+ const other='';
  const back=t.day?`<a href="#day${t.day}" class="train-back-link">← 返回第 ${t.day} 天行程</a>`:'<a href="#transit" class="train-back-link">← 返回交通資訊頁首</a>';
  const number=t.id;
  return `<details id="timetable-${t.id}" class="train-timetable" aria-label="${esc(label)}｜${esc(t.title)}"><summary><span class="train-num"><small>TABLE</small>${number}</span><span class="train-title"><b>${esc(t.title)}</b><small>${esc(t.from)} → ${esc(t.to)}</small></span><span class="train-toggle" aria-hidden="true"></span></summary><div class="train-panel">${tripInfo}<p class="tt-footnote">${esc(t.note)}</p>${rows}${transfer}${verify}${other}${back}</div></details>`;
@@ -579,7 +617,7 @@ const DAYS = [
   {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',map:'奈良 東向商店街'},
   {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',map:'東大寺 奈良'},
   {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',map:'東大寺 二月堂'},
-  {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'搭乘約 38 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。','請再次確認列車是否停靠近鐵日本橋。']},
+  {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'預計 16:30–17:14 · 約 44 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。','請再次確認列車是否停靠近鐵日本橋。']},
   {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',map:'大阪 新世界市場'},
   {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',map:'通天閣 大阪'},

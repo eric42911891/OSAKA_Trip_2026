@@ -93,6 +93,74 @@ button:disabled{cursor:default}
 @media(max-width:360px){.content{padding-left:17px;padding-right:17px}.topbar{padding:0 18px}.cover{padding:14px 12px 0}.cover-panel{height:365px}.cover-title{font-size:36px}.lead-row{margin-left:0;margin-right:0}.lead-row h2{font-size:19px}.primary-cta{padding:0 11px;font-size:11px}.day-tabs{padding-left:17px;padding-right:17px}.page-intro{padding-left:17px;padding-right:17px}.entry{grid-template-columns:59px minmax(0,1fr);gap:11px}.schedule{padding-left:17px;padding-right:17px}.day-index button{padding:12px;min-height:140px}.day-index strong{font-size:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @media print{body,.app{background:white;box-shadow:none}.topbar,.bottom-nav,.day-tabs,.filter-bar,.entry-actions,.cover{display:none!important}.view{display:block!important}.app{padding-bottom:0;max-width:none}.content{max-width:720px;margin:auto}.day-cover{color:black;background:white}.day-cover p,.day-cover .day-eyebrow{color:#333}.more-details .more-inner{display:block} .site-footer{display:none}}
+/* Mobile railway timetable data table */
+.tt-table{border-collapse:collapse;width:100%;table-layout:fixed;font-variant-numeric:tabular-nums}
+.tt-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.tt-table th,.tt-table td{padding:9px 10px;text-align:center;border-bottom:1px solid #e5e6df}
+.tt-table th{font-size:11px;letter-spacing:.07em;font-weight:600;color:#65736c;background:#f6f7f3}
+.tt-table td{font:600 15px/1.4 var(--sans);color:#344a48}
+.tt-table td:last-child{font-size:12px;font-weight:500;color:#64716b}
+.tt-table tbody tr:nth-child(even){background:#f5f6f1}
+.tt-table tbody tr:last-child td{border-bottom:0}
+.tt-table td:first-child{color:var(--sea)}
+.tt-table tbody tr.planned-row{background:#e7efea;border-left:3px solid var(--matcha)}
+.tt-table tbody tr.planned-row td{font-weight:700;color:var(--sea)}
+.tt-planned-tag{display:block;margin-top:3px;color:#486d57;font:700 10px/1.2 var(--sans)}
+.tt-notice{font-size:12px;line-height:1.75;background:#f3ede4;color:#84634c;border-left:2px solid #ba9d64;padding:11px 12px;margin:14px 0 0}
+.tt-footnote{font-size:11px;line-height:1.8;color:var(--ink-light);margin:12px 0 0}
+.tt-transit-link{display:inline-flex;margin-top:12px;font-size:12px;font-weight:700;color:#315b56;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:360px){.tt-table th,.tt-table td{padding:8px 5px}}
+
+/* 行程時刻表深層連結：從每日行程跳至交通頁並展開指定班次 */
+.timetable-link{display:inline-flex;align-items:center;gap:2px;padding:3px 7px;margin-left:2px;min-height:30px;white-space:nowrap;text-decoration:none;color:#235950;background:#e8efea;border-bottom:1px solid #819c90;border-radius:2px;font-weight:700}
+.timetable-link:focus-visible,.timetable-link:hover{background:#dce8df}
+.timetable-hub{margin:20px 0 28px}
+.timetable-hub-head{font:600 20px/1.5 var(--serif);margin:0 0 7px}
+.timetable-hub-intro{font-size:12px;line-height:1.8;color:var(--ink-light);margin:0 0 15px}
+.timetable-jump{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+.timetable-jump a{font-size:11px;min-height:35px;display:inline-flex;align-items:center;padding:6px 11px;text-decoration:none;border:1px solid #c8d1c7;color:#31564f;background:#f4f6ef}
+.timetable-jump a:focus-visible,.timetable-jump a:hover{background:#e8efea}
+.train-timetable{background:var(--white);border:1px solid var(--line);margin:12px 0;scroll-margin-top:91px;box-shadow:var(--shadow);overflow:hidden}
+.train-timetable.is-target{border:2px solid var(--vermilion);box-shadow:0 5px 26px rgba(157,89,66,.14)}
+.train-timetable>summary{padding:16px;list-style:none;display:flex;gap:13px;align-items:center;min-height:82px;cursor:pointer}
+.train-timetable>summary::-webkit-details-marker{display:none}
+.train-timetable .train-num{height:43px;width:43px;min-width:43px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--sea);color:white;line-height:1.1;font:700 19px/1 var(--serif)}
+.train-timetable .train-num small{font:600 8px/1.5 var(--sans);letter-spacing:.06em;color:#d6dfd5}
+.train-timetable .train-title{flex:1;min-width:0}
+.train-timetable .train-title b{font:600 15px/1.5 var(--serif);display:block}
+.train-timetable .train-title small{display:block;font-size:11px;line-height:1.6;color:var(--ink-light);margin-top:2px}
+.train-timetable .train-toggle{color:var(--vermilion);font:600 20px var(--sans)}
+.train-timetable .train-toggle::after{content:'＋'}
+.train-timetable[open] .train-toggle::after{content:'−'}
+.train-panel{padding:4px 16px 18px;border-top:1px solid var(--line)}
+.train-plan{background:#eaf0eb;border-left:3px solid var(--matcha);padding:13px 15px;margin:14px 0}
+.train-plan small{display:block;font-size:10px;color:#526e62;font-weight:700;letter-spacing:.1em}
+.train-plan b{font:600 23px/1.5 var(--serif);display:block;color:var(--sea)}
+.train-plan p{margin:3px 0 0;font-size:11px;color:#536660;line-height:1.8}
+.train-missing{margin:13px 0 0;padding:12px;border:1px dashed #c6c6b8;color:#667069;background:#faf8f2;font-size:12px;line-height:1.9}
+.train-back-link{display:inline-flex;margin-top:13px;padding:7px 0;color:#2e5e59;font-size:12px;font-weight:700;text-underline-offset:4px}
+@media(max-width:360px){.train-timetable>summary{padding:13px 11px;gap:9px}.train-num{min-width:39px}.train-panel{padding:4px 11px 16px}}
+.train-next-link{display:block;margin-top:14px;padding:11px 12px;background:#edf0e9;border-left:3px solid var(--matcha);color:var(--sea);text-decoration:none;font-size:12px;font-weight:700;line-height:1.6}
+.train-next-link:focus-visible,.train-next-link:hover{background:#dfe8dd}
+
+/* 每筆行程各自展開時刻表：與「購票／轉乘」並列的第二個 more，無跳頁 */
+.entry-main{min-width:0}
+.inline-timetable{margin-top:6px}
+.inline-timetable>summary{color:#285e57;font-weight:700}
+.inline-timetable>summary::before{content:'▤';font-size:15px;color:var(--matcha);margin-right:4px}
+.inline-tt-panel{background:#fffefa;border:1px solid var(--line);padding:12px 10px 14px;margin-top:8px;min-width:0}
+.inline-tt-route{font:600 12px/1.75 var(--serif);margin:0 0 10px;color:var(--sea);overflow-wrap:anywhere}
+.inline-tt-planned{background:#e8efea;border-left:3px solid var(--matcha);padding:9px 10px;margin-bottom:9px}
+.inline-tt-planned span,.inline-tt-planned small{display:block;font-size:10px;color:#536660}
+.inline-tt-planned strong{display:block;color:var(--sea);font:700 18px/1.45 var(--serif);font-variant-numeric:tabular-nums;margin:3px 0}
+.inline-tt-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.inline-tt-panel .tt-table{width:100%;table-layout:fixed}
+.inline-tt-panel .tt-table th,.inline-tt-panel .tt-table td{padding:8px 3px;overflow-wrap:anywhere;word-break:normal}
+.inline-tt-panel .tt-table td{font-size:13px}
+.inline-tt-panel .tt-table td:last-child{font-size:11px}
+.inline-tt-panel .tt-table th{font-size:10px;letter-spacing:0}
+.inline-tt-panel .tt-table .tt-planned-tag{font-size:9px}
+.inline-tt-panel .tt-footnote{font-size:10px}
 </style>
 </head>
 <body>
@@ -130,11 +198,11 @@ button:disabled{cursor:default}
   <div class="cover-bottom"><div><strong>冬日，出發。</strong><span>12.02 WED — 12.07 MON</span></div><span class="cover-seal">家族<br>旅行</span></div>
  </div></div>
  <div class="content">
-  <div class="lead-row"><div><span class="overline">THE TRAVEL NOTEBOOK</span><h2>把旅途，收進一本手冊。</h2><p>每日路線、交通轉乘、機票與住宿，<br>都在這裡。</p></div><button class="primary-cta" type="button" data-open-day="1">開始旅程 <svg class="icon"><use href="#i-arrow"/></svg></button></div>
-  <div class="micro-strip"><div class="micro-item"><strong>06</strong><span>旅遊天數</span></div><div class="micro-item"><strong>05</strong><span>住宿晚數</span></div><div class="micro-item"><strong>02</strong><span>已填行程天數</span></div></div>
+  <div class="lead-row"><div><span class="overline">THE TRAVEL NOTEBOOK</span><h2>把旅途，收進一本手冊。</h2><p>六天路線、交通轉乘、機票與住宿，<br>都在這裡。</p></div><button class="primary-cta" type="button" data-open-day="1">開始旅程 <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+  <div class="micro-strip"><div class="micro-item"><strong>06</strong><span>旅遊天數</span></div><div class="micro-item"><strong>05</strong><span>住宿晚數</span></div><div class="micro-item"><strong>06</strong><span>已填行程天數</span></div></div>
   <div class="block-heading"><div><span class="overline">DAILY JOURNAL</span><h2>六日行程覽</h2></div><small>點選日期查看</small></div>
   <div id="dayIndex" class="day-index"></div>
-  <aside class="editorial-note"><b>旅途小提醒</b><p>交通時刻、營業時間與車票規定請在出發前再次確認。本手冊依目前提供的行程整理；第 3–6 天尚未填入內容。</p></aside>
+  <aside class="editorial-note"><b>旅途小提醒</b><p>交通時刻、營業時間與車票規定請在出發前再次確認。六天行程均已填入；尚未提供完整班次的時刻表將顯示預計搭乘資訊。</p></aside>
  </div>
 </section>
 <section class="view" id="page-itinerary" aria-label="每日行程">
@@ -147,13 +215,14 @@ button:disabled{cursor:default}
  <div class="content">
   <h2 class="feature-label">往返航班</h2>
   <article class="boarding-pass"><div class="pass-head"><strong>12/02（三） · 去程</strong><span>EVA AIR / BR 182</span></div><div class="pass-body"><div class="pass-point"><b>07:05</b><span>高雄 · 第 1 航廈</span></div><span class="pass-center"><svg class="icon"><use href="#i-plane"/></svg></span><div class="pass-point"><b>10:55</b><span>關西 · 第 1 航廈</span></div></div></article>
-  <article class="boarding-pass"><div class="pass-head"><strong>12/07（一） · 回程</strong><span>EVA AIR / BR 181</span></div><div class="pass-body"><div class="pass-point"><b>11:55</b><span>關西 · 第 1 航廈</span></div><span class="pass-center"><svg class="icon"><use href="#i-plane"/></svg></span><div class="pass-point"><b>14:40</b><span>高雄 · 第 1 航廈</span></div></div></article>
+  <article class="boarding-pass"><div class="pass-head"><strong>12/07（一） · 回程</strong><span>EVA AIR / BR 181</span></div><div class="pass-body"><div class="pass-point"><b>11:55</b><span>關西 · 第 1 航廈</span></div><span class="pass-center"><svg class="icon"><use href="#i-plane"/></svg></span><div class="pass-point"><b>14:30</b><span>高雄 · 第 1 航廈</span></div></div></article>
   <h2 class="feature-label">車票與轉乘備忘</h2>
   <div class="ticket-list">
    <section class="ticket-item"><span class="num">01 / JR WEST</span><h3>關西機場 · HARUKA 22</h3><p>原計畫 12/02 12:14 自關西機場前往天王寺。預先購票、現場確認車次與座位安排；是否可劃位及其費用以購買票種規定為準。</p></section>
    <section class="ticket-item"><span class="num">02 / KEIHAN RAILWAY</span><h3>京阪 Premium Car</h3><p>12/03 08:47 淀屋橋 → 中書島，以及 17:01 中書島 → 北濱。IC 卡支付基本車資，Premium Car 專用車票另購。實際販售與搭乘班次請再確認。</p></section>
    <section class="ticket-item"><span class="num">03 / OSAKA METRO</span><h3>地下鐵・交通 IC 卡</h3><p>御堂筋線、堺筋線依行程使用交通 IC 卡進出站；轉乘時確認月台、站名與方向。</p></section>
    <section class="ticket-item"><span class="num">04 / DOTONBORI</span><h3>Wonder Cruise 道頓堀觀光船</h3><p>第 1 天目前規劃 20:00 搭乘，約 20 分鐘。請以訂位憑證核對登船地點及實際時間。</p></section>
+   <div id="trainTimetableHub" class="timetable-hub" aria-label="列車時刻表、阪急箕面回程及機場交通"></div>
   </div>
  </div>
 </section>
@@ -182,45 +251,175 @@ button:disabled{cursor:default}
    編輯行程：在 DAYS 內修改每一天的 title / subtitle / events 即可。
    type: 'move' 交通、'visit' 景點、'stay' 飯店、'flight' 飛機。
    period: 'morning' 早上、'afternoon' 下午、'evening' 晚上。
-   第 3–6 天尚未提供，因此保留空白，避免產生錯誤行程。
+   六天皆已填入。列車時刻表使用 timetableId 對應 TRAIN_TIMETABLES。
+   每個行程可有兩個獨立的展開區：more（購票／轉乘提醒）及 timetableId（行程內時刻表）。
+   尚未提供完整班次的時刻表保留空白，避免產生錯誤班次。
    ======================================================================== */
 const HOTEL = 'ESLEAD HOTEL Namba Daikokucho Annex';
+/*
+   列車時刻表：
+   1 = HARUKA 關西機場 → 天王寺（尚未提供完整班次）
+   2 = 京阪本線 淀屋橋 → 中書島（使用者提供 7 班，預定 08:47）
+   3 = 阪急電鐵 石橋阪大前 → 大阪梅田（使用者提供 12 班，12/05 預定 14:08）
+   4 = 京阪宇治線 宇治 → 中書島（尚未提供完整班次）
+   5 = 京阪本線 中書島 → 北濱（尚未提供完整班次）
+   6、7 = 12/04 京都京阪特急（尚未提供班次）
+   10、11 = 12/06 奈良來回近鐵（尚未提供班次）
+   11-rapit = 12/07 南海 Rapi:t（原行程同樣編作 11，以獨立識別碼保留）
+   hankyuA = 阪急附錄 A：箕面 → 石橋阪大前（12/05 預定 14:00）
+   阪急附錄獨立保存，不佔用「時刻表 2」的京阪編號。
+   車種未提供的班次標記「未註明」，不自行推定。
+*/
+const TRAIN_TIMETABLES = [
+ {id:1,day:1,operator:'JR 西日本',title:'HARUKA 22',from:'關西機場',to:'天王寺',planned:'12:14',duration:'約 34 分鐘',service:'特急',note:'預計在關西機場確認班次與座位安排。',rows:[['11:14','11:48','Haruka 18'],['11:44','12:18','Haruka 20'],['12:14','12:48','Haruka 22'],['12:44','13:18','Haruka 24'],
+  ['13:14','13:48','Haruka 26'],['13:44','14:18','Haruka 28'],['14:14','14:48','Haruka 30'],['14:44','15:18','Haruka 32']]},
+ {id:2,day:2,operator:'京阪電鐵',title:'京阪本線｜淀屋橋 → 中書島',from:'淀屋橋',to:'中書島',planned:'08:47',arrival:'09:28',duration:'約 41 分鐘',service:'特急',destination:'出町柳',note:'行程預定搭乘 08:47 京阪本線特急，09:28 抵達中書島。基本乘車費以交通 IC 卡支付；Premium Car 座位票另購。於中書島換乘宇治線。以下是旅客自行整理的候選班次。',rows:[
+  ['08:33','09:12','特急'],['08:40','09:23','快速急行'],['08:47','09:28','特急'],
+  ['09:00','09:39',''],['09:03','09:51','快速急行'],['09:23','10:02','特急'],['09:34','10:13','']
+ ]},
+ {id:3,day:4,operator:'阪急電鐵',title:'第二段｜石橋阪大前 → 大阪梅田',from:'石橋阪大前',to:'大阪梅田',planned:'14:08',arrival:'14:24',duration:'約 16 分鐘',service:'急行',destination:'大阪梅田',note:'開往大阪梅田。這是旅客自行整理的急行列車班次；於石橋阪大前轉乘時，請確認月台及預留時間。前一段箕面 → 石橋阪大前請參閱「阪急附錄 A」。',rows:[
+  ['12:58','13:14','急行'],['13:08','13:24','急行'],['13:18','13:34','急行'],['13:28','13:44','急行'],
+  ['13:38','13:54','急行'],['13:48','14:04','急行'],['13:58','14:14','急行'],['14:08','14:24','急行'],
+  ['14:18','14:34','急行'],['14:28','14:44','急行'],['14:38','14:54','急行'],['14:48','15:04','急行']
+ ]},
+ {id:4,day:2,operator:'京阪電鐵',title:'京阪宇治線 普通',from:'宇治',to:'中書島',planned:'16:30',duration:'約 15 分鐘',service:'普通',note:'搭乘後於中書島轉乘京阪本線。',rows:[]},
+ {id:5,day:2,operator:'京阪電鐵',title:'京阪本線 特急',from:'中書島',to:'北濱',planned:'17:01',duration:'約 38 分鐘',service:'特急／Premium Car 規劃中',note:'Premium Car 車票須另外購買；到達北濱後轉乘大阪 Metro 堺筋線。',rows:[]},
+ {id:6,day:3,operator:'京阪電鐵',title:'京阪本線 特急｜淀屋橋 → 祇園四條',from:'淀屋橋',to:'祇園四條',planned:'08:05',duration:'約 43 分鐘',service:'特急／Premium Car 規劃中',note:'12/04 去程，基本車資使用交通 IC 卡；Premium Car 車票另購。尚未提供完整候選班次。',rows:[]},
+ {id:7,day:3,operator:'京阪電鐵',title:'京阪本線 特急｜三條 → 淀屋橋',from:'三條（京都）',to:'淀屋橋',planned:'20:00',duration:'約 43 分鐘',service:'特急／Premium Car 規劃中',note:'12/04 回程，請確認車次及可否購買 Premium Car 車票。尚未提供完整候選班次。',rows:[]},
+ {id:10,day:5,operator:'近畿日本鐵道',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',planned:'09:47',duration:'約 35 分鐘',service:'特急 HINOTORI',note:'12/06 去程；班次、行經路線、車種及票券資訊依最新行程記錄，請與已購車票再次核對。尚未提供完整候選班次。',rows:[]},
+ {id:11,label:'時刻表 11（近鐵奈良回程）',day:5,operator:'近畿日本鐵道',title:'近鐵奈良線 快速急行｜近鐵奈良 → 近鐵日本橋',from:'近鐵奈良',to:'近鐵日本橋',planned:'16:30',duration:'約 38 分鐘',service:'快速急行',note:'12/06 奈良回程，使用交通 IC 卡搭乘。尚未提供完整候選班次。',rows:[]},
+ {id:'11-rapit',label:'時刻表 11（南海 Rapi:t）',day:6,operator:'南海電鐵',title:'南海特急 Rapi:t｜新今宮 → 關西機場',from:'新今宮',to:'關西機場',planned:'07:32',duration:'約 37 分鐘',service:'特急 Rapi:t',note:'12/07 機場去程。原行程同樣標示「時刻表 11」，此處以獨立連結識別，避免與奈良回程混用。尚未提供完整候選班次。',rows:[]},
+ {id:'hankyuA',label:'阪急附錄 A',day:4,operator:'阪急電鐵',title:'第一段｜箕面 → 石橋阪大前',from:'箕面',to:'石橋阪大前',planned:'14:00',arrival:'14:06',duration:'約 6 分鐘',service:'普通',destination:'石橋阪大前',note:'開往石橋阪大前。這是旅客自行整理的普通列車班次；下一段石橋阪大前 → 大阪梅田請參閱「時刻表 3」。',rows:[
+  ['12:50','12:56','普通'],['13:00','13:06','普通'],['13:10','13:16','普通'],['13:20','13:26','普通'],
+  ['13:30','13:36','普通'],['13:40','13:46','普通'],['13:50','13:56','普通'],['14:00','14:06','普通'],
+  ['14:10','14:16','普通'],['14:20','14:26','普通'],['14:30','14:36','普通'],['14:40','14:46','普通']
+ ]}
+];
+function timetableLabel(t){return t.label||'時刻表 '+t.id;}
+function trainTimetableHtml(t){
+ const label=timetableLabel(t);
+ const rows=t.rows.length?`<table class="tt-table"><caption>${esc(label)}｜${esc(t.from)}至${esc(t.to)} 旅客整理時刻表</caption><thead><tr><th scope="col">出發</th><th scope="col">抵達</th><th scope="col">車種</th></tr></thead><tbody>${t.rows.map(r=>`<tr${t.planned===r[0]?' class="planned-row"':''}><td>${esc(r[0])}${t.planned===r[0]?'<span class="tt-planned-tag">預定搭乘</span>':''}</td><td>${esc(r[1])}</td><td>${esc(r[2]||'未註明')}</td></tr>`).join('')}</tbody></table>`:`<p class="train-missing"><strong>尚未輸入完整列車班次。</strong><br>目前僅記錄行程預計搭乘的時間與路線；待提供班次表後可補上。</p>`;
+ const tripInfo=t.planned
+  ?`<div class="train-plan"><small>行程預計搭乘 · 班次請以官方資訊確認</small><b>${esc(t.planned)}${t.arrival?' → '+esc(t.arrival):''}</b><p>${esc(t.duration)} · ${esc(t.service)}${t.destination?' · 開往 '+esc(t.destination):''}</p></div>`
+  :`<div class="train-plan"><small>列車候選班次 · 旅客自行整理</small><b>共 ${t.rows.length} 班</b><p>開往 ${esc(t.destination)} · ${esc(t.service)} · ${esc(t.duration)}</p></div>`;
+ const transfer=(t.id===3||t.id==='hankyuA')?`<p class="tt-notice"><strong>轉乘提醒：</strong>阪急箕面回程兩段班次分別列出，部分相鄰班次僅有 2 分鐘間隔，不代表一定能順利轉乘。請以當日月台及時刻為準。</p>`:'';
+ const verify=t.rows.length?`<p class="tt-footnote">此為旅客整理時刻表，尚未核對 2026 年 12 月各鐵道公司官方班次。${t.id===2?'09:00、09:34 兩班的車種未提供，暫以「未註明」呈現。':''}</p>`:'';
+ const other=t.id==='hankyuA'?'<a class="train-next-link" href="#timetable3">下一段：時刻表 3｜石橋阪大前 → 大阪梅田 →</a>':t.id===3?'<a class="train-next-link" href="#hankyuA">← 前一段：阪急附錄 A｜箕面 → 石橋阪大前</a>':'';
+ const back=t.day?`<a href="#day${t.day}" class="train-back-link">← 返回第 ${t.day} 天行程</a>`:'<a href="#transit" class="train-back-link">← 返回交通資訊頁首</a>';
+ const number=t.id==='hankyuA'?'A':t.id==='11-rapit'?'11':t.id;
+ return `<details id="timetable-${t.id}" class="train-timetable" aria-label="${esc(label)}｜${esc(t.title)}"><summary><span class="train-num"><small>${t.id==='hankyuA'?'HANKYU':'TABLE'}</small>${number}</span><span class="train-title"><b>${esc(t.title)}</b><small>${esc(t.from)} → ${esc(t.to)} · ${esc(t.operator)}${t.rows.length?' · '+t.rows.length+' 班':''}${t.id===2?' · 預定 08:47':''}</small></span><span class="train-toggle" aria-hidden="true"></span></summary><div class="train-panel">${tripInfo}<p class="tt-footnote">${esc(t.note)}</p>${rows}${transfer}${verify}${other}${back}</div></details>`;
+}
+
+// 每日行程專用：在相同的交通卡片下方，直接展開列車時刻表，不變更頁面或網址。
+function inlineTrainTimetableHtml(t){
+ const rows=t.rows.length
+   ? `<div class="inline-tt-scroll"><table class="tt-table"><caption>${esc(t.from)}至${esc(t.to)}｜${esc(timetableLabel(t))}</caption><thead><tr><th scope="col">出發</th><th scope="col">抵達</th><th scope="col">車種／班次</th></tr></thead><tbody>${t.rows.map(r=>`<tr${r[0]===t.planned?' class="planned-row"':''}><td>${esc(r[0])}${r[0]===t.planned?'<span class="tt-planned-tag">預定搭乘</span>':''}</td><td>${esc(r[1])}</td><td>${esc(r[2]||'未註明')}</td></tr>`).join('')}</tbody></table></div>`
+   : '<p class="train-missing">尚未提供完整列車班次。目前先保留行程預定時間；取得時刻表後可填入 TRAIN_TIMETABLES 的 rows。</p>';
+ const planned=t.planned?`<div class="inline-tt-planned"><span>預計搭乘</span><strong>${esc(t.planned)}${t.arrival?' → '+esc(t.arrival):''}</strong><small>${esc(t.service)} · ${esc(t.duration)}</small></div>`:'';
+ const tip=(t.id===3||t.id==='hankyuA')?'<p class="tt-notice">阪急箕面線轉乘寶塚線可能僅有 2 分鐘，請預留彈性並確認月台。</p>':'';
+ return `<details class="more-details inline-timetable"><summary>查看列車時刻表${t.rows.length?'（'+t.rows.length+' 班）':''}</summary><div class="inline-tt-panel"><p class="inline-tt-route">${esc(t.operator)}｜${esc(t.from)} → ${esc(t.to)}</p>${planned}${rows}${tip}<p class="tt-footnote">${esc(t.note)}</p><p class="tt-footnote">實際時刻與車種請以鐵道公司當日公告為準。</p></div></details>`;
+}
+
+function renderTrainTimetables(){
+ document.getElementById('trainTimetableHub').innerHTML=`<span class="overline">RAILWAY · TIME TABLE</span><h2 class="timetable-hub-head">列車時刻表・路線附錄</h2><p class="timetable-hub-intro"><strong>時刻表 2 為京阪本線「淀屋橋 → 中書島」</strong>，08:47 特急已收錄 7 班候選列車。阪急箕面回程沿用「阪急附錄 A」及「時刻表 3」。第三至六天的時刻表 6、7、10、11 已建立入口，尚待補完整班次；第六天 Rapi:t 原始資料也編為「11」，為免混淆已使用獨立連結。</p><div class="timetable-jump" role="navigation" aria-label="選擇時刻表">${TRAIN_TIMETABLES.map(t=>`<a href="${t.id==='hankyuA'?'#hankyuA':'#timetable'+t.id}">${esc(timetableLabel(t))}${t.id===2?' · 京阪':t.id===3?' · 阪急':''}</a>`).join('')}</div>${TRAIN_TIMETABLES.map(trainTimetableHtml).join('')}`;
+}
+function openTrainTimetable(number){
+ const target=document.getElementById('timetable-'+number);
+ if(!target)return;
+ document.querySelectorAll('.train-timetable').forEach(el=>{el.open=el===target;el.classList.toggle('is-target',el===target);});
+ // 在交通頁顯示後再捲動，避免被原本的隱藏頁面或固定標題影響。
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  target.scrollIntoView({block:'start',behavior:'instant'});
+ }));
+}
+
+
 const DAYS = [
  {date:'12/02',week:'三',title:'大阪初見',subtitle:'難波・心齋橋・道頓堀',bar:'#bd7058',desc:'從高雄起飛，沿著大阪的街道與夜色展開旅程。',events:[
-  {time:'07:05',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 182',from:'高雄機場 T1',to:'關西機場 T1',sub:'07:05 起飛 → 10:55 抵達',more:['去程航班：BR 182，預定抵達關西機場 10:55。']},
-  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'出境、領取行李',more:['JR 車站在關西機場二樓，完成入境手續後前往車站。'],map:'關西國際機場 第1航廈'},
-  {time:'12:14',period:'morning',type:'move',tag:'JR 特急',title:'HARUKA 22 號',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘 · 時刻表 1',notice:'需確認 HARUKA 車次與座位安排。',more:['原行程：先上網購買自由席票券，抵達後確認車次並至售票機辦理座位相關手續。','自由席票種是否可指定座位、是否需加價，以實際購票規定為準。']},
+  {time:'07:05',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 182',from:'高雄機場 T1',to:'關西機場 T1',sub:'07:05 起飛 → 10:55 抵達'},
+  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'出境、領取行李',more:['使用VJP QRcode 掃描入境。'],map:'關西國際機場 第1航廈'},
+  {time:'12:14',period:'morning',type:'move',tag:'JR',title:'關西機場特快HARUKA',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘',timetableId:1,more:['JR車站在關西機場二樓，拿到行李後確認要搭乘的車次，並用綠色售票機劃位。']},
   {time:'12:50',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'天王寺',to:'大國町',sub:'搭乘約 7 分鐘',more:['使用交通 IC 卡進站。']},
-  {time:'12:55',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,notice:'12:50 上車、車程約 7 分鐘，12:55 到飯店的時間偏緊，請依實際抵達為準。',more:['原計畫從大國町站步行約 3 分鐘到飯店。','正式入住時間為 16:00 起。'],map:HOTEL},
-  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行前往 · 原規劃約 12 分鐘',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社'},
+  {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL},
+  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社'},
   {time:'14:10',period:'afternoon',type:'move',tag:'地鐵',title:'御堂筋線前往心齋橋',from:'難波',to:'心齋橋',sub:'搭乘約 4 分鐘',more:['原規劃使用交通 IC 卡進站。']},
   {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀'},
   {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise'},
-  {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'御堂筋線返回飯店',from:'難波',to:'大國町',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡進站。','搭船後前往車站的步行時間，請自行保留轉乘餘裕。']},
+  {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'御堂筋線返回飯店',from:'難波',to:'大國町',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡進站。']},
   {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL}
  ]},
  {date:'12/03',week:'四',title:'宇治茶日和',subtitle:'宇治・日本橋',bar:'#75816b',desc:'順著京阪電車，走進宇治的抹茶香、古寺與故事。',events:[
-  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站'},
+  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往地鐵大國町站'},
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡進站。']},
-  {time:'08:47',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'中書島',sub:'搭乘約 41 分鐘 · 時刻表 2',notice:'計畫搭乘 Premium Car，另外購票；中書島換車。',more:['基本車資使用交通 IC 卡支付。','Premium Car 專用車票須另外購買；是否可於現場購得以班次與剩餘座位為準。']},
-  {time:'09:43',period:'morning',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'中書島',to:'宇治',sub:'搭乘約 15 分鐘 · 時刻表 3'},
+  {time:'08:47',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'中書島',sub:'搭乘約 41 分鐘',notice:'計畫搭乘 Premium Car，另外購票；中書島換車。',timetableId:2,more:['基本車資使用交通 IC 卡支付。','Premium Car 專用車票須另外購買；是否可於現場購得以班次與剩餘座位為準。']},
+  {time:'09:43',period:'morning',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'中書島',to:'宇治',sub:'搭乘約 15 分鐘'},
   {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治'},
   {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治'},
   {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治'},
   {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都'},
   {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都'},
   {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館'},
-  {time:'16:30',period:'evening',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'宇治',to:'中書島',sub:'約 15 分鐘 · 時刻表 4',more:['使用交通 IC 卡進站，中書島站轉乘。']},
-  {time:'17:01',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'中書島',to:'北濱',sub:'約 38 分鐘 · 時刻表 5',notice:'規劃購買 Premium Car 車票。',more:['原計畫在月台購買 Premium Car 專用車票，請確認現場購票方式及餘位。']},
+  {time:'16:30',period:'evening',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'宇治',to:'中書島',sub:'約 15 分鐘',timetableId:4,more:['使用交通 IC 卡進站，中書島站轉乘。']},
+  {time:'17:01',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'中書島',to:'北濱',sub:'約 38 分鐘',notice:'規劃購買 Premium Car 車票。',timetableId:5,more:['原計畫在月台購買 Premium Car 專用車票，請確認現場購票方式及餘位。']},
   {time:'17:39',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'北濱',to:'惠美須町',sub:'搭乘約 8 分鐘',notice:'上一班京阪列車預計 17:39 抵達，轉乘時間不足，請再確認時刻。',more:['使用交通 IC 卡進站。']},
   {time:'17:50',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街'},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'返回大國町',from:'惠美須町',to:'動物園前 → 大國町',sub:'堺筋線轉御堂筋線 · 各約 3 分鐘',more:['惠美須町 → 動物園前搭乘堺筋線。','於動物園前站轉乘御堂筋線至大國町。','使用交通 IC 卡進站。']},
   {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL}
  ]},
- {date:'12/04',week:'五',title:'行程待補',subtitle:'第三天',bar:'#b3a785',desc:'這一天尚未提供行程內容。',events:[]},
- {date:'12/05',week:'六',title:'行程待補',subtitle:'第四天',bar:'#b3a785',desc:'這一天尚未提供行程內容。',events:[]},
- {date:'12/06',week:'日',title:'行程待補',subtitle:'第五天',bar:'#b3a785',desc:'這一天尚未提供行程內容。',events:[]},
- {date:'12/07',week:'一',title:'返程日',subtitle:'第六天 · 尚待補充行程',bar:'#b3a785',desc:'僅已知回程航班資訊；市區至機場的行程尚待補充。',events:[]}
+ {date:'12/04',week:'五',title:'京都清水散策',subtitle:'清水寺・三年坂・祇園',bar:'#aa7259',desc:'沿著清水坂走訪古寺、坡道與祇園街景，在京都度過一整天。',events:[
+  {time:'07:15',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'07:30',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
+  {time:'08:05',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'祇園四條',sub:'搭乘約 43 分鐘',notice:'現場規劃購買 Premium Car 車票。',timetableId:6,more:['基本車資以交通 IC 卡支付。','Premium Car 專用車票須另外購買，請確認當日班次與剩餘座位。']},
+  {time:'09:00',period:'morning',type:'move',tag:'京都市巴士',title:'京都市巴士 207／106／58',from:'四条京阪前',to:'清水道',sub:'搭乘約 15 分鐘',notice:'祇園四條站 7 號出口，前往巴士 A 站乘車。',more:['依你的行程規劃使用交通 IC 卡搭乘。','請現場確認路線、方向及上下車刷卡方式。']},
+  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',map:'京都 清水坂'},
+  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',map:'清水寺 京都',more:['參觀順序依現場人潮與開放時間彈性調整。']},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',map:'産寧坂 京都'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',map:'法觀寺 八坂之塔 京都'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',map:'二寧坂 京都'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',map:'祇園 花見小路 京都'},
+  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',map:'新京極商店街 京都'},
+  {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 43 分鐘',notice:'現場規劃購買 Premium Car 車票。',timetableId:7,more:['基本車資以交通 IC 卡支付。','Premium Car 專用車票另購，並請確認實際車次及時間。']},
+  {time:'20:53',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'淀屋橋',to:'大國町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+ ]},
+ {date:'12/05',week:'六',title:'箕面山色',subtitle:'勝尾寺・箕面瀑布・梅田',bar:'#698179',desc:'從勝尾寺的達摩祈願走向箕面瀑布，傍晚返回大阪梅田。',events:[
+  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'箕面萱野',sub:'搭乘約 38 分鐘',more:['使用交通 IC 卡搭乘。','依行程規劃前往箕面萱野站。']},
+  {time:'08:50',period:'morning',type:'move',tag:'計程車',title:'計程車前往勝尾寺',from:'箕面萱野站',to:'勝尾寺',sub:'預估車程約 30 分鐘',notice:'箕面萱野站南出口搭車；與地鐵抵達僅約 2 分鐘，請預留緩衝。',more:['從箕面萱野站南出口搭乘計程車。','車程為目前行程估計，可能受路況影響。']},
+  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',more:['可以欣賞寺內各式達摩與庭園景觀。']},
+  {time:'11:30',period:'morning',type:'move',tag:'計程車',title:'計程車前往大日駐車場',from:'勝尾寺',to:'大日駐車場',sub:'預估車程約 10 分鐘',more:['抵達後依現場路況與步道指引前往瀑布。']},
+  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'瀑布景觀、午餐安排',map:'箕面大滝'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'沿箕面步道散策',map:'箕面 瀧安寺',notice:'步行到箕面車站的時間請自行保留，避免錯過 14:00 列車。'},
+  {time:'14:00',period:'afternoon',type:'move',tag:'阪急普通',title:'阪急箕面線 普通',from:'箕面',to:'石橋阪大前',sub:'搭乘約 6 分鐘',timetableId:'hankyuA',notice:'於石橋阪大前轉乘，預計只有 2 分鐘。',more:['使用交通 IC 卡搭乘。','抵達石橋阪大前後換乘阪急寶塚線。']},
+  {time:'14:08',period:'afternoon',type:'move',tag:'阪急急行',title:'阪急寶塚線 急行',from:'石橋阪大前',to:'大阪梅田（阪急）',sub:'搭乘約 16 分鐘',notice:'預計 14:06 抵達、14:08 出發，轉乘時間僅 2 分鐘。',timetableId:3,more:['請核對當日站內月台與列車班次，必要時改搭下一班。']},
+  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',map:'大阪 梅田',more:['依行程預計 14:24 抵達大阪梅田，進入商圈仍需步行時間。']},
+  {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'梅田',to:'大國町',sub:'搭乘約 11 分鐘',more:['使用交通 IC 卡搭乘。']},
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+ ]},
+ {date:'12/06',week:'日',title:'奈良古都',subtitle:'奈良・新世界・通天閣',bar:'#a47d69',desc:'從奈良古寺與鹿群走到大阪新世界，感受古都與城市的對比。',events:[
+  {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'09:20',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 四橋線',from:'大國町',to:'難波',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。','到站後依指標前往近鐵大阪難波站。']},
+  {time:'09:47',period:'morning',type:'move',tag:'近鐵特急',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',sub:'預計搭乘約 35 分鐘',notice:'請依已購買車票核對車次、車種及目的地。',timetableId:10,more:['若搭乘近鐵特急，除基本乘車費外通常需確認特急券與指定席規定。','此處依你提供的行程文字保留 HINOTORI 車種與預計時間。']},
+  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',map:'興福寺 奈良'},
+  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',map:'奈良公園'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',map:'春日大社 奈良'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',map:'奈良 東向商店街'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',map:'東大寺 奈良'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',map:'東大寺 二月堂'},
+  {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'搭乘約 38 分鐘',timetableId:11,more:['使用交通 IC 卡搭乘。','請再次確認列車是否停靠近鐵日本橋。']},
+  {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
+  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',map:'大阪 新世界市場'},
+  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',map:'通天閣 大阪'},
+  {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'動物園前',to:'大國町',sub:'搭乘約 3 分鐘',more:['使用交通 IC 卡搭乘。']},
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+ ]},
+ {date:'12/07',week:'一',title:'返程日',subtitle:'關西機場・高雄',bar:'#6e8493',desc:'整理行李，從大阪前往關西機場，搭乘 BR 181 返回高雄。',events:[
+  {time:'07:00',period:'morning',type:'move',tag:'Uber',title:'計程車前往新今宮',from:HOTEL,to:'新今宮站',sub:'從飯店出發，使用 Uber 叫車',notice:'提前確認叫車、上車地點及新今宮站月台位置。',more:['計程車抵達時間依當日交通狀況調整。'],map:'新今宮站 大阪'},
+  {time:'07:32',period:'morning',type:'move',tag:'南海特急',title:'南海電鐵 特急 Rapi:t',from:'新今宮',to:'關西機場',sub:'搭乘約 37 分鐘',timetableId:'11-rapit',notice:'此處「時刻表 11」與第五天奈良回程的編號重複，網站以路線分別連結。',more:['請確認特急券、劃位及出發月台。','依行程記錄預計 08:09 左右抵達機場。']},
+  {time:'08:10',period:'morning',type:'move',tag:'機場',title:'抵達關西機場第 1 航廈',sub:'退稅、托運行李、出境手續',more:['先確認航空公司報到櫃檯位置及辦理時間。'],map:'關西國際機場 第1航廈'},
+  {time:'11:55',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 181',from:'關西機場 T1',to:'高雄機場 T1',sub:'11:55 起飛 → 14:30 預計抵達',notice:'抵達時間依最新提供行程標示為 14:30，請以實際機票為準。'},
+  {time:'14:30',period:'afternoon',type:'move',tag:'入境',title:'抵達高雄機場',sub:'入境、領取行李',map:'高雄國際機場 第1航廈'}
+ ]}
 ];
 const periodNames={morning:['朝','MORNING'],afternoon:['晝','AFTERNOON'],evening:['夜','EVENING']};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -235,12 +434,21 @@ function renderDayTabs(){
 function entryHtml(e){
  const isMove=['move','flight'].includes(e.type);
  const cat=isMove?'交通':'景點';
- const details=e.more?.length?`<details class="more-details"><summary>查看${isMove?'購票／轉乘':'景點'}補充資訊</summary><div class="more-inner">${e.more.map(p=>`<p>${esc(p)}</p>`).join('')}</div></details>`:'';
+ // more 是第一個收合區塊：保留購票、轉乘和景點備註。
+ const details=e.more?.length
+   ? `<details class="more-details"><summary>查看${isMove?'購票／轉乘':e.type==='stay'?'住宿':'景點'}補充資訊</summary><div class="more-inner">${e.more.map(p=>`<p>${esc(p)}</p>`).join('')}</div></details>`
+   : '';
+ // timetableId 是第二個獨立收合區塊：直接把表格放在這筆行程內。
+ // 表格資料仍統一存放在 TRAIN_TIMETABLES，不需在 DAYS 重複填入 rows。
+ const table=e.timetableId==null?null:TRAIN_TIMETABLES.find(t=>String(t.id)===String(e.timetableId));
+ const timetable=table?inlineTrainTimetableHtml(table):'';
  const route=e.from&&e.to?`<div class="route"><b>${esc(e.from)}</b><span class="arrow" aria-hidden="true">→</span><b>${esc(e.to)}</b></div>`:'';
+ const subtitle=e.sub?esc(e.sub):'';
  const q=e.map?`<a class="map-link" href="${mapUrl(e.map)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon"><use href="#i-pin"/></svg> 地圖導航 ↗</a>`:'';
  const chipColor=isMove?'#567783':(e.type==='stay'?'#868875':'#b16c53');
- return `<article class="entry" data-type="${cat}"><div class="entry-time ${e.time.includes(':')?'':'flexible'}">${esc(e.time)}<span>${e.type==='flight'?'FLIGHT':e.type==='move'?'MOVE':e.type==='stay'?'STAY':'VISIT'}</span></div><div><div class="entry-title-row"><h3 class="entry-title">${esc(e.title)}</h3><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||cat)}</span></div>${route}${e.sub?`<p class="entry-sub">${esc(e.sub)}</p>`:''}${e.notice?`<div class="quick-note">${esc(e.notice)}</div>`:''}${q?`<div class="entry-actions">${q}</div>`:''}${details}</div></article>`;
+ return `<article class="entry" data-type="${cat}"><div class="entry-time ${e.time.includes(':')?'':'flexible'}">${esc(e.time)}<span>${e.type==='flight'?'FLIGHT':e.type==='move'?'MOVE':e.type==='stay'?'STAY':'VISIT'}</span></div><div class="entry-main"><div class="entry-title-row"><h3 class="entry-title">${esc(e.title)}</h3><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||cat)}</span></div>${route}${e.sub?`<p class="entry-sub">${subtitle}</p>`:''}${e.notice?`<div class="quick-note">${esc(e.notice)}</div>`:''}${q?`<div class="entry-actions">${q}</div>`:''}${details}${timetable}</div></article>`;
 }
+
 function renderDay(){
  renderDayTabs();
  const d=DAYS[state.day-1];
@@ -259,23 +467,28 @@ function renderDay(){
   const [label,en]=periodNames[p];
   return `<section class="session" aria-label="${label}間行程"><h2 class="session-title"><span class="kanji">${label}之章</span><span class="line"></span><small>${en}</small></h2><div class="ledger">${events.map(entryHtml).join('')}</div></section>`;
  }).join('');
- const caution=(state.day===1||state.day===2)?'<div class="day-caution">行程時間與交通班次依目前規劃整理，尚未完成實際時刻表核對。部分轉乘時間緊湊，請以現場資訊為準。</div>':'';
- root.innerHTML=cover+caution+bar+`<div class="schedule">${sections||'<p style="padding:20px 0;color:#7b817b">這個分類目前沒有行程。</p>'}</div>`;
+ const caution=(d.events.length>0)?'<div class="day-caution">行程時間與交通班次依目前規劃整理，尚未完成實際時刻表核對。部分轉乘時間緊湊，請以現場資訊為準。</div>':'';
+ const extra='';
+ root.innerHTML=cover+caution+bar+`<div class="schedule">${sections||'<p style="padding:20px 0;color:#7b817b">這個分類目前沒有行程。</p>'}</div>`+extra;
  const active=document.querySelector('.day-tabs button.active');
  if(active){active.scrollIntoView({block:'nearest',inline:'center',behavior:'instant'});}
 }
 function show(){
  const h=(location.hash||'#home').slice(1);
  const dayMatch=/^day([1-6])$/.exec(h);
- const page=dayMatch?'itinerary':(['home','transit','guide'].includes(h)?h:'home');
+ const timetableMatch=/^timetable(11-rapit|[0-9]{1,2})$/.exec(h);
+ const hankyuAppendix=h==='hankyuA';
+ const page=dayMatch?'itinerary':((timetableMatch||hankyuAppendix)?'transit':(['home','transit','guide'].includes(h)?h:'home'));
  if(dayMatch){const requested=Number(dayMatch[1]);if(requested!==state.day)state.filter='all';state.day=requested;renderDay();}
  document.querySelectorAll('.view').forEach(node=>node.classList.toggle('active',node.id==='page-'+page));
  document.querySelectorAll('[data-nav]').forEach(a=>{const on=a.dataset.nav===page;a.classList.toggle('active',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
  if(page==='itinerary')document.querySelector('[data-nav="itinerary"]').setAttribute('href','#day'+state.day);
- window.scrollTo({top:0,behavior:'instant'});
+ if(timetableMatch||hankyuAppendix){openTrainTimetable(hankyuAppendix?'hankyuA':timetableMatch[1]);}else{window.scrollTo({top:0,behavior:'instant'});}
 }
 function goDay(day){if(!Number.isInteger(day)||day<1||day>6)return;if(location.hash==='#day'+day){state.day=day;state.filter='all';renderDay();window.scrollTo({top:0,behavior:'instant'});}else{location.hash='day'+day;}}
 document.addEventListener('click',event=>{
+ const sameTimetableLink=event.target.closest('a[href^="#timetable"]');if(sameTimetableLink && location.hash===sameTimetableLink.getAttribute('href')){const n=location.hash.replace('#timetable','');if(document.getElementById('timetable-'+n))openTrainTimetable(n);return;}
+ if(event.target.closest('a[href="#hankyuA"]') && location.hash==='#hankyuA'){openTrainTimetable('hankyuA');return;}
  const dayButton=event.target.closest('[data-open-day]');if(dayButton){goDay(Number(dayButton.dataset.openDay));return;}
  const filterButton=event.target.closest('[data-filter]');if(filterButton){state.filter=filterButton.dataset.filter;renderDay();return;}
 });
@@ -288,6 +501,7 @@ document.getElementById('copyAddress').addEventListener('click',async function()
   this.textContent='地址已複製 ✓';
  }catch(e){this.textContent='複製失敗，請長按地址複製';}
 });
+renderTrainTimetables();
 renderHome();window.addEventListener('hashchange',show);show();
 </script>
 </body>

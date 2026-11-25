@@ -705,6 +705,13 @@ body {
  .tt-table-destination td:nth-child(4) {font-size:10px;}
  .bottom-nav a {font-size:10px;}
 }
+/* 景點卡片副標題：比景點名稱更小、保留手機閱讀清晰度 */
+.spot-excerpt {
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 500;
+}
+
 /* ===== END TYPOGRAPHY B ===== */
 
 </style>
@@ -993,84 +1000,87 @@ const DAYS = [
   {time:'12:14',period:'morning',type:'move',tag:'JR',title:'關西機場特快HARUKA',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘 · 時刻表 1',more:['JR車站在關西機場二樓，拿到行李後確認要搭乘的車次，並用綠色售票機劃位。']},
   {time:'12:50',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'天王寺',to:'大國町',sub:'搭乘約 7 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'},
-  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社',mapUrl:''},
+  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'吞厄招福的巨大獅子殿',more:['以巨型獅子殿聞名，象徵吞噬厄運、招來好運，是大阪祈求勝運與消災解厄的特色神社。'],notice:'營業時間: 06:30 ~ 17:30',map:'難波八阪神社',mapUrl:'https://maps.app.goo.gl/VNgUkDdVWqrQavTB7'},
   {time:'14:10',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'心齋橋',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀',mapUrl:''},
-  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise',mapUrl:''},
+  {time:'14:20',period:'afternoon',type:'visit',tag:'購物',title:'心齋橋',sub:'大阪最熱鬧的購物天堂',more:['來大阪絕對不能錯過的購物天堂！從人氣藥妝、日系服飾到特色小吃應有盡有，沿著心齋橋筋商店街一路逛到道頓堀，吃喝玩樂一次滿足。'],mapUrl:'https://maps.app.goo.gl/KLDFxw2zBF8CAA6t6'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'購物・美食',title:'道頓堀',sub:'霓虹燈下的大阪美食天堂',more:['大阪最熱鬧的美食天堂！除了必拍的固力果跑跑人招牌，還能品嚐章魚燒、大阪燒，搭乘觀光船欣賞河畔霓虹夜景，感受大阪獨有的熱鬧氛圍。'],mapUrl:'https://maps.app.goo.gl/bdf8ARNBpQ93ZfAaA'},
+  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'乘船探索大阪的璀璨夜景 · 約 20 分鐘',more:['換個角度欣賞道頓堀！搭乘觀光船穿梭河道，近距離欣賞固力果招牌與繽紛霓虹燈，享受大阪獨特的水上風情。'],map:'大阪 道頓堀 Wonder Cruise',mapUrl:'https://maps.app.goo.gl/2d1hE2mqHiKtiUVm8'},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'大國町',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
+  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'}
  ]},
  {date:'12/03',week:'四',title:'宇治茶日和',theme:'#435B46',subtitle:'宇治・日本橋',bar:'#75816b',desc:'順著京阪電車，走進宇治的抹茶香、古寺與故事。',events:[
   {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往地鐵大國町站'},
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:47',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'中書島',sub:'搭乘約 41 分鐘 · 時刻表 2',notice:'中書島換車。',more:['使用交通 IC 卡搭乘，月台購買 Premium Car 車票']},
   {time:'09:43',period:'morning',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'中書島',to:'宇治',sub:'搭乘約 15 分鐘 · 時刻表 3'},
-  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館',mapUrl:''},
+  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'傳承百年的宇治茶香',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治必訪的百年抹茶名店！招牌生茶果凍與抹茶聖代茶香濃郁，是抹茶控絕對不能錯過的甜點天堂。'],map:'中村藤吉本店 宇治',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'漫步充滿茶香的宇治老街',more:['通往平等院的特色商店街，沿途聚集抹茶甜點、百年茶舖與伴手禮店，邊走邊吃，感受宇治濃厚的茶文化。'],map:'平等院表參道 宇治',mapUrl:'https://maps.app.goo.gl/BYM5S2oquLi8MhRE6'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'千年古寺中的極樂淨土',more:['宇治必訪的世界文化遺產！以日本10日圓硬幣上的鳳凰堂聞名，優美的建築倒映在池水中，展現平安時代的典雅風情。'],notice:'營業時間: 08:45 ~ 17:30',map:'平等院 京都宇治',mapUrl:'https://maps.app.goo.gl/veA7bD2YBP8oir61A'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋訪指引幸福的回首兔',more:['宇治歷史悠久的古老神社，以「回首兔」聞名，象徵引領人們走向正確的道路，是祈求學業順利與開運招福的好去處。'],notice:'營業時間: 24小時營業',map:'宇治神社 京都',mapUrl:'https://maps.app.goo.gl/zm68QiYjvMECFrQL7'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'隱身山林間的千年神社',more:['日本世界文化遺產，擁有日本現存最古老的神社本殿，古樸的木造建築與幽靜的森林環境，散發濃厚的歷史氣息。'],notice:'營業時間: 09:00 ~ 16:00',map:'宇治上神社 京都',mapUrl:'https://maps.app.goo.gl/5BVTNmgyk6Pxt9pC6'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'穿越千年的平安時代物語',more:['以日本古典文學名著《源氏物語》為主題，透過場景重現、服飾展示與影像介紹，帶你走進千年前的日本貴族生活，感受平安時代的浪漫風情。'],notice:'營業時間: 09:00 ~ 17:00',map:'宇治市源氏物語博物館',mapUrl:'https://maps.app.goo.gl/gnMd9jiU2tge3uQv6'},
   {time:'16:30',period:'evening',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'宇治',to:'中書島',sub:'約 15 分鐘 · 時刻表 4',notice:'中書島換車。',more:['使用交通 IC 卡搭乘。']},
   {time:'17:01',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'中書島',to:'北濱',sub:'約 38 分鐘 · 時刻表 5',more:['月台購買 Premium Car 車票。']},
   {time:'17:45',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'北濱',to:'惠美須町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街',mapUrl:''},
+  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'大阪的動漫與電器天堂',more:['有著「大阪秋葉原」之稱，聚集動漫周邊、模型公仔、電玩遊戲與電子商品，是動漫迷與收藏愛好者必逛的特色商圈！'],map:'大阪 日本橋筋商店街',mapUrl:'https://maps.app.goo.gl/99PA56rhr5eFdECG9'},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線、御堂筋線',from:'惠美須町',to:'動物園前 → 大國町',sub:'堺筋線轉御堂筋線 · 各約 3 分鐘',notice:'動物園前換車。',more:['惠美須町 → 動物園  搭乘堺筋線。','動物園前 → 大國町  搭乘御堂筋線。','使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
+  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'}
  ]},
  {date:'12/04',week:'五',title:'京都清水散策',theme:'#795047',subtitle:'清水寺・三年坂・祇園',bar:'#aa7259',desc:'漫步清水坂、探訪京都古寺，感受祇園古都風情。',events:[
-  {time:'07:15',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
+  {time:'07:15',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',mapUrl:'https://maps.app.goo.gl/bWm5FRe2hTuXtMfP6'},
   {time:'07:30',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:05',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'祇園四條',sub:'搭乘約 43 分鐘 · 時刻表 6',more:['使用交通 IC 卡搭乘，月台購買Premium Car 車票。']},
   {time:'09:00',period:'morning',type:'move',tag:'京都市巴士',title:'京都市巴士 207／106／58',from:'四条京阪前',to:'清水道',sub:'搭乘約 15 分鐘',notice:'祇園四條站 7 號出口，前往巴士 A 站乘車。',more:['使用交通 IC 卡搭乘。','後門上車，前門刷卡下車。']},
-  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',intro:'清水寺前的參道坡道，沿途可欣賞老街、店舖與京都東山的傳統街景。',map:'京都 清水坂',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',intro:'京都東山代表性寺院，以清水舞台及眺望市區的景色聞名。',map:'清水寺 京都',notice:'門票500日圓',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',intro:'保留傳統街道氛圍的石板坡道，適合慢慢散步與拍照。',map:'産寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',intro:'東山街景中的五重塔地標，塔身與街道構成經典的京都風景。',map:'法觀寺 八坂之塔 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',intro:'兩旁有日式町屋與特色小店的石板坡道，可以接續三年坂步行。',map:'二寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',intro:'以傳統町屋與石板街景為特色的京都街區，適合感受祇園氣氛。',map:'祇園 花見小路 京都',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',intro:'京都市中心的熱鬧商店街，可安排晚餐、購物及沿途散步。',map:'新京極商店街 京都',mapUrl:''},
-  {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 53 分鐘 · 時刻表 7',more:['以交通 IC 卡搭乘，月台購買 Premium Car 車票。']},
+  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'通往清水寺的古都風情街道',intro:'沿途聚集日式甜點、京都漬物、和菓子與特色伴手禮店，漫步在古色古香的街道上，感受京都獨有的傳統風情。',map:'京都 清水坂',mapUrl:'https://maps.app.goo.gl/pu1WFDZVYHnfv1cW6'},
+  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'俯瞰京都的千年古寺',intro:'京都必訪的世界文化遺產！以懸空木造的清水舞台聞名，不僅能俯瞰京都市景，還能在音羽瀑布祈求學業、戀愛與健康順利。',map:'清水寺 京都',notice:'營業時間: 06:00 ~ 18:00',mapUrl:'https://maps.app.goo.gl/a7Rr9DAwPTq6NaRT6'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'產寧坂（三年坂）',sub:'漫步京都百年石板古街',intro:'京都最具古都風情的坡道之一！沿途保留傳統日式町屋，聚集特色甜點、手工藝品與伴手禮店，是散步與拍照的熱門景點。',map:'産寧坂 京都',mapUrl:'https://maps.app.goo.gl/ZdTf9KTEt172D8SE7'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都古街中的經典五重塔',intro:'京都東山最具代表性的地標！五重塔與石板古街相互映襯，隨手一拍都是充滿古都風情的經典畫面。',notice:'營業時間: 09:00 ~ 16:00',map:'法觀寺 八坂之塔 京都',mapUrl:'https://maps.app.goo.gl/FupJ9U8FJ5J5wehS8'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'充滿京都韻味的懷舊小徑',intro:'古色古香的石板坡道，沿途遍布傳統町屋、特色茶屋與日式小店，是悠閒散步、品嚐美食與感受京都風情的絕佳景點。',map:'二寧坂 京都',mapUrl:'https://maps.app.goo.gl/QLuyoWxdRwtMUpp49'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'八坂神社',sub:'守護京都千年的祇園信仰',intro:'京都祇園的代表性神社，以鮮豔的朱紅色西樓門與祇園祭聞名，是祈求消災解厄、良緣與健康平安的熱門景點。',map:'法觀寺 八坂之塔 京都',mapUrl:'https://maps.app.goo.gl/Gq4GPKgeVsRfDAQW8'},
+  {time:'依序',period:'evening',type:'visit',tag:'寺院',title:'錦天滿宮',sub:'隱身熱鬧商圈的學問神社',intro:'位於錦市場東端，供奉日本學問之神菅原道真，以特色燈籠與天然湧泉聞名，是祈求學業進步、考試順利的熱門神社。',notice:'營業時間: 08:00 ~ 20:00',mapUrl:'https://maps.app.goo.gl/DiqytPMmhmc2nNAFA'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'尋訪京都藝伎文化的古老街道',intro:'京都最具代表性的傳統花街！石板街道兩旁保留古老町屋與日式茶屋，漫步其中，感受濃厚的藝伎文化與古都風情。',map:'祇園 花見小路 京都',mapUrl:'https://maps.app.goo.gl/bLtHpKG2ci3sKU247'},
+  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'京都人氣購物與美食天堂',intro:'京都歷史悠久的熱鬧商店街，匯集日系服飾、人氣藥妝、特色小吃與伴手禮，是逛街購物、感受京都庶民風情的好去處。',map:'新京極商店街 京都',mapUrl:'https://maps.app.goo.gl/2EHTDeZg2iTJb6Ni6'},
+  {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 53 分鐘 · 時刻表 7',more:['以交通 IC 卡搭乘，月台購買 Premium Car 車票。'],mapUrl:'https://maps.app.goo.gl/GmjQwSvSwNj8ehSGA'},
   {time:'21:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'淀屋橋',to:'大國町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'}
  ]},
  {date:'12/05',week:'六',title:'箕面山色',theme:'#315C53',subtitle:'勝尾寺・箕面瀑布・梅田',bar:'#698179',desc:'勝尾寺祈願、漫步箕面瀑布，傍晚暢遊梅田。',events:[
-  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
-  {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'箕面萱野',sub:'搭乘約 38 分鐘',more:['使用交通 IC 卡搭乘。','依行程規劃前往箕面萱野站。']},
+  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:'https://maps.app.goo.gl/bWm5FRe2hTuXtMfP6'},
+  {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'箕面萱野',sub:'搭乘約 38 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:50',period:'morning',type:'move',tag:'計程車',title:'計程車前往勝尾寺',from:'箕面萱野站',to:'勝尾寺',sub:'預估車程約 30 分鐘',notice:'箕面萱野站南出口搭車。'},
-  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。'],mapUrl:''},
+  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'滿山達摩的勝運祈願聖地',map:'勝尾寺 大阪 箕面',notice:'營業時間: 08:00 ~ 17:00',more:['大阪祈求勝運的知名古寺！寺內隨處可見大小不一的紅色達摩，除了祈求考試、事業順利，也別忘了尋找藏在各個角落的可愛達摩。'],mapUrl:'https://maps.app.goo.gl/bFKSMfHhDi2xRS4U8'},
   {time:'11:30',period:'morning',type:'move',tag:'計程車',title:'計程車前往大日駐車場',from:'勝尾寺',to:'大日駐車場',sub:'預估車程約 10 分鐘'},
-  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」'],mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',intro:'位於箕面瀑布步道沿線的寺院，可配合瀑布行程順道參拜。',map:'箕面 瀧安寺',mapUrl:''},
+  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'藏身山林間的絕美瀑布',map:'箕面大滝',more:['日本瀑布百選之一！沿著森林步道漫步，欣賞高達33公尺的壯麗瀑布，別忘了品嚐箕面名產「紅葉天婦羅」，享受遠離都市的自然風光。'],mapUrl:'https://maps.app.goo.gl/NLsnzPg23z2Ty61f7'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'隱身箕面山林的開運古寺',intro:'日本彩券的發源地，供奉掌管財運與智慧的弁財天。前往箕面瀑布途中，不妨在此參拜，祈求財運亨通、開運招福。',map:'箕面 瀧安寺',mapUrl:'https://maps.app.goo.gl/PhvQPAApuWM2vhU86'},
   {time:'14:00',period:'afternoon',type:'move',tag:'阪急普通',title:'阪急箕面線 普通',from:'箕面',to:'石橋阪大前',sub:'搭乘約 6 分鐘 · 時刻表 8',notice:'石橋阪大前站轉車',more:['使用交通 IC 卡搭乘。','抵達石橋阪大前後換乘阪急寶塚線。']},
   {time:'14:08',period:'afternoon',type:'move',tag:'阪急急行',title:'阪急寶塚線 急行',from:'石橋阪大前',to:'大阪梅田（阪急）',sub:'搭乘約 16 分鐘 · 時刻表 9'},
-  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',intro:'大阪重要的購物商圈，百貨與地下街集中，適合安排晚餐與採買。',map:'大阪 梅田',mapUrl:''},
+  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪繁華時尚的都市核心',intro:'大阪必逛的購物商圈！匯集大型百貨、時尚品牌與人氣美食，還能登上梅田藍天大廈欣賞城市天際線，感受大阪現代都市的魅力。',map:'大阪 梅田',mapUrl:'https://maps.app.goo.gl/esiTjnadU8xh1DDd7'},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'梅田',to:'大國町',sub:'搭乘約 11 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'}
  ]},
  {date:'12/06',week:'日',title:'奈良古都',theme:'#564F70',subtitle:'奈良・新世界・通天閣',bar:'#a47d69',desc:'漫步奈良古寺、邂逅可愛鹿群，夜遊大阪新世界。',events:[
-  {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
+  {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:'https://maps.app.goo.gl/bWm5FRe2hTuXtMfP6'},
   {time:'09:20',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 四橋線',from:'大國町',to:'難波',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'09:47',period:'morning',type:'move',tag:'近鐵特急',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',sub:'預計搭乘約 35 分鐘 · 時刻表 10',more:['使用交通 IC 卡搭乘。','座位是6車 3B,3C,4B,4C']},
-  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',intro:'奈良市中心的古寺，沿著寺院建築與周邊散步，感受古都氛圍。',map:'興福寺 奈良',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',intro:'遼闊的公園綠地與鹿群是奈良的代表景色，散步時也請遵守與鹿互動的現場規範。',map:'奈良公園',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',intro:'位於奈良森林中的神社，參道及燈籠景觀是參拜重點。',map:'春日大社 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',intro:'位於奈良市中心的商店街，適合中途休息、逛店與尋找伴手禮。',map:'奈良 東向商店街',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',intro:'以大佛殿聞名的奈良古寺，可欣賞大型佛教建築與寺院境內景觀。',map:'東大寺 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',intro:'東大寺境內的高處建築，可順著步道前往欣賞奈良景色。',map:'東大寺 二月堂',mapUrl:''},
+  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'見證奈良千年歷史的佛教古寺',intro:'奈良代表性的世界文化遺產！以五重塔與國寶級阿修羅像聞名，寺院周圍還能遇見悠閒散步的小鹿，感受古都獨特的歷史風情。',notice:'營業時間: 09:00 ~ 17:00',mapUrl:'https://maps.app.goo.gl/fy1XmtZXDfsmbGnn7'},
+  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'與可愛小鹿相遇的自然樂園',intro:'來奈良絕對不能錯過的景點！園內隨處可見自由漫步的小鹿，可以購買鹿仙貝與牠們互動，享受古都與自然交織的悠閒時光。',mapUrl:'https://maps.app.goo.gl/JjrWef4W5ghy6Rby5'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'千年森林中的朱紅燈籠神社',intro:'奈良必訪的世界文化遺產！以朱紅色社殿與數千盞石燈籠、吊燈籠聞名，沿著參道漫步，還能與象徵神明使者的小鹿相遇。',notice:'營業時間: 07:00 ~ 17:00',mapUrl:'https://maps.app.goo.gl/i9Aa2cALZrH7fbGh9'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'奈良古都的美食購物街道',intro:'位於近鐵奈良站旁的熱鬧商店街，聚集奈良特色美食、日式甜點與伴手禮店，是探索奈良公園前後逛街覓食的好去處。',map:'奈良 東向商店街',mapUrl:'https://maps.app.goo.gl/odKpr9s5WV2wwTX58'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'震撼人心的千年大佛殿',intro:'奈良必訪的世界文化遺產！以宏偉的木造大佛殿與巨大盧舍那佛聞名，別忘了體驗穿越「大佛鼻孔」石柱洞，相傳能祈求平安與開運。',notice:'營業時間: 07:30 ~ 17:30',mapUrl:'https://maps.app.goo.gl/muTDcp44ZEDc2UMR8'},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'俯瞰奈良古都的絕美觀景台',intro:'位於東大寺山坡上的古老佛堂，以傳統「修二會」祭典聞名。站在木造露台上，可將奈良市景盡收眼底，也是欣賞夕陽的絕佳景點。',notice:'營業時間: 24小時營業',mapUrl:'https://maps.app.goo.gl/fk81t7eMstrmbgLy8'},
   {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'預計搭乘約 44 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。']},
   {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',intro:'大阪新世界一帶的熱鬧街區，適合晚餐與散步。',map:'大阪 新世界市場',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',intro:'大阪新世界的代表地標，可從周邊街道欣賞高塔及復古商圈景觀。',map:'通天閣 大阪',mapUrl:''},
+  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'充滿昭和懷舊風情的庶民商圈',intro:'大阪最具復古特色的街區之一！以通天閣、五彩繽紛的招牌與人氣串炸聞名，漫步街頭，感受大阪道地的庶民文化與懷舊氛圍。',map:'大阪 新世界市場',mapUrl:'https://maps.app.goo.gl/aNdCsM7d8hPdC7sWA'},
+  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'見證大阪百年繁華的象徵',intro:'大阪極具代表性的展望塔！登上觀景台俯瞰城市風光，別忘了摸摸福神比利肯（Billiken）的腳底，相傳能帶來幸福與好運。',map:'通天閣 大阪',mapUrl:'https://maps.app.goo.gl/Ghk9zA85NHUMSD2r8'},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'動物園前',to:'大國町',sub:'搭乘約 3 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'}
  ]},
  {date:'12/07',week:'一',title:'返程日',theme:'#3E5E78',subtitle:'關西機場・高雄',bar:'#6e8493',desc:'結束關西六日旅程，帶著滿滿回憶返回高雄。',events:[
-  {time:'07:00',period:'morning',type:'move',tag:'Uber',title:'計程車前往新今宮',from:HOTEL,to:'新今宮站',sub:'從飯店出發，使用 Uber 叫車',map:'新今宮站 大阪',mapUrl:''},
+  {time:'07:00',period:'morning',type:'move',tag:'Uber',title:'計程車前往新今宮',from:HOTEL,to:'新今宮站',sub:'從飯店出發，使用 Uber 叫車',map:'新今宮站 大阪',mapUrl:'https://maps.app.goo.gl/vuJYKBtMgsY38YMD6'},
   {time:'07:32',period:'morning',type:'move',tag:'南海特急',title:'南海電鐵 特急 Rapi:t',from:'新今宮',to:'關西機場',sub:'搭乘約 37 分鐘 · 時刻表 12'},
-  {time:'08:10',period:'morning',type:'move',tag:'機場',title:'抵達關西機場第 1 航廈',sub:'退稅、托運行李、出境手續',more:['先確認航空公司報到櫃檯位置及辦理時間。'],map:'關西國際機場 第1航廈',mapUrl:''},
+  {time:'08:10',period:'morning',type:'move',tag:'機場',title:'抵達關西機場第 1 航廈',sub:'退稅、托運行李、出境手續',more:['先確認航空公司報到櫃檯位置及辦理時間。'],map:'關西國際機場 第1航廈',mapUrl:'https://maps.app.goo.gl/KqEcW57fsfBqtg2a9'},
   {time:'11:55',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 181',from:'關西機場 T1',to:'高雄機場 T1',sub:'11:55 起飛 → 14:30 預計抵達'},
-  {time:'14:30',period:'afternoon',type:'move',tag:'入境',title:'抵達高雄機場',sub:'入境、領取行李',map:'高雄國際機場 第1航廈',mapUrl:''}
+  {time:'14:30',period:'afternoon',type:'move',tag:'入境',title:'抵達高雄機場',sub:'入境、領取行李',map:'高雄國際機場 第1航廈',mapUrl:'https://maps.app.goo.gl/Dafe5dWKmD7tzbSV7'}
  ]}
 ];
 const periodNames={morning:['朝','MORNING'],afternoon:['晝','AFTERNOON'],evening:['夜','EVENING']};

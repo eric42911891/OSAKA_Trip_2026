@@ -564,6 +564,45 @@ button:disabled{cursor:default}
   margin:0 0 7px;
 }
 .spot-description p:last-child {margin-bottom:0;}
+/* 景點照片：只在景點卡片展開時顯示。支援單張或橫向多張瀏覽。 */
+.spot-photo-gallery {
+  display:block;
+  margin:13px 0 0;
+  min-width:0;
+}
+.spot-photo-gallery.is-multiple {
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.spot-photo-item {
+  min-width:0;
+  margin:0;
+  overflow:hidden;
+  border:1px solid #dedbd2;
+  background:#fffefa;
+}
+.spot-photo-gallery.is-multiple .spot-photo-item {
+  flex:0 0 85%;
+  scroll-snap-align:start;
+}
+.spot-photo-item img {
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 10;
+  object-fit:cover;
+  object-position:center;
+}
+.spot-photo-item figcaption {
+  padding:7px 10px;
+  font-size:11px;
+  line-height:1.6;
+  color:#61706a;
+}
 .spot-notice {
   font-size:11px;
   line-height:1.8;
@@ -986,6 +1025,11 @@ function openTrainTimetable(number){
 
 /* 景點地圖：在每一個 DAYS.events 項目的 mapUrl:'' 中貼上 Google Maps 分享連結。
    例如：mapUrl:'https://maps.app.goo.gl/實際分享連結'，無須修改下方導航程式。 */
+/* 景點照片設定：每一筆 type:'visit' 的 photo:'' 可填入圖片路徑。
+   單張：photo:'images/namba-yasaka.jpg'（建議把 images 資料夾和 index.html 一起放上 GitHub）
+   多張：photos:[{src:'images/a.jpg',caption:'入口'},{src:'images/b.jpg',caption:'建築'}]
+   沒有照片時 photo:''，卡片不顯示圖片區塊。
+*/
 const DAYS = [
  {date:'12/02',week:'三',title:'大阪初見',theme:'#19343B',subtitle:'難波・心齋橋・道頓堀',bar:'#bd7058',desc:'從高雄起飛，沿著大阪的街道與夜色展開旅程。',events:[
   {time:'07:05',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 182',from:'高雄機場 T1',to:'關西機場 T1',sub:'07:05 起飛 → 10:55 抵達'},
@@ -993,10 +1037,10 @@ const DAYS = [
   {time:'12:14',period:'morning',type:'move',tag:'JR',title:'關西機場特快HARUKA',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘 · 時刻表 1',more:['JR車站在關西機場二樓，拿到行李後確認要搭乘的車次，並用綠色售票機劃位。']},
   {time:'12:50',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'天王寺',to:'大國町',sub:'搭乘約 7 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'},
-  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社',mapUrl:''},
+  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社',photo:'d1_1.jpeg',mapUrl:''},
   {time:'14:10',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'心齋橋',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀',mapUrl:''},
-  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise',mapUrl:''},
+  {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀',photo:'',mapUrl:''},
+  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise',photo:'',mapUrl:''},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'大國町',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -1005,16 +1049,16 @@ const DAYS = [
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:47',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'中書島',sub:'搭乘約 41 分鐘 · 時刻表 2',notice:'中書島換車。',more:['使用交通 IC 卡搭乘，月台購買 Premium Car 車票']},
   {time:'09:43',period:'morning',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'中書島',to:'宇治',sub:'搭乘約 15 分鐘 · 時刻表 3'},
-  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館',mapUrl:''},
+  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館',photo:'',mapUrl:''},
   {time:'16:30',period:'evening',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'宇治',to:'中書島',sub:'約 15 分鐘 · 時刻表 4',notice:'中書島換車。',more:['使用交通 IC 卡搭乘。']},
   {time:'17:01',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'中書島',to:'北濱',sub:'約 38 分鐘 · 時刻表 5',more:['月台購買 Premium Car 車票。']},
   {time:'17:45',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'北濱',to:'惠美須町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街',mapUrl:''},
+  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街',photo:'',mapUrl:''},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線、御堂筋線',from:'惠美須町',to:'動物園前 → 大國町',sub:'堺筋線轉御堂筋線 · 各約 3 分鐘',notice:'動物園前換車。',more:['惠美須町 → 動物園  搭乘堺筋線。','動物園前 → 大國町  搭乘御堂筋線。','使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -1023,13 +1067,13 @@ const DAYS = [
   {time:'07:30',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:05',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'祇園四條',sub:'搭乘約 43 分鐘 · 時刻表 6',more:['使用交通 IC 卡搭乘，月台購買Premium Car 車票。']},
   {time:'09:00',period:'morning',type:'move',tag:'京都市巴士',title:'京都市巴士 207／106／58',from:'四条京阪前',to:'清水道',sub:'搭乘約 15 分鐘',notice:'祇園四條站 7 號出口，前往巴士 A 站乘車。',more:['使用交通 IC 卡搭乘。','後門上車，前門刷卡下車。']},
-  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',intro:'清水寺前的參道坡道，沿途可欣賞老街、店舖與京都東山的傳統街景。',map:'京都 清水坂',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',intro:'京都東山代表性寺院，以清水舞台及眺望市區的景色聞名。',map:'清水寺 京都',notice:'門票500日圓',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',intro:'保留傳統街道氛圍的石板坡道，適合慢慢散步與拍照。',map:'産寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',intro:'東山街景中的五重塔地標，塔身與街道構成經典的京都風景。',map:'法觀寺 八坂之塔 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',intro:'兩旁有日式町屋與特色小店的石板坡道，可以接續三年坂步行。',map:'二寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',intro:'以傳統町屋與石板街景為特色的京都街區，適合感受祇園氣氛。',map:'祇園 花見小路 京都',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',intro:'京都市中心的熱鬧商店街，可安排晚餐、購物及沿途散步。',map:'新京極商店街 京都',mapUrl:''},
+  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',intro:'清水寺前的參道坡道，沿途可欣賞老街、店舖與京都東山的傳統街景。',map:'京都 清水坂',photo:'',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',intro:'京都東山代表性寺院，以清水舞台及眺望市區的景色聞名。',map:'清水寺 京都',notice:'門票500日圓',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',intro:'保留傳統街道氛圍的石板坡道，適合慢慢散步與拍照。',map:'産寧坂 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',intro:'東山街景中的五重塔地標，塔身與街道構成經典的京都風景。',map:'法觀寺 八坂之塔 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',intro:'兩旁有日式町屋與特色小店的石板坡道，可以接續三年坂步行。',map:'二寧坂 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',intro:'以傳統町屋與石板街景為特色的京都街區，適合感受祇園氣氛。',map:'祇園 花見小路 京都',photo:'',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',intro:'京都市中心的熱鬧商店街，可安排晚餐、購物及沿途散步。',map:'新京極商店街 京都',photo:'',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 53 分鐘 · 時刻表 7',more:['以交通 IC 卡搭乘，月台購買 Premium Car 車票。']},
   {time:'21:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'淀屋橋',to:'大國町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
@@ -1038,13 +1082,13 @@ const DAYS = [
   {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'箕面萱野',sub:'搭乘約 38 分鐘',more:['使用交通 IC 卡搭乘。','依行程規劃前往箕面萱野站。']},
   {time:'08:50',period:'morning',type:'move',tag:'計程車',title:'計程車前往勝尾寺',from:'箕面萱野站',to:'勝尾寺',sub:'預估車程約 30 分鐘',notice:'箕面萱野站南出口搭車。'},
-  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。'],mapUrl:''},
+  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。'],photo:'',mapUrl:''},
   {time:'11:30',period:'morning',type:'move',tag:'計程車',title:'計程車前往大日駐車場',from:'勝尾寺',to:'大日駐車場',sub:'預估車程約 10 分鐘'},
-  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」'],mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',intro:'位於箕面瀑布步道沿線的寺院，可配合瀑布行程順道參拜。',map:'箕面 瀧安寺',mapUrl:''},
+  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」'],photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',intro:'位於箕面瀑布步道沿線的寺院，可配合瀑布行程順道參拜。',map:'箕面 瀧安寺',photo:'',mapUrl:''},
   {time:'14:00',period:'afternoon',type:'move',tag:'阪急普通',title:'阪急箕面線 普通',from:'箕面',to:'石橋阪大前',sub:'搭乘約 6 分鐘 · 時刻表 8',notice:'石橋阪大前站轉車',more:['使用交通 IC 卡搭乘。','抵達石橋阪大前後換乘阪急寶塚線。']},
   {time:'14:08',period:'afternoon',type:'move',tag:'阪急急行',title:'阪急寶塚線 急行',from:'石橋阪大前',to:'大阪梅田（阪急）',sub:'搭乘約 16 分鐘 · 時刻表 9'},
-  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',intro:'大阪重要的購物商圈，百貨與地下街集中，適合安排晚餐與採買。',map:'大阪 梅田',mapUrl:''},
+  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',intro:'大阪重要的購物商圈，百貨與地下街集中，適合安排晚餐與採買。',map:'大阪 梅田',photo:'',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'梅田',to:'大國町',sub:'搭乘約 11 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -1052,16 +1096,16 @@ const DAYS = [
   {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'09:20',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 四橋線',from:'大國町',to:'難波',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'09:47',period:'morning',type:'move',tag:'近鐵特急',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',sub:'預計搭乘約 35 分鐘 · 時刻表 10',more:['使用交通 IC 卡搭乘。','座位是6車 3B,3C,4B,4C']},
-  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',intro:'奈良市中心的古寺，沿著寺院建築與周邊散步，感受古都氛圍。',map:'興福寺 奈良',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',intro:'遼闊的公園綠地與鹿群是奈良的代表景色，散步時也請遵守與鹿互動的現場規範。',map:'奈良公園',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',intro:'位於奈良森林中的神社，參道及燈籠景觀是參拜重點。',map:'春日大社 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',intro:'位於奈良市中心的商店街，適合中途休息、逛店與尋找伴手禮。',map:'奈良 東向商店街',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',intro:'以大佛殿聞名的奈良古寺，可欣賞大型佛教建築與寺院境內景觀。',map:'東大寺 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',intro:'東大寺境內的高處建築，可順著步道前往欣賞奈良景色。',map:'東大寺 二月堂',mapUrl:''},
+  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',intro:'奈良市中心的古寺，沿著寺院建築與周邊散步，感受古都氛圍。',map:'興福寺 奈良',photo:'',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',intro:'遼闊的公園綠地與鹿群是奈良的代表景色，散步時也請遵守與鹿互動的現場規範。',map:'奈良公園',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',intro:'位於奈良森林中的神社，參道及燈籠景觀是參拜重點。',map:'春日大社 奈良',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',intro:'位於奈良市中心的商店街，適合中途休息、逛店與尋找伴手禮。',map:'奈良 東向商店街',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',intro:'以大佛殿聞名的奈良古寺，可欣賞大型佛教建築與寺院境內景觀。',map:'東大寺 奈良',photo:'',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',intro:'東大寺境內的高處建築，可順著步道前往欣賞奈良景色。',map:'東大寺 二月堂',photo:'',mapUrl:''},
   {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'預計搭乘約 44 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。']},
   {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',intro:'大阪新世界一帶的熱鬧街區，適合晚餐與散步。',map:'大阪 新世界市場',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',intro:'大阪新世界的代表地標，可從周邊街道欣賞高塔及復古商圈景觀。',map:'通天閣 大阪',mapUrl:''},
+  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',intro:'大阪新世界一帶的熱鬧街區，適合晚餐與散步。',map:'大阪 新世界市場',photo:'',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',intro:'大阪新世界的代表地標，可從周邊街道欣賞高塔及復古商圈景觀。',map:'通天閣 大阪',photo:'',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'動物園前',to:'大國町',sub:'搭乘約 3 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -1169,6 +1213,21 @@ function entryHtml(e){
   const spotIntro=paragraphs.length
    ? paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')
    : `<p>${esc(e.sub||'景點介紹待補充。')}</p>`;
+  // 圖片放在展開區域：photo 支援單張，photos 支援多張（檔案路徑或 HTTPS 網址）。
+  // 沒有設定圖片時不會產生空白區塊。
+  const photoItems=Array.isArray(e.photos) && e.photos.length
+   ? e.photos
+   : (e.photo ? [e.photo] : []);
+  const photos=photoItems.map(item=>{
+   const object=typeof item==='string' ? {src:item, caption:e.photoCaption||''} : item;
+   if(!object || typeof object.src!=='string' || !object.src.trim()) return '';
+   const caption=object.caption||'';
+   const alt=object.alt||e.title+' 景點照片';
+   return `<figure class="spot-photo-item"><img src="${esc(object.src)}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption?`<figcaption>${esc(caption)}</figcaption>`:''}</figure>`;
+  }).filter(Boolean);
+  const gallery=photos.length
+   ? `<div class="spot-photo-gallery${photos.length>1?' is-multiple':''}" aria-label="${esc(e.title)} 景點照片">${photos.join('')}</div>`
+   : '';
   const notice=e.notice?`<div class="spot-notice">${esc(e.notice)}</div>`:'';
   const nav=scenicMapHref
    ? `<a class="spot-map" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Google 地圖導航 ↗</a>`
@@ -1182,8 +1241,8 @@ function entryHtml(e){
      <span class="spot-hint">景點介紹 <small>點擊展開／收合</small></span>
     </summary>
     <div class="spot-body">
-     <span class="spot-overline">ABOUT THIS PLACE / 景點介紹</span>
      <div class="spot-description">${spotIntro}</div>
+     ${gallery}
      ${notice}
      ${nav}
     </div>

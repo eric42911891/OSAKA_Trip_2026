@@ -86,7 +86,7 @@ button:disabled{cursor:default}
 .contact{display:flex;align-items:center;justify-content:space-between;gap:15px;text-decoration:none;border-bottom:1px solid var(--line);min-height:72px}.contact:last-child{border-bottom:0}.contact span{font:600 15px/1.5 var(--serif)}.contact b{font:600 20px/1.5 var(--serif);color:var(--vermilion);text-align:right;overflow-wrap:anywhere}
 .disclaimer{border-top:1px solid var(--line);padding:17px 0 30px;color:var(--ink-light);font-size:11px;line-height:1.9}
 /* app dock */
-.bottom-nav{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:560px;background:rgba(255,254,250,.98);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding:9px 8px calc(9px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 30px rgba(26,36,33,.05);backdrop-filter:blur(15px)}
+.bottom-nav{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:560px;background:rgba(255,254,250,.98);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);padding:9px 5px calc(9px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 30px rgba(26,36,33,.05);backdrop-filter:blur(15px)}
 .bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:49px;color:#6d7572;text-decoration:none;font-size:10px;letter-spacing:.05em}.bottom-nav a.active{color:var(--vermilion);font-weight:700}.bottom-nav a.active::after{content:"";width:15px;height:2px;background:var(--vermilion);position:absolute;bottom:calc(6px + env(safe-area-inset-bottom,0px))}.icon{width:22px;height:22px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .site-footer{text-align:center;padding:9px 0 23px;font-size:9px;color:#96958d;letter-spacing:.13em}
 @media(min-width:560px){.app{border-left:1px solid #ddd6cb;border-right:1px solid #ddd6cb}}
@@ -315,6 +315,34 @@ button:disabled{cursor:default}
   background: var(--day-theme);
   border-color: var(--day-theme);
 }
+
+/* =========================================================
+   美食・茶屋分頁：暖米色雜誌式餐飲筆記
+   ========================================================= */
+.food-page-heading { padding-bottom:18px; }
+.food-page-heading h1 { font-size:27px; }
+.food-content { padding-bottom:26px; }
+.food-intro { background:#f1e9dc; border-left:3px solid #ac8064; padding:18px 17px; margin:0 0 21px; }
+.food-intro .overline { letter-spacing:.17em; color:#a36d53; }
+.food-intro p { font:600 18px/1.6 var(--serif); margin:7px 0 5px; color:var(--ink); }
+.food-intro small { display:block; font-size:11px; line-height:1.8; color:var(--ink-light); }
+.food-filters { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:0 0 14px; margin-bottom:3px; }
+.food-filters::-webkit-scrollbar { display:none; }
+.food-filters button { flex:0 0 auto; border:1px solid #d8d4ca; padding:7px 13px; min-height:37px; background:transparent; color:var(--ink-light); font-size:11px; border-radius:999px; }
+.food-filters button.active { background:var(--sea); color:white; border-color:var(--sea); font-weight:700; }
+.food-list { display:grid; gap:12px; }
+.food-card { background:var(--white); border:1px solid var(--line); border-top:3px solid var(--food-color,#a87961); padding:17px 17px 15px; box-shadow:var(--shadow); min-width:0; }
+.food-card-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ink-light); font-size:10px; line-height:1.6; }
+.food-card-meta b { font-weight:700; letter-spacing:.08em; }
+.food-card-meal { color:#a5644b; font-size:10px; font-weight:700; }
+.food-card h2 { font:600 19px/1.55 var(--serif); margin:9px 0 5px; letter-spacing:.02em; overflow-wrap:anywhere; }
+.food-card p { font-size:12px; line-height:1.85; color:var(--ink-light); margin:0; }
+.food-card-actions { border-top:1px solid var(--line); margin-top:13px; padding-top:10px; display:flex; flex-wrap:wrap; gap:9px 17px; }
+.food-card-actions a { min-height:30px; display:inline-flex; align-items:center; text-decoration:none; font-size:11px; font-weight:700; color:#42605a; }
+.food-card-actions a:last-child { color:#9e6b51; }
+.food-empty { background:var(--white); border:1px solid var(--line); padding:25px 15px; text-align:center; color:var(--ink-light); font-size:12px; }
+.food-disclaimer { font-size:11px; color:var(--ink-light); line-height:1.85; border-top:1px solid var(--line); padding-top:14px; margin:22px 0 0; }
+@media(max-width:360px){.food-card{padding:14px}.food-intro{padding:16px 14px}.food-card h2{font-size:18px}}
 </style>
 </head>
 <body>
@@ -322,6 +350,7 @@ button:disabled{cursor:default}
 <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM9 21v-7h6v7"/></symbol>
 <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M8 17h7"/></symbol>
 <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 5h18v5a2 2 0 0 0 0 4v5H3v-5a2 2 0 0 0 0-4V5zM12 5v2M12 10v2M12 15v2"/></symbol>
+<symbol id="i-food" viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M17 3c-2.8 0-4 3-4 6v4h4V3zM17 13v8"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
 <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></symbol>
@@ -374,6 +403,23 @@ button:disabled{cursor:default}
   </div>
  </div>
 </section>
+<section class="view" id="page-food" aria-label="美食與茶屋">
+ <div class="page-heading food-page-heading">
+  <span class="overline">FOOD &amp; CAFÉ</span>
+  <h1>美食・茶屋</h1>
+  <p>依照每日路線整理用餐地點與茶點，方便隨時查找。</p>
+ </div>
+ <div class="content food-content">
+  <div class="food-intro">
+   <span class="overline">旅の味 / TASTE OF KANSAI</span>
+   <p>走過的街道，也留下想吃的味道。</p>
+   <small>先整理行程中安排的用餐區域，餐廳名稱可再逐一補上。</small>
+  </div>
+  <div id="foodFilters" class="food-filters" role="group" aria-label="依旅遊日期篩選美食"></div>
+  <div id="foodList" class="food-list" aria-live="polite"></div>
+  <p class="food-disclaimer">部分項目為預計用餐的商圈，並非已預訂的餐廳；實際用餐地點、營業時間與候位狀況請再確認。</p>
+ </div>
+</section>
 <section class="view" id="page-guide" aria-label="住宿與緊急資訊">
  <div class="page-heading"><span class="overline">STAY & ESSENTIALS</span><h1>住宿・實用資訊</h1><p>需要快速給司機看地址，或聯絡緊急服務時使用。</p></div>
  <div class="content">
@@ -423,6 +469,7 @@ button:disabled{cursor:default}
 <a href="#home" data-nav="home"><svg class="icon"><use href="#i-home"/></svg><span>封面</span></a>
 <a href="#day1" data-nav="itinerary"><svg class="icon"><use href="#i-calendar"/></svg><span>行程</span></a>
 <a href="#transit" data-nav="transit"><svg class="icon"><use href="#i-ticket"/></svg><span>交通</span></a>
+<a href="#food" data-nav="food"><svg class="icon"><use href="#i-food"/></svg><span>美食</span></a>
 <a href="#guide" data-nav="guide"><svg class="icon"><use href="#i-info"/></svg><span>資訊</span></a>
 </nav>
 <noscript><div style="background:#fff;padding:20px">此網站需要啟用 JavaScript，才能切換每日行程。</div></noscript>
@@ -562,97 +609,148 @@ function openTrainTimetable(number){
 }
 
 
+/* 景點地圖：在每一個 DAYS.events 項目的 mapUrl:'' 中貼上 Google Maps 分享連結。
+   例如：mapUrl:'https://maps.app.goo.gl/實際分享連結'，無須修改下方導航程式。 */
 const DAYS = [
  {date:'12/02',week:'三',title:'大阪初見',theme:'#19343B',subtitle:'難波・心齋橋・道頓堀',bar:'#bd7058',desc:'從高雄起飛，沿著大阪的街道與夜色展開旅程。',events:[
   {time:'07:05',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 182',from:'高雄機場 T1',to:'關西機場 T1',sub:'07:05 起飛 → 10:55 抵達'},
-  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'入境、領取行李',map:'關西國際機場 第1航廈'},
+  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'入境、領取行李',map:'關西國際機場 第1航廈',mapUrl:''},
   {time:'12:14',period:'morning',type:'move',tag:'JR',title:'關西機場特快HARUKA',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘 · 時刻表 1',more:['JR車站在關西機場二樓，拿到行李後確認要搭乘的車次，並用綠色售票機劃位。']},
   {time:'12:50',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'天王寺',to:'大國町',sub:'搭乘約 7 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL},
-  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社'},
+  {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL,mapUrl:''},
+  {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社',mapUrl:''},
   {time:'14:10',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'心齋橋',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀'},
-  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise'},
+  {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀',mapUrl:''},
+  {time:'20:00',period:'evening',type:'visit',tag:'遊船',title:'Wonder Cruise 觀光船',sub:'道頓堀川夜景 · 約 20 分鐘',notice:'登船地點與班次請依預約憑證確認。',more:['沿道頓堀川欣賞橋梁與霓虹街景。'],map:'大阪 道頓堀 Wonder Cruise',mapUrl:''},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'大國町',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL}
+  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
  {date:'12/03',week:'四',title:'宇治茶日和',theme:'#435B46',subtitle:'宇治・日本橋',bar:'#75816b',desc:'順著京阪電車，走進宇治的抹茶香、古寺與故事。',events:[
   {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往地鐵大國町站'},
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:47',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'中書島',sub:'搭乘約 41 分鐘 · 時刻表 2',notice:'中書島換車。',more:['使用交通 IC 卡搭乘，月台購買 Premium Car 車票']},
   {time:'09:43',period:'morning',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'中書島',to:'宇治',sub:'搭乘約 15 分鐘 · 時刻表 3'},
-  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館'},
+  {time:'10:00',period:'morning',type:'visit',tag:'抹茶',title:'中村藤吉本店',sub:'抵達先抽號碼牌',notice:'人氣店家，先取候位號碼再安排周邊景點。',more:['宇治的抹茶老舖，以抹茶甜點、茶食聞名。'],map:'中村藤吉本店 宇治',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'午餐',title:'平等院表參道',sub:'沿參道散步、享用午餐',more:['沿途有茶店、甜點店與伴手禮店。'],map:'平等院表參道 宇治',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'平等院',sub:'欣賞鳳凰堂與庭園',more:['平等院創建於平安時代。鳳凰堂是日本 10 圓硬幣背面的代表圖像。'],map:'平等院 京都宇治',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'宇治神社',sub:'尋找回頭兔的特色意象',more:['供奉菟道稚郎子，境內有與兔子相關的傳說。'],map:'宇治神社 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'世界遺產',title:'宇治上神社',sub:'古樸寧靜的神社境內',more:['以歷史悠久的本殿建築著稱，也是世界文化遺產的一部分。'],map:'宇治上神社 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'博物館',title:'源氏物語博物館',sub:'認識平安時代與宇治十帖',more:['《源氏物語》後段的宇治十帖以宇治為重要舞台。'],map:'宇治市源氏物語博物館',mapUrl:''},
   {time:'16:30',period:'evening',type:'move',tag:'京阪普通',title:'京阪宇治線 普通',from:'宇治',to:'中書島',sub:'約 15 分鐘 · 時刻表 4',notice:'中書島換車。',more:['使用交通 IC 卡搭乘。']},
   {time:'17:01',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'中書島',to:'北濱',sub:'約 38 分鐘 · 時刻表 5',more:['月台購買 Premium Car 車票。']},
   {time:'17:45',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'北濱',to:'惠美須町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街'},
+  {time:'18:00',period:'evening',type:'visit',tag:'晚餐',title:'日本橋筋商店街',sub:'Den Den Town · 美食與購物',more:['以電器、動漫、遊戲和模型商店聞名。'],map:'大阪 日本橋筋商店街',mapUrl:''},
   {time:'20:30',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線、御堂筋線',from:'惠美須町',to:'動物園前 → 大國町',sub:'堺筋線轉御堂筋線 · 各約 3 分鐘',notice:'動物園前換車。',more:['惠美須町 → 動物園  搭乘堺筋線。','動物園前 → 大國町  搭乘御堂筋線。','使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL}
+  {time:'晚上',period:'evening',type:'stay',tag:'休息',title:'返回飯店',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
  {date:'12/04',week:'五',title:'京都清水散策',theme:'#795047',subtitle:'清水寺・三年坂・祇園',bar:'#aa7259',desc:'漫步清水坂、探訪京都古寺，感受祇園古都風情。',events:[
-  {time:'07:15',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'07:15',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'07:30',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:05',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'祇園四條',sub:'搭乘約 43 分鐘 · 時刻表 6',more:['使用交通 IC 卡搭乘，月台購買Premium Car 車票。']},
   {time:'09:00',period:'morning',type:'move',tag:'京都市巴士',title:'京都市巴士 207／106／58',from:'四条京阪前',to:'清水道',sub:'搭乘約 15 分鐘',notice:'祇園四條站 7 號出口，前往巴士 A 站乘車。',more:['使用交通 IC 卡搭乘。','後門上車，前門刷卡下車。']},
-  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',map:'京都 清水坂'},
-  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',map:'清水寺 京都',notice:'門票500日圓'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',map:'産寧坂 京都'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',map:'法觀寺 八坂之塔 京都'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',map:'二寧坂 京都'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',map:'祇園 花見小路 京都'},
-  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',map:'新京極商店街 京都'},
+  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',map:'京都 清水坂',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',map:'清水寺 京都',notice:'門票500日圓',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',map:'産寧坂 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',map:'法觀寺 八坂之塔 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',map:'二寧坂 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',map:'祇園 花見小路 京都',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',map:'新京極商店街 京都',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 53 分鐘 · 時刻表 7',more:['以交通 IC 卡搭乘，月台購買 Premium Car 車票。']},
   {time:'21:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'淀屋橋',to:'大國町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
  {date:'12/05',week:'六',title:'箕面山色',theme:'#315C53',subtitle:'勝尾寺・箕面瀑布・梅田',bar:'#698179',desc:'勝尾寺祈願、漫步箕面瀑布，傍晚暢遊梅田。',events:[
-  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'08:00',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'08:10',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'箕面萱野',sub:'搭乘約 38 分鐘',more:['使用交通 IC 卡搭乘。','依行程規劃前往箕面萱野站。']},
   {time:'08:50',period:'morning',type:'move',tag:'計程車',title:'計程車前往勝尾寺',from:'箕面萱野站',to:'勝尾寺',sub:'預估車程約 30 分鐘',notice:'箕面萱野站南出口搭車。'},
-  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。']},
+  {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。'],mapUrl:''},
   {time:'11:30',period:'morning',type:'move',tag:'計程車',title:'計程車前往大日駐車場',from:'勝尾寺',to:'大日駐車場',sub:'預估車程約 10 分鐘'},
-  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」']},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',map:'箕面 瀧安寺'},
+  {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」'],mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',map:'箕面 瀧安寺',mapUrl:''},
   {time:'14:00',period:'afternoon',type:'move',tag:'阪急普通',title:'阪急箕面線 普通',from:'箕面',to:'石橋阪大前',sub:'搭乘約 6 分鐘 · 時刻表 8',notice:'石橋阪大前站轉車',more:['使用交通 IC 卡搭乘。','抵達石橋阪大前後換乘阪急寶塚線。']},
   {time:'14:08',period:'afternoon',type:'move',tag:'阪急急行',title:'阪急寶塚線 急行',from:'石橋阪大前',to:'大阪梅田（阪急）',sub:'搭乘約 16 分鐘 · 時刻表 9'},
-  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',map:'大阪 梅田'},
+  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',map:'大阪 梅田',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'梅田',to:'大國町',sub:'搭乘約 11 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
  {date:'12/06',week:'日',title:'奈良古都',theme:'#564F70',subtitle:'奈良・新世界・通天閣',bar:'#a47d69',desc:'漫步奈良古寺、邂逅可愛鹿群，夜遊大阪新世界。',events:[
-  {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL},
+  {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'09:20',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 四橋線',from:'大國町',to:'難波',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'09:47',period:'morning',type:'move',tag:'近鐵特急',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',sub:'預計搭乘約 35 分鐘 · 時刻表 10',more:['使用交通 IC 卡搭乘。','座位是6車 3B,3C,4B,4C']},
-  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',map:'興福寺 奈良'},
-  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',map:'奈良公園'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',map:'春日大社 奈良'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',map:'奈良 東向商店街'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',map:'東大寺 奈良'},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',map:'東大寺 二月堂'},
+  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',map:'興福寺 奈良',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',map:'奈良公園',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',map:'春日大社 奈良',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',map:'奈良 東向商店街',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',map:'東大寺 奈良',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',map:'東大寺 二月堂',mapUrl:''},
   {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'預計搭乘約 44 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。']},
   {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',map:'大阪 新世界市場'},
-  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',map:'通天閣 大阪'},
+  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',map:'大阪 新世界市場',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',map:'通天閣 大阪',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'動物園前',to:'大國町',sub:'搭乘約 3 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL}
+  {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
  {date:'12/07',week:'一',title:'返程日',theme:'#3E5E78',subtitle:'關西機場・高雄',bar:'#6e8493',desc:'結束關西六日旅程，帶著滿滿回憶返回高雄。',events:[
-  {time:'07:00',period:'morning',type:'move',tag:'Uber',title:'計程車前往新今宮',from:HOTEL,to:'新今宮站',sub:'從飯店出發，使用 Uber 叫車',map:'新今宮站 大阪'},
+  {time:'07:00',period:'morning',type:'move',tag:'Uber',title:'計程車前往新今宮',from:HOTEL,to:'新今宮站',sub:'從飯店出發，使用 Uber 叫車',map:'新今宮站 大阪',mapUrl:''},
   {time:'07:32',period:'morning',type:'move',tag:'南海特急',title:'南海電鐵 特急 Rapi:t',from:'新今宮',to:'關西機場',sub:'搭乘約 37 分鐘 · 時刻表 12'},
-  {time:'08:10',period:'morning',type:'move',tag:'機場',title:'抵達關西機場第 1 航廈',sub:'退稅、托運行李、出境手續',more:['先確認航空公司報到櫃檯位置及辦理時間。'],map:'關西國際機場 第1航廈'},
+  {time:'08:10',period:'morning',type:'move',tag:'機場',title:'抵達關西機場第 1 航廈',sub:'退稅、托運行李、出境手續',more:['先確認航空公司報到櫃檯位置及辦理時間。'],map:'關西國際機場 第1航廈',mapUrl:''},
   {time:'11:55',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 181',from:'關西機場 T1',to:'高雄機場 T1',sub:'11:55 起飛 → 14:30 預計抵達'},
-  {time:'14:30',period:'afternoon',type:'move',tag:'入境',title:'抵達高雄機場',sub:'入境、領取行李',map:'高雄國際機場 第1航廈'}
+  {time:'14:30',period:'afternoon',type:'move',tag:'入境',title:'抵達高雄機場',sub:'入境、領取行李',map:'高雄國際機場 第1航廈',mapUrl:''}
  ]}
 ];
 const periodNames={morning:['朝','MORNING'],afternoon:['晝','AFTERNOON'],evening:['夜','EVENING']};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const mapUrl=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
-const state={day:1,filter:'all'};
+/*
+  Google Maps 導航設定（景點、飯店、機場及美食共用）：
+  1. 最推薦：在 DAYS.events / FOOD_SPOTS 將 mapUrl:'' 改成 Google Maps 分享連結。
+     例如 mapUrl:'https://maps.app.goo.gl/你複製的真正連結'
+  2. 也可以直接把原本 map:'地點名稱' 改成 map:'https://maps.app.goo.gl/...'
+  3. mapUrl 尚未填寫時，會保留原有 map 地點名稱搜尋功能，避免現有導覽失效。
+*/
+const mapUrl = q => {
+ const value=String(q??'').trim();
+ return /^https?:\/\//i.test(value)
+   ? value
+   : 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(value);
+};
+const placeMapHref = place => {
+ const direct=String(place.mapUrl??'').trim();
+ return direct ? mapUrl(direct) : (place.map ? mapUrl(place.map) : '');
+};
+const state={day:1,filter:'all',foodDay:'all'};
+/* ========================================================================
+   編輯美食：只需要修改 FOOD_SPOTS。
+   day: 第幾天（1～6）；meal: 午餐、晚餐、抹茶甜點等；
+   title: 店名或用餐區域；note: 行程備註；mapUrl: 直接貼 Google Maps 分享連結。
+   原本 map: 地點名稱維持為備用搜尋方式；填入 mapUrl 後優先使用直接連結。
+   尚未選定店家時，保持商圈名稱，不會誤認為已訂餐廳。
+   ======================================================================== */
+const FOOD_SPOTS = [
+ {day:1,meal:'晚餐',time:'晚間',title:'道頓堀',note:'道頓堀商圈晚餐與逛街，餐廳尚未指定。',map:'大阪 道頓堀',mapUrl:''},
+ {day:2,meal:'抹茶・甜點',time:'10:00',title:'中村藤吉本店',note:'抵達宇治後先取候位號碼牌，再安排其他景點。',map:'中村藤吉本店 宇治',mapUrl:''},
+ {day:2,meal:'午餐',time:'午間',title:'平等院表參道',note:'沿著參道散步並安排午餐，餐廳尚未指定。',map:'平等院表參道 宇治',mapUrl:''},
+ {day:2,meal:'晚餐',time:'17:50',title:'日本橋筋商店街',note:'在日本橋商圈用餐與購物，餐廳尚未指定。',map:'大阪 日本橋筋商店街',mapUrl:''},
+ {day:3,meal:'晚餐',time:'晚間',title:'新京極商店街',note:'京都行程結束前安排晚餐，餐廳尚未指定。',map:'新京極商店街 京都',mapUrl:''},
+ {day:4,meal:'午餐',time:'11:40',title:'箕面瀑布周邊',note:'參觀箕面瀑布並安排午餐，餐廳尚未指定。',map:'箕面大滝',mapUrl:''},
+ {day:4,meal:'晚餐',time:'晚間',title:'大阪梅田',note:'在梅田商圈安排晚餐與逛街，餐廳尚未指定。',map:'大阪 梅田',mapUrl:''},
+ {day:5,meal:'晚餐',time:'17:30',title:'新世界市場',note:'新世界商圈晚餐，餐廳尚未指定。',map:'大阪 新世界市場',mapUrl:''}
+];
+function renderFood(){
+ const current=state.foodDay;
+ const choices=[['all','全部'],...DAYS.map((d,i)=>[String(i+1),d.date])];
+ document.getElementById('foodFilters').innerHTML=choices.map(([value,label])=>`<button type="button" data-food-day="${value}" class="${current===value?'active':''}" aria-pressed="${current===value}">${esc(label)}</button>`).join('');
+ const filtered=FOOD_SPOTS.filter(f=>current==='all'||String(f.day)===current);
+ document.getElementById('foodList').innerHTML=filtered.length?filtered.map(f=>{
+   const d=DAYS[f.day-1];
+   const foodMapHref=placeMapHref(f);
+   return `<article class="food-card" style="--food-color:${d.theme}">
+     <div class="food-card-meta"><b>DAY ${String(f.day).padStart(2,'0')} / ${esc(d.date)}（${esc(d.week)}）</b><span class="food-card-meal">${esc(f.meal)} · ${esc(f.time)}</span></div>
+     <h2>${esc(f.title)}</h2><p>${esc(f.note)}</p>
+     <div class="food-card-actions"><a href="#day${f.day}">查看當日行程 ↗</a>${foodMapHref?`<a href="${esc(foodMapHref)}" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>`:''}</div>
+   </article>`;
+ }).join(''):'<div class="food-empty">這一天尚未登記用餐地點，可以稍後補上。</div>';
+}
+
 function renderHome(){
  document.getElementById('dayIndex').innerHTML=DAYS.map((d,i)=>`<button type="button" data-open-day="${i+1}" style="--bar:${d.bar}" class="${d.events.length?'':'empty'}" aria-label="查看第 ${i+1} 天 ${esc(d.date)} 行程"><span class="index-top"><b>DAY ${String(i+1).padStart(2,'0')}</b><span>${esc(d.date)}（${esc(d.week)}）</span></span><strong>${esc(d.title)}</strong><small>${esc(d.subtitle)} ${d.events.length?' ↗':' · 待補'}</small></button>`).join('');
 }
@@ -673,7 +771,8 @@ const details = e.more?.length
   : '';
  const route=e.from&&e.to?`<div class="route"><b>${esc(e.from)}</b><span class="arrow" aria-hidden="true">→</span><b>${esc(e.to)}</b></div>`:'';
  const subtitle=e.sub?esc(e.sub).replace(/時刻表\s*([0-9]{1,2})/g,(_text,n)=>{const id=e.timetableId||n;const hash='#timetable'+id;return `<a class="timetable-link" href="${hash}" aria-label="前往交通頁查看時刻表 ${esc(n)}：${esc(e.title)}">時刻表 ↗</a>`;}):'';
- const q=e.map?`<a class="map-link" href="${mapUrl(e.map)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon"><use href="#i-pin"/></svg> 地圖導航 ↗</a>`:'';
+ const scenicMapHref=placeMapHref(e);
+ const q=scenicMapHref?`<a class="map-link" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon"><use href="#i-pin"/></svg> 地圖導航 ↗</a>`:'';
  const chipColor=isMove?'#567783':(e.type==='stay'?'#868875':'#b16c53');
  return `<article class="entry" data-type="${cat}"><div class="entry-time ${e.time.includes(':')?'':'flexible'}">${esc(e.time)}<span>${e.type==='flight'?'FLIGHT':e.type==='move'?'MOVE':e.type==='stay'?'STAY':'VISIT'}</span></div><div><div class="entry-title-row"><h3 class="entry-title">${esc(e.title)}</h3><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||cat)}</span></div>${route}${e.sub?`<p class="entry-sub">${subtitle}</p>`:''}${e.notice?`<div class="quick-note">${esc(e.notice)}</div>`:''}${q?`<div class="entry-actions">${q}</div>`:''}${details}</div></article>`;
 }
@@ -707,7 +806,7 @@ function show(){
  const h=(location.hash||'#home').slice(1);
  const dayMatch=/^day([1-6])$/.exec(h);
  const timetableMatch=/^timetable([1-9]|1[0-2])$/.exec(h);
- const page=dayMatch?'itinerary':(timetableMatch?'transit':(['home','transit','guide'].includes(h)?h:'home'));
+ const page=dayMatch?'itinerary':(timetableMatch?'transit':(['home','transit','food','guide'].includes(h)?h:'home'));
  if(dayMatch){const requested=Number(dayMatch[1]);if(requested!==state.day)state.filter='all';state.day=requested;renderDay();}
  document.querySelectorAll('.view').forEach(node=>node.classList.toggle('active',node.id==='page-'+page));
  document.querySelectorAll('[data-nav]').forEach(a=>{const on=a.dataset.nav===page;a.classList.toggle('active',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -719,6 +818,7 @@ document.addEventListener('click',event=>{
  const sameTimetableLink=event.target.closest('a[href^="#timetable"]');if(sameTimetableLink && location.hash===sameTimetableLink.getAttribute('href')){const n=location.hash.replace('#timetable','');if(document.getElementById('timetable-'+n))openTrainTimetable(n);return;}
  const dayButton=event.target.closest('[data-open-day]');if(dayButton){goDay(Number(dayButton.dataset.openDay));return;}
  const filterButton=event.target.closest('[data-filter]');if(filterButton){state.filter=filterButton.dataset.filter;renderDay();return;}
+ const foodButton=event.target.closest('[data-food-day]');if(foodButton){state.foodDay=foodButton.dataset.foodDay;renderFood();return;}
 });
 const address='〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex';
 document.getElementById('copyAddress').addEventListener('click',async function(){
@@ -730,7 +830,7 @@ document.getElementById('copyAddress').addEventListener('click',async function()
  }catch(e){this.textContent='複製失敗，請長按地址複製';}
 });
 renderTrainTimetables();
-renderHome();window.addEventListener('hashchange',show);show();
+renderHome();renderFood();window.addEventListener('hashchange',show);show();
 </script>
 </body>
 </html>

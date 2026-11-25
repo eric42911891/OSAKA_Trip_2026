@@ -97,10 +97,11 @@ button:disabled{cursor:default}
 .tt-table{border-collapse:collapse;width:100%;table-layout:fixed;font-variant-numeric:tabular-nums}
 .tt-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .tt-table th,.tt-table td{padding:9px 10px;text-align:center;border-bottom:1px solid #e5e6df}
-.tt-table th{font-size:11px;letter-spacing:.07em;font-weight:600;color:#65736c;background:#f6f7f3}
+.tt-table th{font-size:11px;letter-spacing:.07em;font-weight:600;color:#65736c;background:#fff}
 .tt-table td{font:600 15px/1.4 var(--sans);color:#344a48}
 .tt-table td:last-child{font-size:12px;font-weight:500;color:#64716b}
-.tt-table tbody tr:nth-child(even){background:#f5f6f1}
+/* 列車時刻表不使用交錯底色；只有預定搭乘列保留淺綠底色 */
+.tt-table tbody tr{background:#fff}
 .tt-table tbody tr:last-child td{border-bottom:0}
 .tt-table td:first-child{color:var(--sea)}
 .tt-table tbody tr.planned-row{background:#e7efea;border-left:3px solid var(--matcha)}
@@ -326,23 +327,386 @@ button:disabled{cursor:default}
 .food-intro .overline { letter-spacing:.17em; color:#a36d53; }
 .food-intro p { font:600 18px/1.6 var(--serif); margin:7px 0 5px; color:var(--ink); }
 .food-intro small { display:block; font-size:11px; line-height:1.8; color:var(--ink-light); }
-.food-filters { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:0 0 14px; margin-bottom:3px; }
-.food-filters::-webkit-scrollbar { display:none; }
-.food-filters button { flex:0 0 auto; border:1px solid #d8d4ca; padding:7px 13px; min-height:37px; background:transparent; color:var(--ink-light); font-size:11px; border-radius:999px; }
-.food-filters button.active { background:var(--sea); color:white; border-color:var(--sea); font-weight:700; }
-.food-list { display:grid; gap:12px; }
-.food-card { background:var(--white); border:1px solid var(--line); border-top:3px solid var(--food-color,#a87961); padding:17px 17px 15px; box-shadow:var(--shadow); min-width:0; }
-.food-card-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ink-light); font-size:10px; line-height:1.6; }
-.food-card-meta b { font-weight:700; letter-spacing:.08em; }
-.food-card-meal { color:#a5644b; font-size:10px; font-weight:700; }
-.food-card h2 { font:600 19px/1.55 var(--serif); margin:9px 0 5px; letter-spacing:.02em; overflow-wrap:anywhere; }
+/* 01 / 02：日式編輯式篩選，不沿用一般膠囊按鈕 */
+.food-filter-panel{margin:0 0 18px;padding:1px 0 18px;border-bottom:1px solid var(--line)}
+.food-filter-section+.food-filter-section{margin-top:17px}
+.food-filter-label{display:flex;align-items:baseline;gap:10px;margin:0 0 9px}
+.food-filter-index{font:600 11px/1.4 var(--serif);color:var(--vermilion)}
+.food-filter-label strong{font:600 14px/1.45 var(--serif);color:var(--ink);letter-spacing:.05em}
+.food-filter-label small{margin-left:auto;font:700 9px/1.5 var(--sans);letter-spacing:.14em;color:#8a8d83}
+.food-filters button{font:500 12px/1.45 var(--sans);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .16s,border-color .16s,color .16s}
+/* 日期：扁平方形票卡，手機可橫向滑動 */
+.food-date-filters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;margin:0;padding:0 0 3px}
+.food-date-filters::-webkit-scrollbar{display:none}
+.food-date-filters button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:66px;min-height:59px;flex:0 0 66px;padding:7px 4px;text-align:center;border:1px solid #d9d7cd;border-radius:2px;background:var(--white);color:var(--ink-light);scroll-snap-align:start}
+.food-date-filters button .food-date-main{font:600 15px/1.3 var(--serif);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.food-date-filters button .food-date-sub{font:500 9px/1.3 var(--sans);color:#7e8b88;white-space:nowrap}
+.food-date-filters button.active{background:var(--sea);border-color:var(--sea);color:#fffaf1}
+.food-date-filters button.active .food-date-sub{color:#cedbd4}
+.food-date-filters button:hover:not(.active){border-color:#9cafa6;background:#f4f6ef}
+/* 分類：完整三等分的選單，比三顆圓角按鈕更俐落 */
+.food-type-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;background:#ebe8e0;border:1px solid #ddd9d0;padding:4px;margin:0}
+.food-type-filters button{position:relative;border:1px solid transparent;background:transparent;color:#697574;border-radius:2px;min-height:43px;padding:9px 4px;font-size:12px;font-weight:500;text-align:center}
+.food-type-filters button.active{background:var(--white);color:var(--sea);font-weight:700;border-color:#e5e0d8;box-shadow:0 1px 5px #1c32370a}
+.food-type-filters button.active::after{content:'';position:absolute;bottom:0;left:28%;right:28%;height:2px;background:var(--vermilion)}
+.food-type-filters button:hover:not(.active){background:#f4f1ea;color:var(--sea)}
+.food-results-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0 12px}
+.food-results-heading>span{font:600 16px/1.5 var(--serif);letter-spacing:.05em;color:var(--ink)}
+.food-results-heading small{font-size:11px;line-height:1.5;color:var(--ink-light)}
+@media(max-width:360px){.food-date-filters button{min-width:62px;flex-basis:62px}.food-filter-label strong{font-size:13px}}
+/* 美食資訊卡：以用餐決策為優先的簡約雙欄資訊版型 */
+.food-list { display:grid; gap:14px; }
+.food-card {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-top:3px solid var(--food-color,#a87961);
+  padding:18px 17px 16px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+.food-card-meta {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--ink-light);
+  font-size:10px;
+  line-height:1.5;
+}
+.food-card-meta b { font-weight:700; letter-spacing:.065em; }
+.food-card-category {
+  display:inline-flex;
+  align-items:center;
+  padding:3px 9px;
+  border:1px solid #e7d9c9;
+  background:#f6f0e7;
+  color:#98634e;
+  font-size:10px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.food-card-category.is-dessert { border-color:#d5ddce; background:#edf1e8; color:#61765c; }
+.food-card h2 {
+  font:600 24px/1.45 var(--serif);
+  margin:13px 0 5px;
+  letter-spacing:.02em;
+  overflow-wrap:anywhere;
+}
 .food-card p { font-size:12px; line-height:1.85; color:var(--ink-light); margin:0; }
-.food-card-actions { border-top:1px solid var(--line); margin-top:13px; padding-top:10px; display:flex; flex-wrap:wrap; gap:9px 17px; }
-.food-card-actions a { min-height:30px; display:inline-flex; align-items:center; text-decoration:none; font-size:11px; font-weight:700; color:#42605a; }
-.food-card-actions a:last-child { color:#9e6b51; }
+/* 備註：獨立於店家簡介，保留輕量底色和充足的閱讀間距 */
+.food-card-remark {
+  margin-top:13px;
+  padding:11px 13px;
+  background:#f7f3eb;
+  border-left:2px solid #b79b7d;
+}
+.food-card-remark-label {
+  display:block;
+  font:700 10px/1.6 var(--sans);
+  letter-spacing:.08em;
+  color:#876a50;
+  margin-bottom:3px;
+}
+.food-card-remark-text {
+  display:block;
+  font:400 12px/1.85 var(--sans);
+  color:#4e5b57;
+  white-space:pre-line;
+  overflow-wrap:anywhere;
+}
+.food-card-details {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:stretch;
+  background:#f5f4ee;
+  border:1px solid #ece8df;
+  padding:12px 0;
+  margin-top:16px;
+}
+.food-card-fact { min-width:0; padding:0 12px; }
+.food-card-fact + .food-card-fact { border-left:1px solid var(--line); }
+.food-card-fact-label {
+  display:block;
+  font:600 10px/1.5 var(--sans);
+  letter-spacing:.055em;
+  color:#758078;
+}
+.food-card-fact-value {
+  display:block;
+  margin-top:4px;
+  font:600 12px/1.65 var(--sans);
+  color:var(--ink);
+  overflow-wrap:anywhere;
+  white-space:pre-line;
+}
+.food-card-fact-value.is-pending { font-weight:500; color:#978777; }
+.food-card-actions {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:14px;
+}
+.food-card-actions a {
+  min-height:44px;
+  padding:9px 7px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.5;
+  text-decoration:none;
+  border:1px solid #cbd4cd;
+  color:#3c625a;
+}
+.food-card-actions a.food-map-button {
+  background:var(--sea);
+  border-color:var(--sea);
+  color:#fffaf1;
+}
+.food-card-actions a.food-itinerary-button { background:transparent; }
+.food-card-actions a:only-child { grid-column:1 / -1; }
+.food-card-actions a:active { transform:translateY(1px); }
 .food-empty { background:var(--white); border:1px solid var(--line); padding:25px 15px; text-align:center; color:var(--ink-light); font-size:12px; }
 .food-disclaimer { font-size:11px; color:var(--ink-light); line-height:1.85; border-top:1px solid var(--line); padding-top:14px; margin:22px 0 0; }
-@media(max-width:360px){.food-card{padding:14px}.food-intro{padding:16px 14px}.food-card h2{font-size:18px}}
+@media(max-width:360px){.food-card{padding:14px}.food-intro{padding:16px 14px}.food-card h2{font-size:21px}}
+
+
+
+/* =========================================================
+   每日行程：景點可展開式小卡片（僅 type:'visit'）
+   點擊整張卡片顯示介紹、參觀提醒、Google Maps。
+   ========================================================= */
+.entry.entry-visit {
+  gap:12px;
+  padding:17px 0 19px;
+  align-items:start;
+}
+.spot-card {
+  min-width:0;
+  width:100%;
+  border:1px solid #dedbd2;
+  border-top:3px solid var(--day-theme,#19343b);
+  background:var(--white);
+  box-shadow:0 5px 16px rgba(28,50,55,.045);
+  overflow:hidden;
+}
+.spot-card > summary {
+  list-style:none;
+  cursor:pointer;
+  padding:12px 14px 11px;
+  user-select:none;
+}
+.spot-card > summary::-webkit-details-marker { display:none; }
+.spot-topline {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:6px;
+}
+.spot-topline .entry-chip { flex:0 0 auto; }
+.spot-toggle {
+  color:var(--vermilion);
+  font:600 18px/1 var(--sans);
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  width:24px;
+  height:24px;
+  flex-shrink:0;
+}
+.spot-toggle::before {content:'＋';}
+.spot-card[open] .spot-toggle::before {content:'−';}
+.spot-title {
+  font:600 18px/1.5 var(--serif);
+  letter-spacing:.02em;
+  margin:0;
+  color:var(--ink);
+  overflow-wrap:anywhere;
+}
+.spot-excerpt {
+  font-size:12px;
+  line-height:1.7;
+  margin:5px 0 0;
+  color:var(--ink-light);
+  overflow-wrap:anywhere;
+}
+.spot-hint {
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid #ece8df;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font:600 11px/1.6 var(--sans);
+  color:#49695f;
+}
+.spot-hint small {font-size:10px;font-weight:400;color:#818b82;}
+.spot-card[open] .spot-hint small {color:var(--vermilion);}
+.spot-body {
+  border-top:1px solid var(--line);
+  padding:13px 14px 15px;
+  background:#f5f5ef;
+}
+.spot-overline {
+  font:700 9px/1.5 var(--sans);
+  letter-spacing:.13em;
+  color:var(--matcha);
+  display:block;
+  margin-bottom:6px;
+}
+.spot-description p {
+  font-size:12px;
+  line-height:1.9;
+  color:#465b57;
+  margin:0 0 7px;
+}
+.spot-description p:last-child {margin-bottom:0;}
+.spot-notice {
+  font-size:11px;
+  line-height:1.8;
+  background:#eee9df;
+  border-left:2px solid var(--gold);
+  color:#766249;
+  padding:9px 11px;
+  margin-top:12px;
+}
+.spot-map {
+  margin-top:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:9px 12px;
+  border:1px solid #becdc4;
+  background:var(--white);
+  color:#345d55;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+.spot-map svg {width:15px;height:15px;margin-right:5px;}
+.spot-map:active {background:#e9eee8;}
+@media(max-width:360px) {
+  .entry.entry-visit {gap:9px;}
+  .spot-card > summary {padding:10px 11px;}
+  .spot-title {font-size:16px;}
+  .spot-body {padding:12px 11px 13px;}
+}
+
+
+/* ===== TYPOGRAPHY B / PHONE-READABLE ===== */
+/* 方案 B：標題保留思源宋體書刊感（Noto Serif TC Bold）
+   內文使用較厚實的 Noto Sans TC Medium；不更動資料與交互功能。 */
+body {
+  font-family:var(--sans);
+  font-weight:500;
+}
+/* 大標題、景點名、店名：加厚宋體筆畫 */
+.brand-type strong,
+.cover-title,
+.cover-bottom strong,
+.lead-row h2,
+.block-heading h2,
+.day-index strong,
+.page-intro h1,
+.page-heading h1,
+.day-cover h2,
+.session-title .kanji,
+.feature-label,
+.timetable-hub-head,
+.entry-title,
+.spot-title,
+.food-card h2,
+.food-intro p,
+.food-results-heading > span,
+.information-card h2,
+.hotel-name,
+.train-timetable .train-title b,
+.food-filter-label strong {
+  font-family:var(--serif);
+  font-weight:700;
+}
+/* 時間、主要資訊：比原先更容易快速掃讀 */
+.entry-time {font-weight:700;}
+.entry-time span {font-size:10px;font-weight:600;}
+.entry-title {font-size:19px;line-height:1.48;}
+.spot-title {font-size:19px;line-height:1.48;}
+.route {font-size:13px;line-height:1.65;}
+.route b {font-weight:700;}
+/* 所有常讀的輔助文字，提升至最少 13px，字重 Medium */
+.lead-row p,
+.page-intro p,
+.page-heading p,
+.day-cover p,
+.entry-sub,
+.spot-excerpt,
+.spot-description p,
+.food-card p,
+.food-intro small,
+.food-card-remark-text,
+.more-inner,
+.quick-note {
+  font-family:var(--sans);
+  font-weight:500;
+  font-size:13px;
+  line-height:1.82;
+}
+/* 展開景點內文及操作提示 */
+.spot-hint {font-size:12px;font-weight:700;}
+.spot-hint small {font-size:11px;font-weight:500;}
+.spot-overline {font-size:10px;}
+.spot-notice {font-size:12px;font-weight:500;}
+.spot-map {font-size:13px;font-weight:700;min-height:44px;}
+.more-details summary {font-size:13px;font-weight:600;}
+.map-link,.timetable-link {font-size:12px;font-weight:600;}
+/* 美食卡片 */
+.food-card h2 {font-size:24px;line-height:1.42;}
+.food-card-meta {font-size:11px;font-weight:600;}
+.food-card-fact-label {font-size:11px;font-weight:600;}
+.food-card-fact-value {font-size:13px;font-weight:600;}
+.food-card-fact-value.is-pending {font-weight:500;}
+.food-card-remark-label {font-size:11px;}
+.food-card-remark-text {font-size:13px;}
+.food-card-actions a {font-size:13px;font-weight:700;}
+.food-date-filters button .food-date-main {font-weight:700;}
+.food-date-filters button .food-date-sub {font-size:10px;font-weight:600;}
+.food-type-filters button {font-weight:600;}
+.food-type-filters button.active {font-weight:700;}
+.food-results-heading small {font-size:12px;font-weight:500;}
+/* 交通時刻表：表頭及班次辨識度 */
+.train-timetable .train-title b {font-size:16px;}
+.train-timetable .train-title small {font-size:12px;font-weight:500;}
+.train-plan p,.tt-footnote {font-size:12px;font-weight:500;}
+.tt-table th {font-size:12px;font-weight:700;}
+.tt-table td {font-weight:600;}
+.tt-table td:last-child {font-size:12px;font-weight:600;}
+.tt-table-multistop th {font-size:11px;}
+.tt-table-multistop td {font-size:13px;}
+.tt-table-multistop td:last-child {font-size:11px;}
+.tt-table-destination td:nth-child(3),
+.tt-table-destination td:nth-child(4) {font-size:11px;font-weight:600;}
+/* 飯店與底部導覽 */
+.hotel-date-label,.hotel-access small {font-size:11px;font-weight:600;}
+.hotel-access strong {font-size:13px;font-weight:600;}
+.hotel-japanese-address {font-weight:600;}
+.bottom-nav a {font-size:11px;font-weight:600;}
+.bottom-nav a.active {font-weight:700;}
+/* 小螢幕：維持表格四欄排版，不讓文字擠出畫面 */
+@media(max-width:360px){
+ .entry-title,.spot-title {font-size:17px;}
+ .food-card h2 {font-size:21px;}
+ .tt-table-multistop th {font-size:10px;}
+ .tt-table-multistop td {font-size:12px;}
+ .tt-table-multistop td:last-child {font-size:10px;}
+ .tt-table-destination td:nth-child(3),
+ .tt-table-destination td:nth-child(4) {font-size:10px;}
+ .bottom-nav a {font-size:10px;}
+}
+/* ===== END TYPOGRAPHY B ===== */
+
 </style>
 </head>
 <body>
@@ -415,7 +779,18 @@ button:disabled{cursor:default}
    <p>走過的街道，也留下想吃的味道。</p>
    <small>先整理行程中安排的用餐區域，餐廳名稱可再逐一補上。</small>
   </div>
-  <div id="foodFilters" class="food-filters" role="group" aria-label="依旅遊日期篩選美食"></div>
+  <!-- 兩階段美食篩選：日期橫向選擇列＋餐飲類型分段選單 -->
+  <div class="food-filter-panel" aria-label="美食篩選條件">
+    <div class="food-filter-section">
+      <div class="food-filter-label"><span class="food-filter-index">01</span><strong>選擇日期</strong><small>DATE · 左右滑動 ↔</small></div>
+      <div id="foodFilters" class="food-filters food-date-filters" role="group" aria-label="依旅遊日期篩選美食"></div>
+    </div>
+    <div class="food-filter-section">
+      <div class="food-filter-label"><span class="food-filter-index">02</span><strong>餐飲類型</strong><small>CATEGORY</small></div>
+      <div id="foodTypeFilters" class="food-filters food-type-filters" role="group" aria-label="依正餐或甜點篩選美食"></div>
+    </div>
+  </div>
+  <div class="food-results-heading"><span>美食筆記</span><small id="foodResultCount" aria-live="polite"></small></div>
   <div id="foodList" class="food-list" aria-live="polite"></div>
   <p class="food-disclaimer">部分項目為預計用餐的商圈，並非已預訂的餐廳；實際用餐地點、營業時間與候位狀況請再確認。</p>
  </div>
@@ -614,10 +989,10 @@ function openTrainTimetable(number){
 const DAYS = [
  {date:'12/02',week:'三',title:'大阪初見',theme:'#19343B',subtitle:'難波・心齋橋・道頓堀',bar:'#bd7058',desc:'從高雄起飛，沿著大阪的街道與夜色展開旅程。',events:[
   {time:'07:05',period:'morning',type:'flight',tag:'航班',title:'長榮航空 BR 182',from:'高雄機場 T1',to:'關西機場 T1',sub:'07:05 起飛 → 10:55 抵達'},
-  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'入境、領取行李',map:'關西國際機場 第1航廈',mapUrl:''},
+  {time:'10:55',period:'morning',type:'move',tag:'機場',title:'抵達關西機場',sub:'入境、領取行李',map:'關西國際機場 第1航廈',mapUrl:'https://maps.app.goo.gl/Eb1xbDCxHD99gxrV9'},
   {time:'12:14',period:'morning',type:'move',tag:'JR',title:'關西機場特快HARUKA',from:'關西機場',to:'天王寺',sub:'搭乘時間約 34 分鐘 · 時刻表 1',more:['JR車站在關西機場二樓，拿到行李後確認要搭乘的車次，並用綠色售票機劃位。']},
   {time:'12:50',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'天王寺',to:'大國町',sub:'搭乘約 7 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL,mapUrl:''},
+  {time:'13:00',period:'afternoon',type:'stay',tag:'住宿',title:'飯店寄放行李',sub:HOTEL,more:['從大國町站5號出口步行約 3 分鐘後抵達。','正式入住時間為 16:00 起。'],map:HOTEL,mapUrl:'https://maps.app.goo.gl/w66ReTccs66JBsF2A'},
   {time:'13:30',period:'afternoon',type:'visit',tag:'神社',title:'難波八阪神社',sub:'從飯店步行約 12 分鐘後抵達 · ',more:['以巨大的獅子頭舞殿聞名，是大阪具特色的神社之一。'],map:'難波八阪神社',mapUrl:''},
   {time:'14:10',period:'afternoon',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'難波',to:'心齋橋',sub:'搭乘約 4 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'14:20',period:'afternoon',type:'visit',tag:'購物・美食',title:'心齋橋 → 道頓堀',sub:'心齋橋筋商店街、道頓堀晚餐與逛街',more:['心齋橋筋是大阪熱鬧的購物街。','道頓堀可欣賞河岸招牌、享用章魚燒與大阪燒等美食。'],map:'大阪 道頓堀',mapUrl:''},
@@ -648,13 +1023,13 @@ const DAYS = [
   {time:'07:30',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'大國町',to:'淀屋橋',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'08:05',period:'morning',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'淀屋橋',to:'祇園四條',sub:'搭乘約 43 分鐘 · 時刻表 6',more:['使用交通 IC 卡搭乘，月台購買Premium Car 車票。']},
   {time:'09:00',period:'morning',type:'move',tag:'京都市巴士',title:'京都市巴士 207／106／58',from:'四条京阪前',to:'清水道',sub:'搭乘約 15 分鐘',notice:'祇園四條站 7 號出口，前往巴士 A 站乘車。',more:['使用交通 IC 卡搭乘。','後門上車，前門刷卡下車。']},
-  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',map:'京都 清水坂',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',map:'清水寺 京都',notice:'門票500日圓',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',map:'産寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',map:'法觀寺 八坂之塔 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',map:'二寧坂 京都',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',map:'祇園 花見小路 京都',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',map:'新京極商店街 京都',mapUrl:''},
+  {time:'09:15',period:'morning',type:'visit',tag:'散策',title:'清水坂',sub:'清水寺參道，沿坡道散步',intro:'清水寺前的參道坡道，沿途可欣賞老街、店舖與京都東山的傳統街景。',map:'京都 清水坂',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'寺院',title:'清水寺',sub:'京都代表性古寺與清水舞台',intro:'京都東山代表性寺院，以清水舞台及眺望市區的景色聞名。',map:'清水寺 京都',notice:'門票500日圓',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'産寧坂（三年坂）',sub:'石板坡道與日式町屋',intro:'保留傳統街道氛圍的石板坡道，適合慢慢散步與拍照。',map:'産寧坂 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'地標',title:'法觀寺（八坂之塔）',sub:'京都東山代表景觀',intro:'東山街景中的五重塔地標，塔身與街道構成經典的京都風景。',map:'法觀寺 八坂之塔 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'街道',title:'二寧坂（二年坂）',sub:'傳統坡道與商店街',intro:'兩旁有日式町屋與特色小店的石板坡道，可以接續三年坂步行。',map:'二寧坂 京都',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'散策',title:'祇園・花見小路',sub:'欣賞京都傳統街景',intro:'以傳統町屋與石板街景為特色的京都街區，適合感受祇園氣氛。',map:'祇園 花見小路 京都',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'晚餐・購物',title:'新京極商店街',sub:'晚餐與街區散步',intro:'京都市中心的熱鬧商店街，可安排晚餐、購物及沿途散步。',map:'新京極商店街 京都',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'京阪特急',title:'京阪本線 特急',from:'三條（京都）',to:'淀屋橋',sub:'搭乘約 53 分鐘 · 時刻表 7',more:['以交通 IC 卡搭乘，月台購買 Premium Car 車票。']},
   {time:'21:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'淀屋橋',to:'大國町',sub:'搭乘約 8 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
@@ -666,10 +1041,10 @@ const DAYS = [
   {time:'09:20',period:'morning',type:'visit',tag:'寺院',title:'勝尾寺',sub:'達摩祈願與寺院參拜',map:'勝尾寺 大阪 箕面',notice:'門票500日圓',more:['可以欣賞寺內各式達摩與庭園景觀。'],mapUrl:''},
   {time:'11:30',period:'morning',type:'move',tag:'計程車',title:'計程車前往大日駐車場',from:'勝尾寺',to:'大日駐車場',sub:'預估車程約 10 分鐘'},
   {time:'11:40',period:'afternoon',type:'visit',tag:'瀑布・午餐',title:'箕面瀑布',sub:'名列日本瀑布百選，以壯麗瀑布與秋季楓紅聞名',map:'箕面大滝',more:['瀑布步道沿路有攤販賣吃的，當地特色小吃「紅葉天婦羅」'],mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',map:'箕面 瀧安寺',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'瀧安寺',sub:'相傳在此參拜能祈求財運亨通與開運招福',intro:'位於箕面瀑布步道沿線的寺院，可配合瀑布行程順道參拜。',map:'箕面 瀧安寺',mapUrl:''},
   {time:'14:00',period:'afternoon',type:'move',tag:'阪急普通',title:'阪急箕面線 普通',from:'箕面',to:'石橋阪大前',sub:'搭乘約 6 分鐘 · 時刻表 8',notice:'石橋阪大前站轉車',more:['使用交通 IC 卡搭乘。','抵達石橋阪大前後換乘阪急寶塚線。']},
   {time:'14:08',period:'afternoon',type:'move',tag:'阪急急行',title:'阪急寶塚線 急行',from:'石橋阪大前',to:'大阪梅田（阪急）',sub:'搭乘約 16 分鐘 · 時刻表 9'},
-  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',map:'大阪 梅田',mapUrl:''},
+  {time:'14:25',period:'afternoon',type:'visit',tag:'購物・晚餐',title:'梅田',sub:'大阪梅田商圈逛街與晚餐',intro:'大阪重要的購物商圈，百貨與地下街集中，適合安排晚餐與採買。',map:'大阪 梅田',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'梅田',to:'大國町',sub:'搭乘約 11 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -677,16 +1052,16 @@ const DAYS = [
   {time:'09:10',period:'morning',type:'stay',tag:'出發',title:'從飯店出發',sub:'前往大國町站',map:HOTEL,mapUrl:''},
   {time:'09:20',period:'morning',type:'move',tag:'地鐵',title:'大阪 Metro 四橋線',from:'大國町',to:'難波',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'09:47',period:'morning',type:'move',tag:'近鐵特急',title:'近鐵奈良線 特急 HINOTORI',from:'大阪難波',to:'近鐵奈良',sub:'預計搭乘約 35 分鐘 · 時刻表 10',more:['使用交通 IC 卡搭乘。','座位是6車 3B,3C,4B,4C']},
-  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',map:'興福寺 奈良',mapUrl:''},
-  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',map:'奈良公園',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',map:'春日大社 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',map:'奈良 東向商店街',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',map:'東大寺 奈良',mapUrl:''},
-  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',map:'東大寺 二月堂',mapUrl:''},
+  {time:'10:30',period:'morning',type:'visit',tag:'寺院',title:'興福寺',sub:'奈良歷史古寺',intro:'奈良市中心的古寺，沿著寺院建築與周邊散步，感受古都氛圍。',map:'興福寺 奈良',mapUrl:''},
+  {time:'依序',period:'morning',type:'visit',tag:'散策',title:'奈良公園',sub:'公園散步與鹿群',intro:'遼闊的公園綠地與鹿群是奈良的代表景色，散步時也請遵守與鹿互動的現場規範。',map:'奈良公園',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'神社',title:'春日大社',sub:'奈良代表性神社',intro:'位於奈良森林中的神社，參道及燈籠景觀是參拜重點。',map:'春日大社 奈良',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'商店街',title:'東向商店街',sub:'購物與休息',intro:'位於奈良市中心的商店街，適合中途休息、逛店與尋找伴手禮。',map:'奈良 東向商店街',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'東大寺',sub:'參觀大佛殿與寺院區域',intro:'以大佛殿聞名的奈良古寺，可欣賞大型佛教建築與寺院境內景觀。',map:'東大寺 奈良',mapUrl:''},
+  {time:'依序',period:'afternoon',type:'visit',tag:'寺院',title:'二月堂',sub:'東大寺境內觀景',intro:'東大寺境內的高處建築，可順著步道前往欣賞奈良景色。',map:'東大寺 二月堂',mapUrl:''},
   {time:'16:30',period:'afternoon',type:'move',tag:'近鐵快急',title:'近鐵奈良線 快速急行',from:'近鐵奈良',to:'近鐵日本橋',sub:'預計搭乘約 44 分鐘 · 時刻表 11',more:['使用交通 IC 卡搭乘。']},
   {time:'17:20',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 堺筋線',from:'日本橋（大阪）',to:'惠美須町',sub:'搭乘約 2 分鐘',more:['使用交通 IC 卡搭乘。']},
-  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',map:'大阪 新世界市場',mapUrl:''},
-  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',map:'通天閣 大阪',mapUrl:''},
+  {time:'17:30',period:'evening',type:'visit',tag:'晚餐',title:'新世界市場',sub:'新世界商圈晚餐',intro:'大阪新世界一帶的熱鬧街區，適合晚餐與散步。',map:'大阪 新世界市場',mapUrl:''},
+  {time:'依序',period:'evening',type:'visit',tag:'地標',title:'通天閣',sub:'新世界代表性景點',intro:'大阪新世界的代表地標，可從周邊街道欣賞高塔及復古商圈景觀。',map:'通天閣 大阪',mapUrl:''},
   {time:'20:00',period:'evening',type:'move',tag:'地鐵',title:'大阪 Metro 御堂筋線',from:'動物園前',to:'大國町',sub:'搭乘約 3 分鐘',more:['使用交通 IC 卡搭乘。']},
   {time:'晚上',period:'evening',type:'stay',tag:'住宿',title:'返回飯店休息',sub:HOTEL,map:HOTEL,mapUrl:''}
  ]},
@@ -701,7 +1076,7 @@ const DAYS = [
 const periodNames={morning:['朝','MORNING'],afternoon:['晝','AFTERNOON'],evening:['夜','EVENING']};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /*
-  Google Maps 導航設定（景點、飯店、機場及美食共用）：
+  Google Maps 導航設定（景點、飯店、機場、美食及購物共用）：
   1. 最推薦：在 DAYS.events / FOOD_SPOTS 將 mapUrl:'' 改成 Google Maps 分享連結。
      例如 mapUrl:'https://maps.app.goo.gl/你複製的真正連結'
   2. 也可以直接把原本 map:'地點名稱' 改成 map:'https://maps.app.goo.gl/...'
@@ -717,39 +1092,62 @@ const placeMapHref = place => {
  const direct=String(place.mapUrl??'').trim();
  return direct ? mapUrl(direct) : (place.map ? mapUrl(place.map) : '');
 };
-const state={day:1,filter:'all',foodDay:'all'};
+const state={day:1,filter:'all',foodDay:'all',foodType:'all'};
 /* ========================================================================
    編輯美食：只需要修改 FOOD_SPOTS。
-   day: 第幾天（1～6）；meal: 午餐、晚餐、抹茶甜點等；
-   title: 店名或用餐區域；note: 行程備註；mapUrl: 直接貼 Google Maps 分享連結。
+   day: 第幾天（1～6）；category: '正餐' 或 '甜點'（用於篩選）；meal: 午餐、晚餐、抹茶甜點等；
+   title: 店名或用餐區域；note: 店家簡介／料理特色；remark: 獨立備註（空字串不顯示）；
+   hours: 營業時間（未填不顯示）；mapUrl: 直接貼 Google Maps 分享連結。
    原本 map: 地點名稱維持為備用搜尋方式；填入 mapUrl 後優先使用直接連結。
    尚未選定店家時，保持商圈名稱，不會誤認為已訂餐廳。
    ======================================================================== */
 const FOOD_SPOTS = [
- {day:1,meal:'晚餐',time:'晚間',title:'道頓堀',note:'道頓堀商圈晚餐與逛街，餐廳尚未指定。',map:'大阪 道頓堀',mapUrl:''},
- {day:2,meal:'抹茶・甜點',time:'10:00',title:'中村藤吉本店',note:'抵達宇治後先取候位號碼牌，再安排其他景點。',map:'中村藤吉本店 宇治',mapUrl:''},
- {day:2,meal:'午餐',time:'午間',title:'平等院表參道',note:'沿著參道散步並安排午餐，餐廳尚未指定。',map:'平等院表參道 宇治',mapUrl:''},
- {day:2,meal:'晚餐',time:'17:50',title:'日本橋筋商店街',note:'在日本橋商圈用餐與購物，餐廳尚未指定。',map:'大阪 日本橋筋商店街',mapUrl:''},
- {day:3,meal:'晚餐',time:'晚間',title:'新京極商店街',note:'京都行程結束前安排晚餐，餐廳尚未指定。',map:'新京極商店街 京都',mapUrl:''},
- {day:4,meal:'午餐',time:'11:40',title:'箕面瀑布周邊',note:'參觀箕面瀑布並安排午餐，餐廳尚未指定。',map:'箕面大滝',mapUrl:''},
- {day:4,meal:'晚餐',time:'晚間',title:'大阪梅田',note:'在梅田商圈安排晚餐與逛街，餐廳尚未指定。',map:'大阪 梅田',mapUrl:''},
- {day:5,meal:'晚餐',time:'17:30',title:'新世界市場',note:'新世界商圈晚餐，餐廳尚未指定。',map:'大阪 新世界市場',mapUrl:''}
+ {category:'正餐',day:1,meal:'晚餐',time:'晚間',title:'一蘭 なんば御堂筋店',note:'豚骨拉麵',remark:'',hours:'待確認',map:'大阪 道頓堀',mapUrl:'https://maps.app.goo.gl/zJJMyhNYmzUJ2dgA8'},
+ {category:'甜點',day:2,meal:'抹茶・甜點',time:'10:00',title:'中村藤吉本店',note:'抹茶・甜點',remark:'抵達宇治後先取候位號碼牌，再安排其他景點。',hours:'待確認',map:'中村藤吉本店 宇治',mapUrl:''},
+ {category:'正餐',day:2,meal:'午餐',time:'午間',title:'平等院表參道',note:'沿著參道散步並安排午餐，餐廳尚未指定。',remark:'',map:'平等院表參道 宇治',mapUrl:''},
+ {category:'正餐',day:2,meal:'晚餐',time:'17:50',title:'Toritoriko',note:'日式烤雞串餐廳，在飯店附近',remark:'',hours:'待確認',mapUrl:'https://maps.app.goo.gl/7T6JCMdR4w8MSDRYA'},
+ {category:'正餐',day:2,meal:'晚餐',time:'17:50',title:'九州の地酒と肴 呑窓',note:'居酒屋，在飯店附近',remark:'',hours:'待確認',mapUrl:'https://maps.app.goo.gl/7T6JCMdR4w8MSDRYA'},
+ {category:'正餐',day:3,meal:'晚餐',time:'晚間',title:'新京極商店街',note:'京都行程結束前安排晚餐，餐廳尚未指定。',remark:'',map:'新京極商店街 京都',mapUrl:''},
+ {category:'正餐',day:4,meal:'午餐',time:'11:40',title:'箕面瀑布周邊',note:'參觀箕面瀑布並安排午餐，餐廳尚未指定。',remark:'',map:'箕面大滝',mapUrl:''},
+ {category:'正餐',day:4,meal:'晚餐',time:'晚間',title:'大阪梅田',note:'在梅田商圈安排晚餐與逛街，餐廳尚未指定。',remark:'',map:'大阪 梅田',mapUrl:''},
+ {category:'正餐',day:5,meal:'午餐',time:'午間',title:'うどん専門店 釜粋',note:'烏龍麵',remark:'',hours:'待確認',mapUrl:'https://maps.app.goo.gl/FsRxojcLhMp5u9tp9'}
 ];
 function renderFood(){
  const current=state.foodDay;
- const choices=[['all','全部'],...DAYS.map((d,i)=>[String(i+1),d.date])];
- document.getElementById('foodFilters').innerHTML=choices.map(([value,label])=>`<button type="button" data-food-day="${value}" class="${current===value?'active':''}" aria-pressed="${current===value}">${esc(label)}</button>`).join('');
- const filtered=FOOD_SPOTS.filter(f=>current==='all'||String(f.day)===current);
+ const dateChoices=[{value:'all',date:'全部',weekday:'ALL'},...DAYS.map((d,i)=>({value:String(i+1),date:d.date,weekday:'星期'+d.week}))];
+ const dateContainer=document.getElementById('foodFilters');
+ const previousScroll=dateContainer.scrollLeft;
+ dateContainer.innerHTML=dateChoices.map(d=>`<button type="button" data-food-day="${d.value}" class="${current===d.value?'active':''}" aria-pressed="${current===d.value}" aria-label="${d.value==='all'?'顯示全部日期':`顯示 ${esc(d.date)} 星期${esc(d.weekday.slice(2))}的美食`}"><span class="food-date-main">${esc(d.date)}</span><span class="food-date-sub">${esc(d.weekday)}</span></button>`).join('');
+ dateContainer.scrollLeft=previousScroll;
+ const typeChoices=[['all','全部美食'],['正餐','正餐'],['甜點','甜點']];
+ document.getElementById('foodTypeFilters').innerHTML=typeChoices.map(([value,label])=>`<button type="button" data-food-type="${value}" class="${state.foodType===value?'active':''}" aria-pressed="${state.foodType===value}">${esc(label)}</button>`).join('');
+ const filtered=FOOD_SPOTS.filter(f=>(current==='all'||String(f.day)===current) && (state.foodType==='all'||f.category===state.foodType));
+ document.getElementById('foodResultCount').textContent=`共 ${filtered.length} 筆`;
  document.getElementById('foodList').innerHTML=filtered.length?filtered.map(f=>{
    const d=DAYS[f.day-1];
    const foodMapHref=placeMapHref(f);
+   const hours=String(f.hours||'').trim();
+   const remark=String(f.remark||'').trim();
+   const isPending=hours==='待確認';
    return `<article class="food-card" style="--food-color:${d.theme}">
-     <div class="food-card-meta"><b>DAY ${String(f.day).padStart(2,'0')} / ${esc(d.date)}（${esc(d.week)}）</b><span class="food-card-meal">${esc(f.meal)} · ${esc(f.time)}</span></div>
-     <h2>${esc(f.title)}</h2><p>${esc(f.note)}</p>
-     <div class="food-card-actions"><a href="#day${f.day}">查看當日行程 ↗</a>${foodMapHref?`<a href="${esc(foodMapHref)}" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>`:''}</div>
+     <div class="food-card-meta">
+       <b>DAY ${String(f.day).padStart(2,'0')} / ${esc(d.date)}（${esc(d.week)}）</b>
+       <span class="food-card-category${f.category==='甜點'?' is-dessert':''}">${esc(f.category||'餐飲')}</span>
+     </div>
+     <h2>${esc(f.title)}</h2>
+     <p>${esc(f.note)}</p>
+     ${hours?`<div class="food-card-details">
+       <div class="food-card-fact"><span class="food-card-fact-label">營業時間</span><span class="food-card-fact-value${isPending?' is-pending':''}">${esc(hours)}</span></div>
+     </div>`:''}
+     ${remark?`<aside class="food-card-remark" aria-label="店家備註"><span class="food-card-remark-label">備註 / NOTE</span><span class="food-card-remark-text">${esc(remark)}</span></aside>`:''}
+     <div class="food-card-actions">
+       ${foodMapHref?`<a class="food-map-button" href="${esc(foodMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看 ${esc(f.title)}">地圖導航 ↗</a>`:''}
+       <a class="food-itinerary-button" href="#day${f.day}">當日行程 ↗</a>
+     </div>
    </article>`;
- }).join(''):'<div class="food-empty">這一天尚未登記用餐地點，可以稍後補上。</div>';
+ }).join(''):'<div class="food-empty">目前沒有符合篩選條件的美食，請切換日期或餐飲類型。</div>';
 }
+
 
 function renderHome(){
  document.getElementById('dayIndex').innerHTML=DAYS.map((d,i)=>`<button type="button" data-open-day="${i+1}" style="--bar:${d.bar}" class="${d.events.length?'':'empty'}" aria-label="查看第 ${i+1} 天 ${esc(d.date)} 行程"><span class="index-top"><b>DAY ${String(i+1).padStart(2,'0')}</b><span>${esc(d.date)}（${esc(d.week)}）</span></span><strong>${esc(d.title)}</strong><small>${esc(d.subtitle)} ${d.events.length?' ↗':' · 待補'}</small></button>`).join('');
@@ -760,21 +1158,50 @@ function renderDayTabs(){
 function entryHtml(e){
  const isMove=['move','flight'].includes(e.type);
  const cat=isMove?'交通':'景點';
- 
-const details = e.more?.length
+ const chipColor=isMove?'#567783':(e.type==='stay'?'#868875':'#b16c53');
+ const timeText=`<div class="entry-time ${e.time.includes(':')?'':'flexible'}">${esc(e.time)}<span>${e.type==='flight'?'FLIGHT':e.type==='move'?'MOVE':e.type==='stay'?'STAY':'VISIT'}</span></div>`;
+ const scenicMapHref=placeMapHref(e);
+
+ // 景點專用：整張小卡片可點擊展開，介紹與地圖藏在卡片內。
+ // 如果行程資料有 intro，優先作為景點介紹；原本的 more 仍完整保留。
+ if(e.type==='visit'){
+  const paragraphs=[...(e.intro?[e.intro]:[]),...(Array.isArray(e.more)?e.more:[])];
+  const spotIntro=paragraphs.length
+   ? paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')
+   : `<p>${esc(e.sub||'景點介紹待補充。')}</p>`;
+  const notice=e.notice?`<div class="spot-notice">${esc(e.notice)}</div>`:'';
+  const nav=scenicMapHref
+   ? `<a class="spot-map" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Google 地圖導航 ↗</a>`
+   : '';
+  return `<article class="entry entry-visit" data-type="景點">${timeText}
+   <details class="spot-card">
+    <summary aria-label="展開或收合 ${esc(e.title)} 的景點介紹">
+     <span class="spot-topline"><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||'景點')}</span><span class="spot-toggle" aria-hidden="true"></span></span>
+     <h3 class="spot-title">${esc(e.title)}</h3>
+     ${e.sub?`<p class="spot-excerpt">${esc(e.sub)}</p>`:''}
+     <span class="spot-hint">景點介紹 <small>點擊展開／收合</small></span>
+    </summary>
+    <div class="spot-body">
+     <span class="spot-overline">ABOUT THIS PLACE / 景點介紹</span>
+     <div class="spot-description">${spotIntro}</div>
+     ${notice}
+     ${nav}
+    </div>
+   </details>
+  </article>`;
+ }
+
+ // 交通、航班及住宿維持原本的樣式與展開功能。
+ const details=e.more?.length
   ? `<details class="more-details">
-       <summary>查看${isMove ? '購票／轉乘' : e.type==='stay' ? '住宿' : '景點'}補充資訊</summary>
-       <div class="more-inner">
-         ${e.more.map(p => `<p>${esc(p)}</p>`).join('')}
-       </div>
+       <summary>查看${isMove?'購票／轉乘':e.type==='stay'?'住宿':'景點'}補充資訊</summary>
+       <div class="more-inner">${e.more.map(p=>`<p>${esc(p)}</p>`).join('')}</div>
      </details>`
   : '';
  const route=e.from&&e.to?`<div class="route"><b>${esc(e.from)}</b><span class="arrow" aria-hidden="true">→</span><b>${esc(e.to)}</b></div>`:'';
- const subtitle=e.sub?esc(e.sub).replace(/時刻表\s*([0-9]{1,2})/g,(_text,n)=>{const id=e.timetableId||n;const hash='#timetable'+id;return `<a class="timetable-link" href="${hash}" aria-label="前往交通頁查看時刻表 ${esc(n)}：${esc(e.title)}">時刻表 ↗</a>`;}):'';
- const scenicMapHref=placeMapHref(e);
- const q=scenicMapHref?`<a class="map-link" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon"><use href="#i-pin"/></svg> 地圖導航 ↗</a>`:'';
- const chipColor=isMove?'#567783':(e.type==='stay'?'#868875':'#b16c53');
- return `<article class="entry" data-type="${cat}"><div class="entry-time ${e.time.includes(':')?'':'flexible'}">${esc(e.time)}<span>${e.type==='flight'?'FLIGHT':e.type==='move'?'MOVE':e.type==='stay'?'STAY':'VISIT'}</span></div><div><div class="entry-title-row"><h3 class="entry-title">${esc(e.title)}</h3><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||cat)}</span></div>${route}${e.sub?`<p class="entry-sub">${subtitle}</p>`:''}${e.notice?`<div class="quick-note">${esc(e.notice)}</div>`:''}${q?`<div class="entry-actions">${q}</div>`:''}${details}</div></article>`;
+ const subtitle=e.sub?esc(e.sub).replace(/時刻表\s*([0-9]{1,2})/g,(_text,n)=>{const id=e.timetableId||n;return `<a class="timetable-link" href="#timetable${id}" aria-label="前往交通頁查看時刻表 ${esc(n)}：${esc(e.title)}">時刻表 ↗</a>`;}):'';
+ const q=scenicMapHref?`<a class="map-link" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon"><use href="#i-pin"/></svg> Google 地圖導航 ↗</a>`:'';
+ return `<article class="entry" data-type="${cat}">${timeText}<div><div class="entry-title-row"><h3 class="entry-title">${esc(e.title)}</h3><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||cat)}</span></div>${route}${e.sub?`<p class="entry-sub">${subtitle}</p>`:''}${e.notice?`<div class="quick-note">${esc(e.notice)}</div>`:''}${q?`<div class="entry-actions">${q}</div>`:''}${details}</div></article>`;
 }
 function renderDay(){
  const d=DAYS[state.day-1];
@@ -819,6 +1246,8 @@ document.addEventListener('click',event=>{
  const dayButton=event.target.closest('[data-open-day]');if(dayButton){goDay(Number(dayButton.dataset.openDay));return;}
  const filterButton=event.target.closest('[data-filter]');if(filterButton){state.filter=filterButton.dataset.filter;renderDay();return;}
  const foodButton=event.target.closest('[data-food-day]');if(foodButton){state.foodDay=foodButton.dataset.foodDay;renderFood();return;}
+ const foodTypeButton=event.target.closest('[data-food-type]');if(foodTypeButton){state.foodType=foodTypeButton.dataset.foodType;renderFood();return;}
+
 });
 const address='〒556-0014 大阪府大阪市浪速区大国2丁目1-7 ESLEAD HOTEL Namba Daikokucho Annex';
 document.getElementById('copyAddress').addEventListener('click',async function(){

@@ -714,6 +714,299 @@ body {
 
 /* ===== END TYPOGRAPHY B ===== */
 
+
+/* ==========================================================
+   FOOD CARDS | Compact editorial layout (2026-11-26)
+   Clear hierarchy, tighter rhythm, easy-to-scan hours,
+   expandable remarks to avoid oversized mobile cards.
+   This section intentionally overrides earlier food-card rules.
+   ========================================================== */
+#page-food .food-list {
+  display: grid;
+  gap: 11px;
+}
+#page-food .food-card {
+  padding: 13px 14px 12px;
+  border: 1px solid #dcd8cd;
+  border-top: 3px solid var(--food-color, var(--sea));
+  background: var(--white);
+  box-shadow: 0 4px 15px rgba(28,50,55,.035);
+}
+#page-food .food-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #607075;
+}
+#page-food .food-card-meta b {
+  font-weight: 600;
+  letter-spacing: .025em;
+}
+#page-food .food-card-category {
+  padding: 2px 8px;
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+#page-food .food-card h2 {
+  margin: 8px 0 4px;
+  font: 700 clamp(19px, 5vw, 22px)/1.34 var(--serif);
+  letter-spacing: .005em;
+  overflow-wrap: anywhere;
+}
+#page-food .food-card > p {
+  margin: 0;
+  font: 500 13px/1.55 var(--sans);
+  color: #52646a;
+}
+/* Business hours: one compact line rather than a large box */
+#page-food .food-card-details {
+  display: block;
+  margin: 10px 0 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+#page-food .food-card-fact {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  min-width: 0;
+  padding: 8px 11px;
+  background: #f2f3ee;
+  border-left: 2px solid #a2b4a5;
+}
+#page-food .food-card-fact-label {
+  flex: 0 0 57px;
+  font: 700 11px/1.6 var(--sans);
+  color: #687d75;
+  letter-spacing: .015em;
+}
+#page-food .food-card-fact-value {
+  flex: 1 1 160px;
+  min-width: 0;
+  margin: 0;
+  font: 700 14px/1.55 var(--sans);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+#page-food .food-card-fact-value.is-pending {
+  font-weight: 500;
+  color: #8c8173;
+}
+/* Notes stay available without expanding every restaurant card. */
+#page-food details.food-card-remark {
+  margin: 9px 0 0;
+  padding: 0;
+  border-left: 2px solid #b79b7d;
+  background: #f7f3eb;
+}
+#page-food .food-card-remark summary {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 11px;
+  cursor: pointer;
+  list-style: none;
+  color: #86674e;
+  font: 700 12px/1.6 var(--sans);
+}
+#page-food .food-card-remark summary::-webkit-details-marker { display:none; }
+#page-food .food-card-remark summary::after {
+  content: '＋';
+  font: 700 16px/1 var(--sans);
+  color: #a47758;
+}
+#page-food .food-card-remark[open] summary::after { content:'−'; }
+#page-food .food-card-remark-text {
+  display: block;
+  padding: 0 11px 10px;
+  font: 500 13px/1.75 var(--sans);
+  color: #4e5b57;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+#page-food .food-card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+#page-food .food-card-actions a {
+  min-height: 44px;
+  padding: 7px 5px;
+  font: 700 13px/1.4 var(--sans);
+}
+@media(max-width:360px) {
+  #page-food .food-card { padding: 11px 11px 10px; }
+  #page-food .food-card h2 { font-size: 19px; }
+  #page-food .food-card-fact-label { flex-basis: 55px; }
+  #page-food .food-card-actions a { font-size: 12px; }
+}
+
+
+/* 美食日期篩選固定五天：12/02～12/06；不需要橫向滑動 */
+#page-food .food-date-filters {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  overflow: visible;
+  padding-bottom: 0;
+  scroll-snap-type: none;
+}
+#page-food .food-date-filters button {
+  min-width: 0;
+  width: 100%;
+  min-height: 62px;
+  padding: 7px 1px;
+}
+#page-food .food-date-filters button .food-date-main { font-size: 14px; }
+#page-food .food-date-filters button .food-date-sub { font-size: 10px; }
+@media(max-width:360px) {
+  #page-food .food-date-filters { gap: 4px; }
+  #page-food .food-date-filters button { min-width: 0; padding: 6px 0; }
+  #page-food .food-date-filters button .food-date-main { font-size: 12px; }
+  #page-food .food-date-filters button .food-date-sub { font-size: 9px; }
+}
+
+
+/* =========================================================
+   景點介紹收合列：比照「美食備註」的暖米色簡約設計
+   卡片標題固定顯示，只有「景點介紹」列會展開／收合。
+   ========================================================= */
+#page-itinerary .spot-card-head{
+  padding:12px 13px 10px;
+}
+#page-itinerary .spot-card-head .spot-topline{
+  margin-bottom:5px;
+}
+#page-itinerary .spot-card-head .spot-excerpt{
+  margin-top:3px;
+}
+#page-itinerary details.spot-intro-details{
+  margin:0 12px 12px;
+  border-left:2px solid #b79b7d;
+  background:#f7f3eb;
+}
+#page-itinerary .spot-intro-details > summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:9px;
+  min-height:38px;
+  padding:8px 11px;
+  list-style:none;
+  cursor:pointer;
+  font:700 12px/1.6 var(--sans);
+  color:#86674e;
+}
+#page-itinerary .spot-intro-details > summary::-webkit-details-marker{
+  display:none;
+}
+#page-itinerary .spot-intro-details > summary::after{
+  content:'＋';
+  font:700 16px/1 var(--sans);
+  color:#a47758;
+  flex-shrink:0;
+}
+#page-itinerary .spot-intro-details[open] > summary::after{
+  content:'−';
+}
+#page-itinerary .spot-intro-content{
+  padding:0 11px 11px;
+}
+#page-itinerary .spot-intro-content .spot-description p{
+  font:500 13px/1.75 var(--sans);
+  color:#4e5b57;
+  margin:0 0 7px;
+  overflow-wrap:anywhere;
+}
+/* 景點介紹中的地圖按鈕：隨當日主題色切換 */
+#page-itinerary .spot-intro-content .spot-map{
+  margin-top:11px;
+  min-height:44px;
+  background:var(--day-theme, #19343B);
+  border-color:var(--day-theme, #19343B);
+  color:#fffaf4;
+}
+#page-itinerary .spot-intro-content .spot-map:hover,
+#page-itinerary .spot-intro-content .spot-map:active{
+  filter:brightness(1.12);
+}
+@media(max-width:360px){
+  #page-itinerary .spot-card-head{padding:11px 10px 9px;}
+  #page-itinerary details.spot-intro-details{margin:0 9px 10px;}
+  #page-itinerary .spot-intro-details > summary{padding:8px 10px;}
+  #page-itinerary .spot-intro-content{padding:0 10px 10px;}
+}
+
+
+/* 景點名稱／類別標籤：比照一般行程 .entry-title-row 的垂直置中對齊 */
+#page-itinerary .spot-card-head .spot-topline {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-start;
+  gap:4px 8px;
+  margin-bottom:3px;
+}
+#page-itinerary .spot-card-head .spot-topline .spot-title {
+  margin:0;
+  min-width:0;
+}
+#page-itinerary .spot-card-head .spot-topline .entry-chip {
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 auto;
+}
+
+/* =========================================================
+   美食頁每日主題色：與 DAYS[].theme 同步（12/02～12/06）
+   僅更換色彩，不更動美食卡片排版與原有篩選功能。
+   ========================================================= */
+#page-food {
+  --food-day-theme: #19343B;
+}
+/* 日期選取與行程頁一致 */
+#page-food .food-date-filters button.active {
+  background: var(--food-day-theme);
+  border-color: var(--food-day-theme);
+  color: #FFFAF4;
+}
+#page-food .food-date-filters button.active .food-date-sub {
+  color: #FFFAF4;
+}
+/* 餐飲類型選取底線、卡片、營業時間與地圖按鈕使用同日色 */
+#page-food .food-type-filters button.active::after {
+  background: var(--food-day-theme);
+}
+#page-food .food-card {
+  border-top-color: var(--food-day-theme);
+}
+#page-food .food-card-fact {
+  border-left-color: var(--food-day-theme);
+}
+#page-food .food-card-actions a.food-map-button {
+  background: var(--food-day-theme);
+  border-color: var(--food-day-theme);
+  color: #FFFAF4;
+}
+/* 小標與介紹區沿用每日色，但保留原來的暖白背景 */
+#page-food .food-page-heading .overline,
+#page-food .food-filter-index {
+  color: var(--food-day-theme);
+}
+#page-food .food-intro {
+  border-left-color: var(--food-day-theme);
+}
+
 </style>
 </head>
 <body>
@@ -789,12 +1082,12 @@ body {
   <!-- 兩階段美食篩選：日期橫向選擇列＋餐飲類型分段選單 -->
   <div class="food-filter-panel" aria-label="美食篩選條件">
     <div class="food-filter-section">
-      <div class="food-filter-label"><span class="food-filter-index">01</span><strong>選擇日期</strong><small>DATE · 左右滑動 ↔</small></div>
+      <div class="food-filter-label"><span class="food-filter-index">01</span><strong>選擇日期</strong><small>DATE</small></div>
       <div id="foodFilters" class="food-filters food-date-filters" role="group" aria-label="依旅遊日期篩選美食"></div>
     </div>
     <div class="food-filter-section">
       <div class="food-filter-label"><span class="food-filter-index">02</span><strong>餐飲類型</strong><small>CATEGORY</small></div>
-      <div id="foodTypeFilters" class="food-filters food-type-filters" role="group" aria-label="依正餐或甜點篩選美食"></div>
+      <div id="foodTypeFilters" class="food-filters food-type-filters" role="group" aria-label="依正餐或點心篩選美食"></div>
     </div>
   </div>
   <div class="food-results-heading"><span>美食筆記</span><small id="foodResultCount" aria-live="polite"></small></div>
@@ -1102,15 +1395,16 @@ const placeMapHref = place => {
  const direct=String(place.mapUrl??'').trim();
  return direct ? mapUrl(direct) : (place.map ? mapUrl(place.map) : '');
 };
-const state={day:1,filter:'all',foodDay:'all',foodType:'all'};
+const state={day:1,filter:'all',foodDay:'1',foodType:'all'};
 /* ========================================================================
    編輯美食：只需要修改 FOOD_SPOTS。
-   day: 第幾天（1～6）；category: '正餐' 或 '甜點'（用於篩選）；meal: 午餐、晚餐、抹茶甜點等；
+   day: 第幾天（1～6）；category: '正餐' 或 '點心'（用於篩選）；meal: 午餐、晚餐、抹茶甜點等；
    title: 店名或用餐區域；note: 店家簡介／料理特色；remark: 獨立備註（空字串不顯示）；
    hours: 營業時間（未填不顯示）；mapUrl: 直接貼 Google Maps 分享連結。
    原本 map: 地點名稱維持為備用搜尋方式；填入 mapUrl 後優先使用直接連結。
    尚未選定店家時，保持商圈名稱，不會誤認為已訂餐廳。
    {category:'正餐',day:,title:'',note:'',remark:'',hours:'午：11:00~14:30　晚：17:30~19:00',mapUrl:''},
+   {category:'點心',day:,title:'',note:'',remark:'',hours:'11:00~14:30',mapUrl:''},
    ======================================================================== */
 const FOOD_SPOTS = [
  {category:'正餐',day:1,title:'一蘭 なんば御堂筋店',note:'豚骨拉麵・道頓堀',remark:'',hours:'09:00~22:00',mapUrl:'https://maps.app.goo.gl/zJJMyhNYmzUJ2dgA8'},
@@ -1123,14 +1417,32 @@ const FOOD_SPOTS = [
  {category:'正餐',day:1,title:'Makino 難波千日前店',note:'天婦羅・難波',hours:'11:00~21:30',mapUrl:'https://maps.app.goo.gl/WpVcuqKNc6agdDmK8'},
  {category:'正餐',day:1,title:'Shabuwara 壽喜燒 涮涮鍋 花月店',note:'壽喜燒・難波',hours:'11:00~22:00',mapUrl:'https://maps.app.goo.gl/eYiuvwysDtG1rVK97'},
  {category:'正餐',day:1,title:'Okonomiyaki NAOYA Namba',note:'大阪燒・道頓堀',hours:'17:00~01:00',mapUrl:'https://maps.app.goo.gl/xLfG4bJVySwpuUib7'},
- {category:'正餐',day:1,title:'Okonomiyaki Sakaba O',note:'大阪燒、日式炒麵・道頓堀',remark:'',hours:'午：11:30~15:00　晚：17:00~23:00',mapUrl:'https://maps.app.goo.gl/ShWih1GJKwWS9pJN8'},
- {category:'甜點',day:2,title:'中村藤吉本店',note:'抹茶甜點',remark:'抵達宇治後先取候位號碼牌，再去其他景點。',hours:'10:00~17:30',mapUrl:'https://maps.app.goo.gl/yHuZVYJ6TnA6Efew5'},
- {category:'甜點',day:2,title:'伊藤久右衛門 JR宇治站前店・茶房',note:'抹茶甜點',remark:'有賢有田聽說是抹茶天堂喔',hours:'10:00~18:00',mapUrl:'https://maps.app.goo.gl/rnPgjZQXsahLy56E7'},
+ {category:'正餐',day:1,title:'Okonomiyaki Sakaba O',note:'大阪燒、日式炒麵・道頓堀',hours:'午：11:30~15:00　晚：17:00~23:00',mapUrl:'https://maps.app.goo.gl/ShWih1GJKwWS9pJN8'},
+ {category:'正餐',day:1,title:'とんかつ なぎかつ【NAGIKATSU】',note:'炸豬排',hours:'午：11:00~15:00　晚：17:00~22:00',mapUrl:'https://maps.app.goo.gl/PNvG8fvJzRy8rj3A9'},
+ {category:'正餐',day:1,title:'一味禪',note:'天婦羅丼・難波',remark:'',hours:'11:00~16:30',mapUrl:'https://maps.app.goo.gl/J54FBcNjE27eDdEF9'},
+ {category:'正餐',day:1,title:'野乃鳥 なんば堂',note:'日式烤雞串・難波',remark:'',hours:'午：11:30~14:30　晚：16:30~22:30',mapUrl:'https://maps.app.goo.gl/jbhkYUWZ5YeSyTMg7'},
+ {category:'正餐',day:1,title:'天丼てんや 難波千日前店',note:'天婦羅丼・難波',remark:'連鎖的',hours:'11:00~22:00',mapUrl:'https://maps.app.goo.gl/Cu9283FqRZU9F4p79'},
+ {category:'正餐',day:1,title:'とんかつニューベイブ難波店',note:'炸豬排・難波',remark:'',hours:'11:00~19:30',mapUrl:'https://maps.app.goo.gl/XtkFu35TykTWbucf9'},
+ {category:'正餐',day:1,title:'福太郎 本店',note:'大阪燒・難波',remark:'低卡推薦',hours:'17:00~22:45',mapUrl:'https://maps.app.goo.gl/ASGJPgceaBmXB4CE9'},
+ {category:'點心',day:1,title:'Le Croissant Shinsaibashi',note:'可頌・心齋橋',remark:'',hours:'11:30~20:30',mapUrl:'https://maps.app.goo.gl/AUrmyURxTkAspA948'},
+ {category:'點心',day:1,title:'弁才天',note:'水果大福、黃金砂利餅・難波',remark:'',hours:'10:00~22:30',mapUrl:'https://maps.app.goo.gl/Nt6gnYEsSSJVxA4b6'},
+ {category:'點心',day:1,title:'かに道楽 道頓堀本店',note:'螃蟹包子、炭火烤的蟹肉',remark:'',hours:'11:00~22:00',mapUrl:'https://maps.app.goo.gl/NS3xFy6LT7aktN7f9'},
+ {category:'點心',day:1,title:'カヌレ堂 CANELÉ du JAPON 長堀橋店',note:'可麗露',remark:'',hours:'10:00~19:00',mapUrl:'https://maps.app.goo.gl/tsVXYqmXKtW1ZDck8'},
+ {category:'點心',day:1,title:'MooKEN',note:'泡芙',remark:'很好吃泡芙店 早上拿號碼牌下午現場排大概十五分鐘',hours:'11:00~15:00',mapUrl:'https://maps.app.goo.gl/71jm2bA453D1vTQc9'},
+ {category:'點心',day:1,title:'たこ焼道楽わなか 千日前本店',note:'章魚燒・難波',remark:'',hours:'10:30~21:00',mapUrl:'https://maps.app.goo.gl/zmsSm2xm8gsSU6us9'},
+ {category:'正餐',day:2,title:'宇治蕎麦 つばめ屋',note:'蕎麥麵店',remark:'抹茶蕎麥麵',hours:'11:15~17:00',mapUrl:'https://maps.app.goo.gl/tw5zUKmKRFPtZv6x9'},
+ {category:'正餐',day:2,title:'はなれ 中村製麺',note:'烏龍麵',remark:'鴨肉麵的湯頭非常鮮甜好喝，搭配麵條和鴨肉相當絕配！鴨肉是用京都的鴨肉，吃起來完全不柴，軟硬度非常剛好，瘦肉帶點皮，一口下去，鴨肉的香味立刻散發，再搭配蔥的鮮甜，整碗麵配合的天衣無縫！',hours:'10:30~15:00',mapUrl:'https://maps.app.goo.gl/rg7dAWYAJdKnuc988'},
+ {category:'正餐',day:2,title:'京料理 宇治川',note:'京都日式料理',remark:'鰻魚意外的好吃，抹茶麵沒有抹茶味，抹茶鹽有抹茶香👍還有宇治川景可以看 不用等',hours:'午：11:00~17:00',mapUrl:'https://maps.app.goo.gl/GpPKM7gkmjba3WJW6'},
+ {category:'點心',day:2,title:'中村藤吉本店',note:'抹茶甜點',remark:'抵達宇治後先取候位號碼牌，再去其他景點。',hours:'10:00~17:30',mapUrl:'https://maps.app.goo.gl/yHuZVYJ6TnA6Efew5'},
+ {category:'點心',day:2,title:'伊藤久右衛門 JR宇治站前店・茶房',note:'抹茶甜點',remark:'有賢有田聽說是抹茶天堂喔',hours:'10:00~18:00',mapUrl:'https://maps.app.goo.gl/rnPgjZQXsahLy56E7'},
+ {category:'點心',day:2,title:'伊藤久右衛門 平等院店',note:'抹茶',remark:'',hours:'09:30~17:30',mapUrl:'https://maps.app.goo.gl/GQifPZdbVjzHuMGT6'},
  {category:'正餐',day:2,title:'Toritoriko',note:'日式烤雞串餐廳',remark:'在飯店附近',hours:'17:00~00:00',mapUrl:'https://maps.app.goo.gl/7T6JCMdR4w8MSDRYA'},
  {category:'正餐',day:2,title:'九州の地酒と肴 呑窓',note:'居酒屋',remark:'在飯店附近',hours:'11:00~23:00',mapUrl:'https://maps.app.goo.gl/7T6JCMdR4w8MSDRYA'}, 
+ {category:'正餐',day:2,title:'ありんこ屋',note:'居酒屋',remark:'在飯店附近',hours:'18:30~23:00',mapUrl:'https://maps.app.goo.gl/257GxLNJdmZ5z15x7'},
  {category:'正餐',day:3,title:'麵屋優光 清水店',note:'拉麵・清水',remark:'',hours:'午：11:30~14:30　晚：17:30~21:30',mapUrl:'https://maps.app.goo.gl/T7pkqrscSWaTMVr46'},
  {category:'正餐',day:3,title:'清水順正 Okabe家',note:'湯豆腐・清水',remark:'很有名湯豆腐以3,000日圓左右的高CP值的味そろえ套餐值得一嚐，能一次嚐遍湯豆腐、生麩與當季京野菜；也可選擇有高度參與感的手作豆腐套餐，體驗親自點滷水做豆腐的樂趣',hours:'10:30~16:00',mapUrl:'https://maps.app.goo.gl/gNMtrH2FVHQXf5ns5'},
  {category:'正餐',day:3,title:'Okutan Kiyomizu',note:'湯豆腐・清水',remark:'吃這個!感覺很讚喔請考慮定位日本最老字號的湯豆腐店，據說更加是京都湯豆腐做得最好的地方了。絹豆腐以及豆腐饅頭是必點的人氣料理，如果冬天來這吃還可以欣賞外面日式庭院的雪景，氣氛一流',hours:'11:00~20:00',mapUrl:'https://maps.app.goo.gl/vuxpan9PjVptDDn8A'},
+ {category:'正餐',day:3,title:'食堂Endo',note:'海鮮丼・清水',remark:'',hours:'11:30~15:00',mapUrl:'https://maps.app.goo.gl/S8adwFq6KEAfWoBL7'},
  {category:'正餐',day:3,title:'米料亭 八代目儀兵衛',note:'日本菜・河源町',remark:'一家以「米飯」為主角的獨特京料理名店。最大魅力是由選米大師精選，並以特製土鍋炊煮出的「究極銀白米飯」，粒粒分明且甘甜飽滿，與各式料理都十分相配。午間與晚間御膳價格約落在2,000～4,500日圓之間，價錢上也相對便宜。眾多訪客點名的滿開御膳，包含天婦羅、銀鱈西京燒等豐盛下飯佳餚，還能享受頂級米飯無限續碗的幸福感！',hours:'午：08:00~15:00　晚：17:00~20:00',mapUrl:'https://maps.app.goo.gl/aCc6JooxVHZYwjs47'},
  {category:'正餐',day:3,title:'麵屋 豬一 離れ',note:'拉麵・河源町',remark:'米其林推薦',hours:'午：11:00~14:30　晚：17:30~19:00',mapUrl:'https://maps.app.goo.gl/yZhM3LFpkKRbUTCs5'},
  {category:'正餐',day:3,title:'Onimaru Kyoto Shijo Kawaramachi',note:'日式飯糰・河源町',remark:'',hours:'10:00~21:00',mapUrl:'https://maps.app.goo.gl/BqYwAbHsJAnvAwdXA'},
@@ -1139,29 +1451,63 @@ const FOOD_SPOTS = [
  {category:'正餐',day:3,title:'うなぎ 炭櫓 京都店',note:'鰻魚飯・河源町',remark:'',hours:'午：11:00~15:00　晚：17:00~21:00',mapUrl:'https://maps.app.goo.gl/z6eDQi4n53Vzwumk9'},
  {category:'正餐',day:3,title:'ひいらぎ亭',note:'日式烤雞串・河源町',remark:'正宗烤雞肉串的居酒屋 在黃色那個網站上評分極高',hours:'17:30~23:00',mapUrl:'https://maps.app.goo.gl/FUfVBAoMM7rqDbiA8'},
  {category:'正餐',day:3,title:'京鴨とsake 鴨蔵（kamokura）',note:'鴨肉壽喜燒・河源町',remark:'',hours:'午：11:30~15:00　晚：17:00~22:00',mapUrl:'https://maps.app.goo.gl/5k5EaQ5xaabWVBMr7'},
- {category:'正餐',day:3,title:'',note:'',remark:'',hours:'午：11:00~14:30　晚：17:30~19:00',mapUrl:''}, 
- {category:'甜點',day:4,title:'りくろーおじさんの店 大丸梅田店',note:'起司蛋糕・梅田',remark:'可以當早餐 很有名老爺爺起司蛋糕 跟歹丸的那個不一樣 大丸百貨地下一樓',hours:'10:00~20:00',mapUrl:'https://maps.app.goo.gl/XssFNNFh8rU44A7C7'},
+ {category:'正餐',day:3,title:'麺匠 たか松 四条店',note:'拉麵・河源町',remark:'',hours:'11:00~23:30',mapUrl:'https://maps.app.goo.gl/5fHGZdypnuQjNDca8'}, 
+ {category:'正餐',day:3,title:'名代とんかつ かつくら 三条本店',note:'炸豬排・河源町',remark:'連鎖名店',hours:'11:00~20:30',mapUrl:'https://maps.app.goo.gl/Xd9A4kDu5VwvPt9LA'},
+ {category:'正餐',day:3,title:'名代豬排',note:'炸豬排・河源町',remark:'',hours:'11:00~21:00',mapUrl:'https://maps.app.goo.gl/CA1Suuh6fTvp8QMNA'},
+ {category:'正餐',day:3,title:'Gion Duck Rice',note:'鴨丼・河源町',remark:'',hours:'10:00~21:00',mapUrl:'https://maps.app.goo.gl/NWJ2Wd4s8v9n43wT7'},
+ {category:'正餐',day:3,title:'祇園 鰻 川藤',note:'鰻魚飯・清水',remark:'',hours:'午：11:00~14:00　晚：17:00~21:30',mapUrl:'https://maps.app.goo.gl/4ta3Rq7uU7VeuPEs5'},
+ {category:'正餐',day:3,title:'本格炭火焼うなぎ えん 京都三条店',note:'鰻魚飯・河源町',remark:'',hours:'午：12:00~16:00　晚：17:00~21:30',mapUrl:'https://maps.app.goo.gl/YW2Sp6CnJUdEj79u6'},
+ {category:'正餐',day:3,title:'天丼まきの 京都寺町店',note:'天婦羅丼・河源町',remark:'',hours:'午：11:00~15:00　晚：17:00~20:30',mapUrl:'https://maps.app.goo.gl/92W9Xaq3D14uiHhBA'},
+ {category:'點心',day:3,title:'京都北山MALEBRANCHE 清水坂店',note:'抹茶餅乾伴手禮',remark:'',hours:'09:00~18:00',mapUrl:'https://maps.app.goo.gl/F3d7kqC4S1ipw7Hy8'},
+ {category:'點心',day:3,title:'GOKAGO',note:'咖啡店、抹茶粉、甜甜圈',remark:'咻推薦',hours:'10:30~18:00',mapUrl:'https://maps.app.goo.gl/Hu8RfYLXMfyVLSxq8'},
+ {category:'點心',day:3,title:'清水坂八ツ橋しゅ泡芙',note:'抹茶泡芙',remark:'咻的愛店',hours:'10:00~18:00',mapUrl:'https://maps.app.goo.gl/TmDdLRdcEJEpkRDJ6'},
+ {category:'點心',day:3,title:'loose kyoto',note:'甜甜圈、咖啡',remark:'',hours:'09:00~18:00',mapUrl:'https://maps.app.goo.gl/AUeJZ9Gk8DcSjhNr6'},
+ {category:'點心',day:3,title:'本家西尾 八ッ橋 清水坂店',note:'伴手禮店',remark:'',hours:'09:00~17:30',mapUrl:'https://maps.app.goo.gl/moALDJazeLX9EAbK9'},
+ {category:'點心',day:3,title:'鍵善良房 四條本店',note:'日式甜點・河源町',remark:'',hours:'09:30~18:00',mapUrl:'https://maps.app.goo.gl/zN6hs7Nbk9nN8tZC8'},
+ {category:'點心',day:3,title:'前田珈琲 高台寺店',note:'咖啡店・清水',remark:'',hours:'07:00~15:30',mapUrl:'https://maps.app.goo.gl/1FyKJFo4Xp6bcLEo6'},
+ {category:'點心',day:4,title:'りくろーおじさんの店 大丸梅田店',note:'起司蛋糕・梅田',remark:'可以當早餐 很有名老爺爺起司蛋糕 跟歹丸的那個不一樣 大丸百貨地下一樓',hours:'10:00~20:00',mapUrl:'https://maps.app.goo.gl/XssFNNFh8rU44A7C7'},
  {category:'正餐',day:4,title:'うなぎ 串料理 いづも ルクア',note:'鰻魚飯・梅田',remark:'',hours:'11:00~23:00',mapUrl:'https://maps.app.goo.gl/vJo7WsjDjUQRRv3X8'},
  {category:'正餐',day:4,title:'元祖海老出汁 もんじゃのえびせん ホワイティうめだ店',note:'文字燒・梅田',remark:'文字燒那種 緯來日本台有來過',hours:'11:00~23:00',mapUrl:'https://maps.app.goo.gl/rCHsjWTE6yg78KGSA'},
- {category:'正餐',day:4,title:'大衆酒場かど升',note:'居酒屋',remark:'',hours:'11:45~04:00',mapUrl:'https://maps.app.goo.gl/88Bx8bv4n3JGdN6E6'},
+ {category:'正餐',day:4,title:'大衆酒場かど升',note:'居酒屋・梅田',remark:'',hours:'11:45~04:00',mapUrl:'https://maps.app.goo.gl/88Bx8bv4n3JGdN6E6'},
+ {category:'正餐',day:4,title:'Agedachi',note:'炸豬排・梅田',remark:'',hours:'12:00~23:00',mapUrl:'https://maps.app.goo.gl/yvTmZEcYT6Rj5oTJ9'},
+ {category:'正餐',day:4,title:'北新地 串揚げ かな山',note:'炸豬排・梅田',remark:'',hours:'午：11:30~14:30　晚：17:00~23:00',mapUrl:'https://maps.app.goo.gl/yvTmZEcYT6Rj5oTJ9'},
+ {category:'正餐',day:4,title:'Butasho Dojima-tei',note:'涮涮鍋・梅田',remark:'曉桂喔但聽說豬排跟火鍋都好吃內',hours:'17:30~23:00',mapUrl:'https://maps.app.goo.gl/MGsGPJ5RePuquonm7'},
+ {category:'正餐',day:4,title:'とんかつ鶴群 ルクアサウス店',note:'炸豬排・梅田',remark:'黑毛豬讚',hours:'11:00~21:00',mapUrl:'https://maps.app.goo.gl/v4J53Bj6AwvmE16C7'},
+ {category:'正餐',day:4,title:'すき焼 しゃぶしゃぶつかだ KITTE大阪',note:'壽喜燒・梅田',remark:'傳說很好吃壽喜燒 有賣豬單獨',hours:'午：11:00~15:00　晚：17:00~23:00',mapUrl:'https://maps.app.goo.gl/qjHwaeUwhXw4L9jo7'},
+ {category:'正餐',day:4,title:'麺屋たけ井 阪急梅田店',note:'拉麵',remark:'沾麵很有名窩',hours:'10:00~22:00',mapUrl:'https://maps.app.goo.gl/6uhzW8CVxuU3UYTK8'},
+ {category:'點心',day:4,title:'Sugar Butter Tree 阪急梅田店',note:'砂糖樹餅乾',remark:'咻推薦 十入1030 可放四個月 原味草莓提拉米蘇都好吃',hours:'11:00~20:00',mapUrl:'https://maps.app.goo.gl/SHXVFqpNJmfwshA7A'},
+ {category:'點心',day:4,title:'BRULEE MERIZE 阪神梅田本店',note:'伴手禮',remark:'咻推薦伴手禮 佈雷乃油千層阿曼 外面是奶油千層酥裡面是巧克力起司奶油餡 可以放一個月 左右四入1296',hours:'10:00~20:00',mapUrl:'https://maps.app.goo.gl/za1CK7S3u2L9HGqBA'},
+ {category:'點心',day:4,title:'HARBS 大丸梅田店',note:'咖啡店',remark:'很有名水果千層',hours:'11:00~20:00',mapUrl:'https://maps.app.goo.gl/h6TWLiurAdjd4Unc8'},
+ {category:'點心',day:4,title:'Afternoon Tea LOVE & TABLE LUCUA大阪店',note:'咖啡店',remark:'超貴有名千層',hours:'10:30~20:30',mapUrl:'https://maps.app.goo.gl/3FZW9mjMi6tDJN9A7'},
  {category:'正餐',day:5,title:'志津香 公園店',note:'釜飯・奈良',remark:'排隊名店',hours:'11:00~16:00',mapUrl:'https://maps.app.goo.gl/6VY7KALBDTrXuP9HA'},
  {category:'正餐',day:5,title:'うどん専門店 釜粋',note:'烏龍麵・奈良',remark:'',hours:'午：11:00~15:00　晚：17:00~21:00',mapUrl:'https://maps.app.goo.gl/FsRxojcLhMp5u9tp9'},
  {category:'正餐',day:5,title:'平宗柿葉壽司 奈良店',note:'壽司・奈良',remark:'可購買外帶伴手禮盒，店內也提供用餐空間，推出搭配傳統「大和茶粥」、「三輪素麵」的柿葉壽司套餐',hours:'11:30~20:00',mapUrl:'https://maps.app.goo.gl/Gwpr3HQd88w8WrW3A'},
  {category:'正餐',day:5,title:'鰻菊 奈良本店',note:'鰻魚飯・奈良',remark:'創立於1891年的老字號料亭菊水樓經營的鰻魚料理店，所在建築為日本登錄有形文化財 除了經典鰻魚飯，還有能一次品嚐白燒與蒲燒雙重風味的「あいのせ重」，以及可搭配不同佐料、淋上熱高湯做成茶泡飯享用的饅魚飯三吃「うなぎまぶし御膳」',hours:'午：11:00~14:45　晚：17:00~19:00',mapUrl:'https://maps.app.goo.gl/fYHZKKmitRsQZL3u6'},
+ {category:'正餐',day:5,title:'奈良 オモテナシ食堂',note:'日式家庭料理・奈良',remark:'',hours:'午：11:00~15:00　晚：17:00~22:00',mapUrl:'https://maps.app.goo.gl/ReYkEbMVieJkWMXj8'},
+ {category:'正餐',day:5,title:'ならや 東大寺店',note:'釜飯・奈良',remark:'',hours:'11:30~15:30',mapUrl:'https://maps.app.goo.gl/ZDBTviWenKnkv8EC6'},
+ {category:'點心',day:5,title:'ROKUMEI COFFEE Nara',note:'咖啡廳',remark:'咻推薦',hours:'8:00~18:00',mapUrl:'https://maps.app.goo.gl/3gFosFAbKeYYyKYo8'},
+ {category:'點心',day:5,title:'Hariyoshi',note:'可樂餅',remark:'老闆是台灣人',hours:'09:30~18:30',mapUrl:'https://maps.app.goo.gl/ivrPpb7zgRiqt9px9'},
+ {category:'點心',day:5,title:'中谷堂',note:'艾草麻糬',remark:'奈良相當知名的人氣日式麻糬店，以現場高速搗製的艾草麻糬聞名',hours:'10:00~18:00',mapUrl:'https://maps.app.goo.gl/4C3W4YJKmxBPfXbT7'},
+ {category:'點心',day:5,title:'大佛布丁 近鐵奈良店',note:'布丁',remark:'杯蓋可以帶回家做紀念',hours:'11:00~18:00',mapUrl:'https://maps.app.goo.gl/9ePXD16QVnwENVEq9'},
+ {category:'正餐',day:5,title:'博多串焼き バッテンよかとぉ新今宮えびす横丁店',note:'串燒居酒屋・新世界',remark:'',hours:'14:00~23:00',mapUrl:'https://maps.app.goo.gl/7V9y2q8atyj8PTFo8'},
+ {category:'正餐',day:5,title:'新世界串かつ 弁慶',note:'串炸・新世界',remark:'',hours:'午：11:00~15:00　晚：17:00~22:00',mapUrl:'https://maps.app.goo.gl/My5g3sgHSUi4kDiM9'},
+ {category:'正餐',day:5,title:'達摩串炸 新世界總本店',note:'串炸・新世界',remark:'',hours:'11:00~22:30',mapUrl:'https://maps.app.goo.gl/uAZzvvQoGgFCj86c6'},
  {category:'正餐',day:5,title:'越源',note:'串炸・新世界',hours:'12:00~19:15',mapUrl:'https://maps.app.goo.gl/NWc9vT7fLXzHa5ne9'},
  {category:'正餐',day:5,title:'達摩串炸 動物園前店',note:'串炸・新世界',remark:'',hours:'11:00~22:30',mapUrl:'https://maps.app.goo.gl/xGQxC2X4tCUod3m78'},
  {category:'正餐',day:5,title:'麵鬪庵',note:'福袋烏龍麵・奈良',remark:'',hours:'11:00~16:00',mapUrl:'https://maps.app.goo.gl/YokHCWQ5mdnN1bBR9'}
 ];
 function renderFood(){
  const current=state.foodDay;
- const dateChoices=[{value:'all',date:'全部',weekday:'ALL'},...DAYS.map((d,i)=>({value:String(i+1),date:d.date,weekday:'星期'+d.week}))];
+ // 依目前美食日期套用與每日行程相同的 DAYS[].theme 主題色。
+ document.getElementById('page-food').style.setProperty('--food-day-theme', DAYS[Number(current)-1]?.theme || '#19343B');
+ const dateChoices=DAYS.slice(0,5).map((d,i)=>({value:String(i+1),date:d.date,weekday:'星期'+d.week}));
  const dateContainer=document.getElementById('foodFilters');
  const previousScroll=dateContainer.scrollLeft;
- dateContainer.innerHTML=dateChoices.map(d=>`<button type="button" data-food-day="${d.value}" class="${current===d.value?'active':''}" aria-pressed="${current===d.value}" aria-label="${d.value==='all'?'顯示全部日期':`顯示 ${esc(d.date)} 星期${esc(d.weekday.slice(2))}的美食`}"><span class="food-date-main">${esc(d.date)}</span><span class="food-date-sub">${esc(d.weekday)}</span></button>`).join('');
+ dateContainer.innerHTML=dateChoices.map(d=>`<button type="button" data-food-day="${d.value}" class="${current===d.value?'active':''}" aria-pressed="${current===d.value}" aria-label="顯示 ${esc(d.date)} ${esc(d.weekday)}的美食"><span class="food-date-main">${esc(d.date)}</span><span class="food-date-sub">${esc(d.weekday)}</span></button>`).join('');
  dateContainer.scrollLeft=previousScroll;
- const typeChoices=[['all','全部美食'],['正餐','正餐'],['甜點','甜點']];
+ const typeChoices=[['all','全部美食'],['正餐','正餐'],['點心','點心']];
  document.getElementById('foodTypeFilters').innerHTML=typeChoices.map(([value,label])=>`<button type="button" data-food-type="${value}" class="${state.foodType===value?'active':''}" aria-pressed="${state.foodType===value}">${esc(label)}</button>`).join('');
- const filtered=FOOD_SPOTS.filter(f=>(current==='all'||String(f.day)===current) && (state.foodType==='all'||f.category===state.foodType));
+ const filtered=FOOD_SPOTS.filter(f=>String(f.day)===current && (state.foodType==='all'||f.category===state.foodType));
  document.getElementById('foodResultCount').textContent=`共 ${filtered.length} 筆`;
  document.getElementById('foodList').innerHTML=filtered.length?filtered.map(f=>{
    const d=DAYS[f.day-1];
@@ -1172,14 +1518,14 @@ function renderFood(){
    return `<article class="food-card" style="--food-color:${d.theme}">
      <div class="food-card-meta">
        <b>DAY ${String(f.day).padStart(2,'0')} / ${esc(d.date)}（${esc(d.week)}）</b>
-       <span class="food-card-category${f.category==='甜點'?' is-dessert':''}">${esc(f.category||'餐飲')}</span>
+       <span class="food-card-category${f.category==='點心'?' is-dessert':''}">${esc(f.category||'餐飲')}</span>
      </div>
      <h2>${esc(f.title)}</h2>
-     <p>${esc(f.note)}</p>
+     ${f.note?`<p>${esc(f.note)}</p>`:''}
      ${hours?`<div class="food-card-details">
        <div class="food-card-fact"><span class="food-card-fact-label">營業時間</span><span class="food-card-fact-value${isPending?' is-pending':''}">${esc(hours)}</span></div>
      </div>`:''}
-     ${remark?`<aside class="food-card-remark" aria-label="店家備註"><span class="food-card-remark-label">備註 / NOTE</span><span class="food-card-remark-text">${esc(remark)}</span></aside>`:''}
+     ${remark?`<details class="food-card-remark"><summary>備註 / NOTE</summary><div class="food-card-remark-text">${esc(remark)}</div></details>`:''}
      <div class="food-card-actions">
        ${foodMapHref?`<a class="food-map-button" href="${esc(foodMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看 ${esc(f.title)}">地圖導航 ↗</a>`:''}
        <a class="food-itinerary-button" href="#day${f.day}">當日行程 ↗</a>
@@ -1214,19 +1560,23 @@ function entryHtml(e){
    ? `<a class="spot-map" href="${esc(scenicMapHref)}" target="_blank" rel="noopener noreferrer" aria-label="在 Google Maps 查看${esc(e.title)}"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Google 地圖導航 ↗</a>`
    : '';
   return `<article class="entry entry-visit" data-type="景點">${timeText}
-   <details class="spot-card">
-    <summary aria-label="展開或收合 ${esc(e.title)} 的景點介紹">
-     <span class="spot-topline"><span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||'景點')}</span><span class="spot-toggle" aria-hidden="true"></span></span>
-     <h3 class="spot-title">${esc(e.title)}</h3>
+   <div class="spot-card">
+    <div class="spot-card-head">
+     <div class="spot-topline">
+      <h3 class="spot-title">${esc(e.title)}</h3>
+      <span class="entry-chip" style="--chipline:${chipColor}">${esc(e.tag||'景點')}</span>
+     </div>
      ${e.sub?`<p class="spot-excerpt">${esc(e.sub)}</p>`:''}
-     <span class="spot-hint">景點介紹 <small>點擊展開／收合</small></span>
-    </summary>
-    <div class="spot-body">
-     <div class="spot-description">${spotIntro}</div>
-     ${notice}
-     ${nav}
     </div>
-   </details>
+    <details class="spot-intro-details">
+     <summary aria-label="展開或收合 ${esc(e.title)} 的景點介紹">景點介紹</summary>
+     <div class="spot-intro-content">
+      <div class="spot-description">${spotIntro}</div>
+      ${notice}
+      ${nav}
+     </div>
+    </details>
+   </div>
   </article>`;
  }
 
